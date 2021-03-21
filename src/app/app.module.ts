@@ -13,11 +13,18 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
+import { NavbarComponent } from './navbar/navbar.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatToolbar, MatToolbarModule} from '@angular/material/toolbar';
+import {MDBBootstrapModule} from 'angular-bootstrap-md';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    NavbarComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,
@@ -27,10 +34,13 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
+    MatSnackBarModule,
     ReactiveFormsModule,
     MatButtonModule,
     MatIconModule,
-    HttpClientModule
+    HttpClientModule,
+    MatToolbarModule,
+    MDBBootstrapModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,57 @@
+<!--Navbar-->
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark indigo darken-1" [containerInside]="false">
+
+  <!-- Navbar brand -->
+  <mdb-navbar-brand><a class="navbar-brand" href="/app">Gestion Park</a></mdb-navbar-brand>
+
+  <!-- Collapsible content -->
+  <links>
+
+    <!-- Links -->
+    <ul class="navbar-nav ">
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect>Gestion Equipements</a>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav ">
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect>Gestion Agents</a>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav ">
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect>Gestion Problèmes</a>
+      </li>
+    </ul>
+    <!-- Links -->
+
+    <ul class="navbar-nav ml-auto nav-flex-icons">
+      <!-- Dropdown -->
+      <li class="nav-item dropdown" dropdown>
+        <a dropdownToggle type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+          <mdb-icon fas icon="user"></mdb-icon> Profile ({{user.nom}})<span class="caret"></span></a>
+        <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
+          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Mon Compte</a>
+          <a class="dropdown-item waves-light mat-warn" mdbWavesEffect href="#" (click)="deconexion()">Déconnexion</a>
+        </div>
+      </li>
+    </ul>
+  </links>
+  <!-- Collapsible content -->
+
+</mdb-navbar>
+<!--/.Navbar-->
+<router-outlet></router-outlet>
+<!-- Footer -->
+<footer class="page-footer font-small indigo fixed-bottom">
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">© 2021 Copyright:
+    <a href="https://www.dxc.technology/"> DXC</a>
+  </div>
+  <!-- Copyright -->
+
+</footer>
+<!-- Footer -->

@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Utilisateur} from '../_model/utilisateur';
 import {UtilisateurService} from '../_services/utilisateur.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -15,6 +16,7 @@ export class LoginComponent implements OnInit {
   user = new Utilisateur();
   constructor(private fb: FormBuilder,
               private router: Router,
+              private snackBar: MatSnackBar,
               private utilisateurService: UtilisateurService) { }
 
   ngOnInit(): void {
@@ -40,14 +42,22 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000,
+      panelClass: ['simple-snack-bar']
+    });
+  }
+
   alert() {
     if (this.user == null) {
       this.user = new Utilisateur();
-      alert('Email ou mots de passe incorrecte');
+      this.openSnackBar('Email ou mots de passe incorrecte','');
       localStorage.removeItem('Utilisateur');
     } else {
       localStorage.setItem('Utilisateur', JSON.stringify(this.user));
-      alert('Vous êtes connecter');
+      this.openSnackBar('Vous êtes connecter', '');
+      this.router.navigate(['/app']).then();
     }
     //console.log(JSON.parse(localStorage.getItem('Utilisateur')));
   }
