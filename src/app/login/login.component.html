@@ -1,0 +1,35 @@
+<div class="flex-container">
+  <mat-card class="flex-item mat-elevation-z8">
+    <form [formGroup]="myForm" (ngSubmit)="submit(myForm)">
+      <mat-card-content>
+        <br>
+        <h3 class="mt-2">LOGIN</h3>
+        <br>
+        <h5 class="mt-3">BIENVENUE ! VEUILLEZ VOUS IDENTIFIER.</h5>
+        <br>
+        <div class="example-container mtb-2 text-center">
+
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" placeholder="Email address">
+            <mat-error *ngIf="myForm.get('email').invalid">Email est pas valider</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Mot de passe</mat-label>
+            <input matInput formControlName="pass" placeholder="Mot de passe" [type]="hide ? 'pass' : 'text'">
+            <button type="button" mat-icon-button matSuffix (click)="hide = !hide"><mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon></button>
+          </mat-form-field>
+          <br>
+          <button mat-raised-button type="reset">Vider</button>
+          <br>
+          <button mat-raised-button color="primary" type="submit" [disabled]="!myForm.valid">Login</button>
+        </div>
+      </mat-card-content>
+    </form>
+    <div class="row justify-content-center">
+    </div>
+    <mat-card-actions>
+    </mat-card-actions>
+  </mat-card>
+</div>
