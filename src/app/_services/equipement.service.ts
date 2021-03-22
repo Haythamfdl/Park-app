@@ -18,16 +18,16 @@ export class EquipementService {
     this.Url = 'http://localhost:8080/equipements';
   }
 
-  public getAllEquipements(): Observable<Equipement> {
-    return this.http.get<Equipement>(this.Url);
+  public getAllEquipements(): Observable<Equipement[]> {
+    return this.http.get<Equipement[]>(this.Url);
   }
 
   public getEquipementbyNum(equipement: Equipement): Observable<Equipement> {
     return this.http.get<Equipement>(this.Url + '/' + equipement.numero);
   }
 
-  public getEquipmentsAgent(agent: Agent): Observable<Equipement> {
-    return this.http.get<Equipement>(this.Url + 'agent/' + agent.idagent);
+  public getEquipmentsAgent(agent: Agent): Observable<Equipement[]> {
+    return this.http.get<Equipement[]>(this.Url + 'agent/' + agent.idagent);
   }
 
   public save(equipement: Equipement): Observable<Object> {

@@ -19,6 +19,11 @@ import {MatToolbar, MatToolbarModule} from '@angular/material/toolbar';
 import {MDBBootstrapModule} from 'angular-bootstrap-md';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { ListComponent } from './equipement/list/list.component';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
+import { ComfirmDialogComponent } from './comfirm-dialog/comfirm-dialog.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -26,7 +31,8 @@ import { ListComponent } from './equipement/list/list.component';
     LoginComponent,
     NavbarComponent,
     WelcomeComponent,
-    ListComponent
+    ListComponent,
+    ComfirmDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -42,6 +48,10 @@ import { ListComponent } from './equipement/list/list.component';
     MatIconModule,
     HttpClientModule,
     MatToolbarModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatDialogModule,
     MDBBootstrapModule.forRoot()
   ],
   providers: [],

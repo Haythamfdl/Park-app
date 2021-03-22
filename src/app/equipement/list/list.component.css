@@ -10,14 +10,31 @@
   margin-top: 200px;
   background-color: transparent;
   height: auto;
-  width: 450px;
+  width: 100%;
   min-width: 200px;
   margin: 10px;
   line-height: 20px;
-  font-weight: bold;
-  font-size: 2em;
-  text-align: center;
   margin: 15px;
   display: inline-block;
   border-radius: 0;
+}
+
+table {
+  width: 100%;
+  table-layout: auto;
+}
+
+.action{
+  justify-content: center;
+  margin-left: 5px;
+}
+
+mat-card-title{
+text-align: center;
+  font-size: x-large;
+}
+
+th{
+  font-weight: bold;
+  font-size: medium;
 }

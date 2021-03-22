@@ -7,11 +7,11 @@ export class Equipement {
   fabriquant: string;
   dateaquisition: string;
   dateservice: string;
-  valeur_aquisition: number;
+  valeuraquisition: number;
   dureegarantie: number;
   poids: string;
   taille: string;
   agent: Agent;
-  date_affectation: string;
+  dateaffectation: string;
   isdeleted: boolean;
 }
