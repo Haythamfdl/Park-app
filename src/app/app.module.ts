@@ -18,13 +18,15 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatToolbar, MatToolbarModule} from '@angular/material/toolbar';
 import {MDBBootstrapModule} from 'angular-bootstrap-md';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { ListComponent } from './equipement/list/list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     NavbarComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    ListComponent
   ],
   imports: [
     BrowserModule,
