@@ -14,6 +14,9 @@ import {ListaEquipComponent} from './agent/lista-equip/lista-equip.component';
 import {AjoutaComponent} from './agent/ajouta/ajouta.component';
 import {ModifieraComponent} from './agent/modifiera/modifiera.component';
 import {InfoaComponent} from './agent/infoa/infoa.component';
+import {ProblemeService} from './_services/probleme.service';
+import {ListpComponent} from './probleme/listp/listp.component';
+import {ListaProblemeComponent} from './agent/lista-probleme/lista-probleme.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -27,9 +30,11 @@ const routes: Routes = [
     {path: 'equipements/affecter',component:AffecterComponent},
     {path: 'agents',component:ListaComponent},
     {path: 'agents/equipements/:num',component:ListaEquipComponent},
+    {path: 'agents/problemes/:num',component:ListaProblemeComponent},
     {path: 'agents/ajout',component:AjoutaComponent},
     {path: 'agents/modifier',component:ModifieraComponent},
-    {path: 'agents/info/:num',component:InfoaComponent}
+    {path: 'agents/info/:num',component:InfoaComponent},
+    {path: 'problemes',component:ListpComponent}
   ]}
 ];
 

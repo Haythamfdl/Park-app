@@ -3,31 +3,33 @@ import {FormBuilder} from '@angular/forms';
 import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatDialog} from '@angular/material/dialog';
+import {EquipementService} from '../../_services/equipement.service';
 import {Equipement} from '../../_model/equipement';
 import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import {ComfirmDialogComponent} from '../../comfirm-dialog/comfirm-dialog.component';
-import {AgentService} from '../../_services/agent.service';
-import {Agent} from '../../_model/agent';
+import {ProblemeService} from '../../_services/probleme.service';
+import {Probleme} from '../../_model/probleme';
 
 @Component({
-  selector: 'app-lista',
-  templateUrl: './lista.component.html',
-  styleUrls: ['./lista.component.css']
+  selector: 'app-listp',
+  templateUrl: './listp.component.html',
+  styleUrls: ['./listp.component.css']
 })
-export class ListaComponent implements OnInit {
+export class ListpComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private router: Router,
               private snackBar: MatSnackBar,
               public dialog: MatDialog,
-              private agentService:AgentService) {
+              private equipementService: EquipementService,
+              private problemeService:ProblemeService) {
   }
 
-  displayedColumns: string[] = ['numero', 'nom', 'departement', 'Action'];
+  displayedColumns: string[] = ['titre', 'type', 'agent', 'datesoumission' ,'resolu' , 'Action'];
   dataSource;
-  agent:Agent;
+  probleme:Probleme;
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -35,8 +37,8 @@ export class ListaComponent implements OnInit {
   ngOnInit(): void {
     localStorage.removeItem('Equipement');
     localStorage.removeItem('Agent');
-    this.agentService.getAllAgent().subscribe(data =>{
-      this.dataSource= new MatTableDataSource<Agent>(data);
+    this.problemeService.getAllProblemes().subscribe(data =>{
+      this.dataSource= new MatTableDataSource<Probleme>(data);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
     });
@@ -59,40 +61,34 @@ export class ListaComponent implements OnInit {
       console.log(result);
       if(result == true){
         this.supprimer(value);
-          window.location.reload();
-          this.openSnackBar('Agent a été Supprimer !','');
+        window.location.reload();
+        this.openSnackBar('Problemes a été Supprimer !','');
       }
     });
   }
 
   ajouter(){
-    this.router.navigate(['/app/agents/ajout']).then();
+    this.router.navigate(['/app/problemes/ajout']).then();
   }
 
   info(value :any){
-    this.router.navigate(['/app/agents/info/'+value]).then();
-  }
-
-  afficherEquipements(value :any){
-    this.router.navigate(['/app/agents/equipements/'+value]).then();
-  }
-
-  afficherProblemes(value :any){
-    this.router.navigate(['/app/agents/problemes/'+value]).then();
+    this.router.navigate(['/app/problemes/info/'+value]).then();
   }
 
   modifier(value: any){
-    this.agent = value;
-    localStorage.setItem('Agent', JSON.stringify(this.agent));
-    this.router.navigate(['/app/agents/modifier']).then();
-    console.log(this.agent);
+    this.probleme = value;
+    localStorage.setItem('Probleme', JSON.stringify(this.probleme));
+    this.router.navigate(['/app/problemes/modifier']).then();
+  }
+
+  solution(value: any){
+    this.probleme = value;
+    this.router.navigate(['/app/solutions/'+this.probleme.idprob]).then();
   }
 
   supprimer(value: any) {
-    this.agent = value;
-    this.agent.isdeleted = true;
-    this.agentService.update(this.agent).subscribe();
+    this.probleme = value;
+    this.probleme.isdeleted = true;
+    this.problemeService.update(this.probleme).subscribe();
   }
-
-
 }

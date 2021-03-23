@@ -4,20 +4,21 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatDialog} from '@angular/material/dialog';
 import {EquipementService} from '../../_services/equipement.service';
-import {Equipement} from '../../_model/equipement';
+import {ProblemeService} from '../../_services/probleme.service';
+import {Probleme} from '../../_model/probleme';
 import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import {ComfirmDialogComponent} from '../../comfirm-dialog/comfirm-dialog.component';
-import {AgentService} from '../../_services/agent.service';
 import {Agent} from '../../_model/agent';
+import {AgentService} from '../../_services/agent.service';
 
 @Component({
-  selector: 'app-lista-equip',
-  templateUrl: './lista-equip.component.html',
-  styleUrls: ['./lista-equip.component.css']
+  selector: 'app-lista-probleme',
+  templateUrl: './lista-probleme.component.html',
+  styleUrls: ['./lista-probleme.component.css']
 })
-export class ListaEquipComponent implements OnInit {
+export class ListaProblemeComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private router: Router,
@@ -25,15 +26,17 @@ export class ListaEquipComponent implements OnInit {
               private activatedRoute:ActivatedRoute,
               public dialog: MatDialog,
               private equipementService: EquipementService,
+              private problemeService:ProblemeService,
               private agentService:AgentService) {
     this.activatedRoute.params.subscribe(params => {this.num = params['num']});
+    this.agent=new Agent();
   }
 
-  displayedColumns: string[] = ['numero', 'designation', 'agent', 'Action'];
+  displayedColumns: string[] = ['titre', 'type', 'agent', 'datesoumission' ,'resolu' , 'Action'];
   dataSource;
-  equipement:Equipement;
+  probleme:Probleme;
   agent:Agent;
-  num: string;
+  num;
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -41,10 +44,15 @@ export class ListaEquipComponent implements OnInit {
   ngOnInit(): void {
     localStorage.removeItem('Equipement');
     localStorage.removeItem('Agent');
-    this.agentService.getAgentbyNum(this.num).subscribe(dataid=>{
-      this.agent = dataid;
-      this.equipementService.getEquipmentsAgent(this.agent).subscribe(data =>{
-        this.dataSource= new MatTableDataSource<Equipement>(data);
+    localStorage.removeItem('Probleme');
+    this.agentService.getAgentbyNum(this.num).subscribe(data =>{
+      this.agent = data;
+      if(this.agent == null){
+        this.router.navigate(['/app/agents']).then();
+        this.openSnackBar('Le numéro de l\'agent est invalide', '');
+      }
+      this.problemeService.getProblemesAgent(this.agent).subscribe(data =>{
+        this.dataSource= new MatTableDataSource<Probleme>(data);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
       });
@@ -69,38 +77,33 @@ export class ListaEquipComponent implements OnInit {
       if(result == true){
         this.supprimer(value);
         window.location.reload();
-        this.openSnackBar('Equipement a été Supprimer !','');
+        this.openSnackBar('Problemes a été Supprimer !','');
       }
     });
   }
 
+  ajouter(){
+    this.router.navigate(['/app/problemes/ajout']).then();
+  }
+
   info(value :any){
-    this.router.navigate(['/app/equipements/info/'+value]).then();
+    this.router.navigate(['/app/problemes/info/'+value]).then();
   }
 
   modifier(value: any){
-    this.equipement = value;
-    localStorage.setItem('Equipement', JSON.stringify(this.equipement));
-    this.router.navigate(['/app/equipements/modifier']).then();
+    this.probleme = value;
+    localStorage.setItem('Probleme', JSON.stringify(this.probleme));
+    this.router.navigate(['/app/problemes/modifier']).then();
   }
 
-  affecter(){
-    this.router.navigate(['/app/equipements']).then();
-  }
-
-  desaffecter(value: any){
-    this.equipement = value;
-    this.equipement.agent = null;
-    this.equipement.dateaffectation = null;
-    this.equipementService.update(this.equipement).subscribe();
-    window.location.reload();
-    this.openSnackBar('Equipement a été Désaffecter !','');
+  solution(value: any){
+    this.probleme = value;
+    this.router.navigate(['/app/solutions/'+this.probleme.idprob]).then();
   }
 
   supprimer(value: any) {
-    this.equipement = value;
-    this.equipement.isdeleted = true;
-    this.equipementService.update(this.equipement).subscribe();
+    this.probleme = value;
+    this.probleme.isdeleted = true;
+    this.problemeService.update(this.probleme).subscribe();
   }
-
 }

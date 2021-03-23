@@ -37,6 +37,8 @@ import { ListaEquipComponent } from './agent/lista-equip/lista-equip.component';
 import { AjoutaComponent } from './agent/ajouta/ajouta.component';
 import { ModifieraComponent } from './agent/modifiera/modifiera.component';
 import { InfoaComponent } from './agent/infoa/infoa.component';
+import { ListpComponent } from './probleme/listp/listp.component';
+import { ListaProblemeComponent } from './agent/lista-probleme/lista-probleme.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +56,9 @@ import { InfoaComponent } from './agent/infoa/infoa.component';
     ListaEquipComponent,
     AjoutaComponent,
     ModifieraComponent,
-    InfoaComponent
+    InfoaComponent,
+    ListpComponent,
+    ListaProblemeComponent
   ],
   imports: [
     BrowserModule,
