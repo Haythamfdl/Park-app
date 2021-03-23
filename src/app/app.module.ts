@@ -36,6 +36,7 @@ import { ListaComponent } from './agent/lista/lista.component';
 import { ListaEquipComponent } from './agent/lista-equip/lista-equip.component';
 import { AjoutaComponent } from './agent/ajouta/ajouta.component';
 import { ModifieraComponent } from './agent/modifiera/modifiera.component';
+import { InfoaComponent } from './agent/infoa/infoa.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { ModifieraComponent } from './agent/modifiera/modifiera.component';
     ListaComponent,
     ListaEquipComponent,
     AjoutaComponent,
-    ModifieraComponent
+    ModifieraComponent,
+    InfoaComponent
   ],
   imports: [
     BrowserModule,

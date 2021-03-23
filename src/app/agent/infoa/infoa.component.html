@@ -1,0 +1,43 @@
+<div class="flex-container" xmlns="http://www.w3.org/1999/html">
+  <mat-card class="flex-item mat-elevation-z8">
+    <mat-card-title><h2 >Information sur l'agent</h2></mat-card-title>
+    <form [formGroup]="myForm" *ngIf="myForm">
+      <mat-card-content>
+        <div class="example-container mtb-2 text-center">
+
+          <mat-form-field appearance="outline">
+            <mat-label>Numéro</mat-label>
+            <input matInput formControlName="numero" placeholder="Numéro de l'agent" readonly>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Nom et Prénom</mat-label>
+            <input matInput formControlName="nom" placeholder="Nom de l'agent" readonly>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" placeholder="Email address" readonly>
+            <mat-error *ngIf="myForm.get('email').invalid">Email est pas valider</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Téléphone</mat-label>
+            <input matInput formControlName="tel" placeholder="Téléphone de l'agent" readonly>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Departement</mat-label>
+            <input matInput formControlName="departement" placeholder="Département de l'agent" readonly>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Fonction</mat-label>
+            <input type="text" matInput formControlName="fonction" placeholder="Fonction de l'agent" readonly>
+          </mat-form-field>
+
+        </div>
+      </mat-card-content>
+    </form>
+  </mat-card>
+</div>
