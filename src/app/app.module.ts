@@ -32,6 +32,7 @@ import { ModifierComponent } from './equipement/modifier/modifier.component';
 import { InfoComponent } from './equipement/info/info.component';
 import { AffecterComponent } from './equipement/affecter/affecter.component';
 import {DatePipe} from '@angular/common';
+import { ListaComponent } from './agent/lista/lista.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import {DatePipe} from '@angular/common';
     AjoutComponent,
     ModifierComponent,
     InfoComponent,
-    AffecterComponent
+    AffecterComponent,
+    ListaComponent
   ],
   imports: [
     BrowserModule,

@@ -9,6 +9,7 @@ import {AjoutComponent} from './equipement/ajout/ajout.component';
 import {ModifierComponent} from './equipement/modifier/modifier.component';
 import {InfoComponent} from './equipement/info/info.component';
 import {AffecterComponent} from './equipement/affecter/affecter.component';
+import {ListaComponent} from './agent/lista/lista.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -19,7 +20,8 @@ const routes: Routes = [
     {path: 'equipements/ajout',component:AjoutComponent},
     {path: 'equipements/modifier',component:ModifierComponent},
     {path: 'equipements/info/:num',component:InfoComponent},
-    {path: 'equipements/affecter',component:AffecterComponent}
+    {path: 'equipements/affecter',component:AffecterComponent},
+    {path: 'agents',component:ListaComponent}
   ]}
 ];
 
