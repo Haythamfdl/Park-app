@@ -4,7 +4,6 @@ import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Equipement} from '../../_model/equipement';
 import {EquipementService} from '../../_services/equipement.service';
-import {Agent} from '../../_model/agent';
 
 @Component({
   selector: 'app-ajout',

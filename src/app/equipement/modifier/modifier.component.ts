@@ -4,7 +4,6 @@ import {Equipement} from '../../_model/equipement';
 import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {EquipementService} from '../../_services/equipement.service';
-import {Agent} from '../../_model/agent';
 import {MatDialog} from '@angular/material/dialog';
 import {ComfirmDialogComponent} from '../../comfirm-dialog/comfirm-dialog.component';
 
