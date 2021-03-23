@@ -30,10 +30,21 @@ export class InfoComponent implements OnInit {
     this.equipement.agent =new Agent();
     this.equipementService.getEquipementbyNum(this.num).subscribe(data =>{
       this.equipement = data;
+      if(this.equipement == null){
+        this.router.navigate(['/app/equipements']).then();
+        this.openSnackBar('Le numéro de l\'équipement est invalide', '');
+      }
       if(this.equipement.agent !== null) {
         this.agent= this.equipement.agent.nom+" ("+this.equipement.agent.numero+")";
       }
       this.createForm();
+    });
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000,
+      panelClass: ['simple-snack-bar']
     });
   }
 
