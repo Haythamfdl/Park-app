@@ -22,8 +22,9 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    localStorage.removeItem('Utilisateur');
     this.createForm();
+    if(JSON.parse(localStorage.getItem('Utilisateur')) !== null)
+      this.router.navigate(['/app']).then();
   }
 
   createForm() {
@@ -61,7 +62,6 @@ export class LoginComponent implements OnInit {
       this.openSnackBar('Vous êtes connecter', '');
       this.router.navigate(['/app']).then();
     }
-    //console.log(JSON.parse(localStorage.getItem('Utilisateur')));
   }
 
 }

@@ -1,0 +1,22 @@
+<div class="flex-container" xmlns="http://www.w3.org/1999/html">
+  <mat-card class="flex-item mat-elevation-z8">
+    <mat-card-title><h2 >Affectation de l'équipement <b>{{equipement.numero}}</b></h2></mat-card-title>
+    <form [formGroup]="myForm" (ngSubmit)="submit()">
+      <mat-card-content>
+        <div class="example-container mtb-2 text-center">
+
+          <mat-form-field appearance="outline">
+            <mat-label>Numéro d'un Agent</mat-label>
+            <input matInput formControlName="numero" placeholder="Numéro d'un Agent">
+          </mat-form-field>
+          <br>
+          <button mat-raised-button class="waves-light" type="button" mdbWavesEffect (click)="recheche(myForm)">Recherche</button>
+          <br>
+          <mat-label *ngIf="show">Nom de l'agent: {{agent.nom}}</mat-label>
+          <br>
+          <button mat-raised-button color="primary" type="submit" mdbWavesEffect disabled="{{!show}}">Affecter</button>
+        </div>
+      </mat-card-content>
+    </form>
+  </mat-card>
+</div>

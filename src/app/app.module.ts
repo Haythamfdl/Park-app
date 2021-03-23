@@ -30,6 +30,8 @@ import {MatNativeDateModule} from '@angular/material/core';
 import {FlexModule} from '@angular/flex-layout';
 import { ModifierComponent } from './equipement/modifier/modifier.component';
 import { InfoComponent } from './equipement/info/info.component';
+import { AffecterComponent } from './equipement/affecter/affecter.component';
+import {DatePipe} from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,8 @@ import { InfoComponent } from './equipement/info/info.component';
     ComfirmDialogComponent,
     AjoutComponent,
     ModifierComponent,
-    InfoComponent
+    InfoComponent,
+    AffecterComponent
   ],
   imports: [
     BrowserModule,
@@ -67,7 +70,7 @@ import { InfoComponent } from './equipement/info/info.component';
     FlexModule,
     FormsModule
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

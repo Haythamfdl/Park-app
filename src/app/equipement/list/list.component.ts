@@ -33,6 +33,7 @@ export class ListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngOnInit(): void {
+    localStorage.removeItem('Equipement');
     this.equipementService.getAllEquipements().subscribe(data =>{
       this.dataSource= new MatTableDataSource<Equipement>(data);
       this.dataSource.sort = this.sort;
@@ -58,9 +59,10 @@ export class ListComponent implements OnInit {
       if(result == true){
         this.supprimer(value);
         this.router.navigate(['/app/equipements']).then(() => {
-          window.location.reload()
+          window.location.reload();
+          this.openSnackBar('Equipement a été Supprimer !','');
         });
-        this.openSnackBar('Equipement a été Supprimer !','');
+
       }
     });
   }
@@ -78,6 +80,24 @@ export class ListComponent implements OnInit {
     localStorage.setItem('Equipement', JSON.stringify(this.equipement));
     this.router.navigate(['/app/equipements/modifier']).then();
     console.log(this.equipement);
+  }
+
+  affecter(value: any){
+    this.equipement = value;
+    localStorage.setItem('Equipement', JSON.stringify(this.equipement));
+    this.router.navigate(['/app/equipements/affecter']).then();
+  }
+
+  desaffecter(value: any){
+    this.equipement = value;
+    this.equipement.agent = null;
+    this.equipement.dateaffectation = null;
+    this.equipementService.update(this.equipement).subscribe();
+    this.router.navigate(['/app/equipements']).then(() => {
+      window.location.reload();
+      this.openSnackBar('Equipement a été Désaffecter !','');
+    });
+
   }
 
   supprimer(value: any) {

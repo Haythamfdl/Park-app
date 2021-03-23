@@ -29,7 +29,8 @@
         <td mat-cell *matCellDef="let data">
           <button mat-raised-button color="primary" (click)="info(data.numero)">Info</button>
           <button mat-raised-button class="action" color="primary" (click)="modifier(data)">Modifier</button>
-          <button mat-raised-button class="action" color="primary">Affecter a un Agent</button>
+          <button *ngIf="data.agent == null" mat-raised-button class="action" color="primary" (click)="affecter(data)">Affecter a un Agent</button>
+          <button *ngIf="data.agent !== null" mat-raised-button class="action" color="primary" (click)="desaffecter(data)">Enlever Affectation</button>
           <button mat-raised-button class="action" color="warn" (click)="openDialog(data)">Supprimer</button>
         </td>
       </ng-container>

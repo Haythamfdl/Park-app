@@ -8,6 +8,7 @@ import {ListComponent} from './equipement/list/list.component';
 import {AjoutComponent} from './equipement/ajout/ajout.component';
 import {ModifierComponent} from './equipement/modifier/modifier.component';
 import {InfoComponent} from './equipement/info/info.component';
+import {AffecterComponent} from './equipement/affecter/affecter.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -17,7 +18,8 @@ const routes: Routes = [
     {path: 'equipements',component:ListComponent},
     {path: 'equipements/ajout',component:AjoutComponent},
     {path: 'equipements/modifier',component:ModifierComponent},
-    {path: 'equipements/info/:num',component:InfoComponent}
+    {path: 'equipements/info/:num',component:InfoComponent},
+    {path: 'equipements/affecter',component:AffecterComponent}
   ]}
 ];
 
