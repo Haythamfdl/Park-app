@@ -15,6 +15,7 @@ import {ComfirmDialogComponent} from '../../comfirm-dialog/comfirm-dialog.compon
 export class ModifierComponent implements OnInit {
   myForm: FormGroup;
   equipement:Equipement;
+  equipsave:Equipement;
   constructor(private fb: FormBuilder,
               private router: Router,
               private snackBar: MatSnackBar,
@@ -27,6 +28,7 @@ export class ModifierComponent implements OnInit {
     if(JSON.parse(localStorage.getItem('Equipement')) == null)
       this.router.navigate(['/app/equipements']).then();
     this.equipement=JSON.parse(localStorage.getItem('Equipement'));
+    this.equipsave=this.equipement;
     this.createForm();
 
   }
@@ -48,6 +50,10 @@ export class ModifierComponent implements OnInit {
 
   submit(myForm) {
     this.equipement= myForm.value;
+    this.equipement.idequip = this.equipsave.idequip;
+    this.equipement.isdeleted = false;
+    this.equipement.dateaffectation = this.equipsave.dateaffectation;
+    this.equipement.agent = this.equipsave.agent;
     this.openDialog();
   }
 
@@ -72,6 +78,7 @@ export class ModifierComponent implements OnInit {
       taille:[this.equipement.taille,[Validators.required]],
       dateaffectation:[this.equipement.dateaffectation],
       isdeleted:[this.equipement.isdeleted],
+      agent:[this.equipement.agent]
     });
   }
 }
