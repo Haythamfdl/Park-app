@@ -5,13 +5,19 @@ import {RouterModule, Routes} from '@angular/router';
 import {NavbarComponent} from './navbar/navbar.component';
 import {WelcomeComponent} from './welcome/welcome.component';
 import {ListComponent} from './equipement/list/list.component';
+import {AjoutComponent} from './equipement/ajout/ajout.component';
+import {ModifierComponent} from './equipement/modifier/modifier.component';
+import {InfoComponent} from './equipement/info/info.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'app', component: NavbarComponent,
   children:[
     {path: '',component:WelcomeComponent},
-    {path: 'equipements',component:ListComponent}
+    {path: 'equipements',component:ListComponent},
+    {path: 'equipements/ajout',component:AjoutComponent},
+    {path: 'equipements/modifier',component:ModifierComponent},
+    {path: 'equipements/info/:num',component:InfoComponent}
   ]}
 ];
 

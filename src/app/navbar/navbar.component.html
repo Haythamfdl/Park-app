@@ -1,3 +1,4 @@
+<div fxLayout="column" style="height: 100%">
 <!--Navbar-->
 <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark indigo darken-1" [containerInside]="false">
 
@@ -43,9 +44,11 @@
 
 </mdb-navbar>
 <!--/.Navbar-->
-<router-outlet></router-outlet>
+<div>
+  <router-outlet></router-outlet>
+</div>
 <!-- Footer -->
-<footer class="page-footer font-small indigo fixed-bottom">
+<footer class="page-footer font-small indigo" fxFlexOffset="auto">
 
   <!-- Copyright -->
   <div class="footer-copyright text-center py-3">© 2021 Copyright:
@@ -55,3 +58,4 @@
 
 </footer>
 <!-- Footer -->
+</div>

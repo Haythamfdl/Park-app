@@ -21,9 +21,9 @@
             <button type="button" mat-icon-button matSuffix (click)="hide = !hide"><mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon></button>
           </mat-form-field>
           <br>
-          <button mat-raised-button type="reset">Vider</button>
+          <button mat-raised-button class="waves-light" type="reset" mdbWavesEffect>Vider</button>
           <br>
-          <button mat-raised-button color="primary" type="submit" [disabled]="!myForm.valid">Login</button>
+          <button mat-raised-button color="primary" type="submit" [disabled]="!myForm.valid" mdbWavesEffect>Login</button>
         </div>
       </mat-card-content>
     </form>

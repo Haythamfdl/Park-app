@@ -50,7 +50,7 @@ export class ListComponent implements OnInit {
   openDialog(value :any){
     const dialogRef = this.dialog.open(ComfirmDialogComponent, {
       width: '400px',
-      data: "Voulez-vous vraiment faire cette suppression"
+      data: "Voulez-vous vraiment faire cette suppression ?"
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -65,10 +65,26 @@ export class ListComponent implements OnInit {
     });
   }
 
+  ajouter(){
+    this.router.navigate(['/app/equipements/ajout']).then();
+  }
+
+  info(value :any){
+    this.router.navigate(['/app/equipements/info/'+value]).then();
+  }
+
+  modifier(value: any){
+    this.equipement = value;
+    localStorage.setItem('Equipement', JSON.stringify(this.equipement));
+    this.router.navigate(['/app/equipements/modifier']).then();
+    console.log(this.equipement);
+  }
+
   supprimer(value: any) {
     this.equipement = value;
     this.equipement.isdeleted = true;
     this.equipementService.update(this.equipement).subscribe();
   }
+
 
 }

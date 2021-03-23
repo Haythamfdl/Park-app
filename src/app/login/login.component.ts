@@ -13,11 +13,13 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 export class LoginComponent implements OnInit {
   myForm: FormGroup;
   hide = true;
-  user = new Utilisateur();
+  user: Utilisateur;
   constructor(private fb: FormBuilder,
               private router: Router,
               private snackBar: MatSnackBar,
-              private utilisateurService: UtilisateurService) { }
+              private utilisateurService: UtilisateurService) {
+    this.user = new Utilisateur();
+  }
 
   ngOnInit(): void {
     localStorage.removeItem('Utilisateur');
