@@ -33,6 +33,7 @@ import { InfoComponent } from './equipement/info/info.component';
 import { AffecterComponent } from './equipement/affecter/affecter.component';
 import {DatePipe} from '@angular/common';
 import { ListaComponent } from './agent/lista/lista.component';
+import { ListaEquipComponent } from './agent/lista-equip/lista-equip.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { ListaComponent } from './agent/lista/lista.component';
     ModifierComponent,
     InfoComponent,
     AffecterComponent,
-    ListaComponent
+    ListaComponent,
+    ListaEquipComponent
   ],
   imports: [
     BrowserModule,

@@ -59,11 +59,8 @@ export class ListaComponent implements OnInit {
       console.log(result);
       if(result == true){
         this.supprimer(value);
-        this.router.navigate(['/app/agents']).then(() => {
           window.location.reload();
           this.openSnackBar('Agent a été Supprimer !','');
-        });
-
       }
     });
   }
@@ -77,7 +74,7 @@ export class ListaComponent implements OnInit {
   }
 
   afficherEquipements(value :any){
-    this.router.navigate(['/app/agents/info/'+value]).then();
+    this.router.navigate(['/app/agents/equipements/'+value]).then();
   }
 
   afficherProblemes(value :any){

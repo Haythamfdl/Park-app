@@ -25,8 +25,8 @@ export class EquipementService {
     return this.http.get<Equipement>(this.Url + '/' + num);
   }
 
-  public getEquipmentsAgent(agent: Agent): Observable<Equipement[]> {
-    return this.http.get<Equipement[]>(this.Url + 'agent/' + agent.idagent);
+  public getEquipmentsAgent(num : string): Observable<Equipement[]> {
+    return this.http.get<Equipement[]>(this.Url + 'agent/' + num);
   }
 
   public save(equipement: Equipement): Observable<Object> {

@@ -1,44 +1,55 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder} from '@angular/forms';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {MatDialog} from '@angular/material/dialog';
 import {EquipementService} from '../../_services/equipement.service';
+import {Equipement} from '../../_model/equipement';
 import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
-import {Equipement} from '../../_model/equipement';
 import {ComfirmDialogComponent} from '../../comfirm-dialog/comfirm-dialog.component';
-import {MatDialog} from '@angular/material/dialog';
-
+import {AgentService} from '../../_services/agent.service';
+import {Agent} from '../../_model/agent';
 
 @Component({
-  selector: 'app-list',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.css']
+  selector: 'app-lista-equip',
+  templateUrl: './lista-equip.component.html',
+  styleUrls: ['./lista-equip.component.css']
 })
-export class ListComponent implements OnInit {
+export class ListaEquipComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private router: Router,
               private snackBar: MatSnackBar,
+              private activatedRoute:ActivatedRoute,
               public dialog: MatDialog,
-              private equipementService: EquipementService) {
+              private equipementService: EquipementService,
+              private agentService:AgentService) {
+    this.activatedRoute.params.subscribe(params => {this.num = params['num']});
   }
 
   displayedColumns: string[] = ['numero', 'designation', 'agent', 'Action'];
   dataSource;
   equipement:Equipement;
+  agent:Agent;
+  num: string;
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngOnInit(): void {
     localStorage.removeItem('Equipement');
-    this.equipementService.getAllEquipements().subscribe(data =>{
-      this.dataSource= new MatTableDataSource<Equipement>(data);
-      this.dataSource.sort = this.sort;
-      this.dataSource.paginator = this.paginator;
-    });
+    localStorage.removeItem('Agent');
+    this.agentService.getAgentbyNum(this.num).subscribe(dataid=>{
+      this.agent = dataid;
+      this.equipementService.getEquipmentsAgent(this.agent.idagent).subscribe(data =>{
+        this.dataSource= new MatTableDataSource<Equipement>(data);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+      });
+    })
+
   }
 
   openSnackBar(message: string, action: string) {
@@ -64,10 +75,6 @@ export class ListComponent implements OnInit {
     });
   }
 
-  ajouter(){
-    this.router.navigate(['/app/equipements/ajout']).then();
-  }
-
   info(value :any){
     this.router.navigate(['/app/equipements/info/'+value]).then();
   }
@@ -78,10 +85,8 @@ export class ListComponent implements OnInit {
     this.router.navigate(['/app/equipements/modifier']).then();
   }
 
-  affecter(value: any){
-    this.equipement = value;
-    localStorage.setItem('Equipement', JSON.stringify(this.equipement));
-    this.router.navigate(['/app/equipements/affecter']).then();
+  affecter(){
+    this.router.navigate(['/app/equipements']).then();
   }
 
   desaffecter(value: any){
@@ -98,4 +103,5 @@ export class ListComponent implements OnInit {
     this.equipement.isdeleted = true;
     this.equipementService.update(this.equipement).subscribe();
   }
+
 }
