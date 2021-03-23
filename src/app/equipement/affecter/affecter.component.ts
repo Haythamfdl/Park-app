@@ -47,6 +47,7 @@ export class AffecterComponent implements OnInit {
       }
       else {
         this.show = false;
+        this.openSnackBar('Numéro invalide', '');
       }
     });
   }
