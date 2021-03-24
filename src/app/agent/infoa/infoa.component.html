@@ -1,6 +1,9 @@
 <div class="flex-container" xmlns="http://www.w3.org/1999/html">
   <mat-card class="flex-item mat-elevation-z8">
-    <mat-card-title><h2 >Information sur l'agent</h2></mat-card-title>
+    <mat-card-title>
+      <h2>Information sur l'agent</h2>
+      <h3 *ngIf="agent.isdeleted"><b>Cet Agent a été Supprimer !</b></h3>
+    </mat-card-title>
     <form [formGroup]="myForm" *ngIf="myForm">
       <mat-card-content>
         <div class="example-container mtb-2 text-center">
@@ -35,6 +38,10 @@
             <mat-label>Fonction</mat-label>
             <input type="text" matInput formControlName="fonction" placeholder="Fonction de l'agent" readonly>
           </mat-form-field>
+
+          <button mat-raised-button class="waves-light" type="button" mdbWavesEffect (click)="afficherEquipements(agent.numero)">Afficher tous les Equipements de cet Agent</button>
+          <br>
+          <button mat-raised-button class="waves-light" type="button" mdbWavesEffect (click)="afficherProblemes(agent.numero)">Afficher tous les Problèmes de cet Agent</button>
 
         </div>
       </mat-card-content>

@@ -30,7 +30,6 @@ export class ModifierComponent implements OnInit {
     this.equipement=JSON.parse(localStorage.getItem('Equipement'));
     this.equipsave=this.equipement;
     this.createForm();
-
   }
 
   openDialog(){

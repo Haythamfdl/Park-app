@@ -58,4 +58,12 @@ export class InfoaComponent implements OnInit {
       isdeleted:[this.agent.isdeleted]
     });
   }
+
+  afficherEquipements(value :any){
+    this.router.navigate(['/app/agents/equipements/'+value]).then();
+  }
+
+  afficherProblemes(value :any){
+    this.router.navigate(['/app/agents/problemes/'+value]).then();
+  }
 }

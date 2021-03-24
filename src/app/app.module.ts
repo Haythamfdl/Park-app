@@ -41,6 +41,8 @@ import { ListpComponent } from './probleme/listp/listp.component';
 import { ListaProblemeComponent } from './agent/lista-probleme/lista-probleme.component';
 import { AjoutpComponent } from './probleme/ajoutp/ajoutp.component';
 import {MatSelectModule} from '@angular/material/select';
+import { ModifierpComponent } from './probleme/modifierp/modifierp.component';
+import { InfopComponent } from './probleme/infop/infop.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +63,9 @@ import {MatSelectModule} from '@angular/material/select';
     InfoaComponent,
     ListpComponent,
     ListaProblemeComponent,
-    AjoutpComponent
+    AjoutpComponent,
+    ModifierpComponent,
+    InfopComponent
   ],
   imports: [
     BrowserModule,

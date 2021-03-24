@@ -27,6 +27,7 @@ mat-card-title{
   text-align: center;
   font-size: x-large;
 }
-h3{
+
+.non-resolu{
   color: red;
 }

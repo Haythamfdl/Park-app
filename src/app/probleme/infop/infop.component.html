@@ -1,0 +1,53 @@
+<div class="flex-container" xmlns="http://www.w3.org/1999/html" *ngIf="myForm">
+  <mat-card class="flex-item mat-elevation-z8">
+    <mat-card-title>
+      <h2>Information sur le Problème</h2>
+      <h3 class="non-resolu" *ngIf="!probleme.resolu"><b>Ce problème n'a pas été résolu</b></h3>
+      <h3 *ngIf="probleme.resolu"><b>Ce problème a été résolu</b></h3>
+    </mat-card-title>
+    <form [formGroup]="myForm">
+      <mat-card-content>
+        <div class="example-container mtb-2 text-center">
+
+          <mat-form-field appearance="outline">
+            <mat-label>Titre du Problème</mat-label>
+            <input type="text" matInput formControlName="titre" placeholder="Titre du Problème" readonly>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Date de Soumission</mat-label>
+            <input type="text" matInput [matDatepicker]="datea" formControlName="datesoumission" placeholder="Date de Soumission du Problème" readonly>
+            <mat-datepicker-toggle matSuffix [for]="datea"></mat-datepicker-toggle>
+            <mat-datepicker #datea disabled></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Détail du Problème</mat-label>
+            <textarea type="textarea" matInput rows="6" formControlName="probleme" placeholder="Détail du Problème" readonly></textarea>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Numéro Agent</mat-label>
+            <input type="text" matInput value="{{probleme.agent.numero}}" readonly>
+          </mat-form-field>
+          <mat-label *ngIf="probleme.agent !== null" style="text-align: left">Nom de l'agent: {{probleme.agent.nom}}</mat-label>
+          <br>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Type</mat-label>
+            <input type="text" matInput formControlName="type" placeholder="Type du Problème" readonly>
+          </mat-form-field>
+
+          <mat-form-field *ngIf="probleme.equipement !== null" appearance="outline">
+            <mat-label>Numéro équipement</mat-label>
+            <input type="text" matInput value="{{probleme.equipement.numero}}" readonly>
+          </mat-form-field>
+
+          <mat-label *ngIf="probleme.equipement !== null" style="text-align: left">Nom de l'agent: {{probleme.equipement.designation}}</mat-label>
+          <br>
+          <button mat-raised-button class="waves-light" type="button" mdbWavesEffect>Voir Solution</button>
+        </div>
+      </mat-card-content>
+    </form>
+  </mat-card>
+</div>

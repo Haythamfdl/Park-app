@@ -18,6 +18,8 @@ import {ProblemeService} from './_services/probleme.service';
 import {ListpComponent} from './probleme/listp/listp.component';
 import {ListaProblemeComponent} from './agent/lista-probleme/lista-probleme.component';
 import {AjoutpComponent} from './probleme/ajoutp/ajoutp.component';
+import {ModifierpComponent} from './probleme/modifierp/modifierp.component';
+import {InfopComponent} from './probleme/infop/infop.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -36,7 +38,9 @@ const routes: Routes = [
     {path: 'agents/modifier',component:ModifieraComponent},
     {path: 'agents/info/:num',component:InfoaComponent},
     {path: 'problemes',component:ListpComponent},
-    {path: 'problemes/ajout',component:AjoutpComponent}
+    {path: 'problemes/ajout',component:AjoutpComponent},
+    {path: 'problemes/modifier',component:ModifierpComponent},
+    {path: 'problemes/info/:id',component:InfopComponent}
   ]}
 ];
 

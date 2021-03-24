@@ -1,6 +1,9 @@
 <div class="flex-container" xmlns="http://www.w3.org/1999/html">
   <mat-card class="flex-item mat-elevation-z8">
-    <mat-card-title><h2 >Information sur l'équipement</h2></mat-card-title>
+    <mat-card-title>
+      <h2 >Information sur l'équipement</h2>
+      <h3 *ngIf="equipement.isdeleted"><b>Cet Equipement a été Supprimer !</b></h3>
+    </mat-card-title>
       <form [formGroup]="myForm" *ngIf="myForm">
         <mat-card-content>
           <div class="example-container mtb-2 text-center">
@@ -9,19 +12,16 @@
               <mat-label>Numéro</mat-label>
               <input type="text" matInput formControlName="numero" readonly placeholder="Numéro de l'équipement" >
             </mat-form-field>
-            <br>
 
             <mat-form-field appearance="outline">
               <mat-label>Désignation</mat-label>
               <input type="text" matInput formControlName="designation" readonly placeholder="Désignation de l'équipement" >
             </mat-form-field>
-            <br>
 
             <mat-form-field appearance="outline">
               <mat-label>Fabriquant</mat-label>
               <input type="text" matInput formControlName="fabriquant" readonly placeholder="Fabriquant de l'équipement" >
             </mat-form-field>
-            <br>
 
             <mat-form-field appearance="outline">
               <mat-label>Date d'aquisition</mat-label>
@@ -29,13 +29,11 @@
               <mat-datepicker-toggle matSuffix [for]="datea"></mat-datepicker-toggle>
               <mat-datepicker #datea disabled></mat-datepicker>
             </mat-form-field>
-            <br>
 
             <mat-form-field appearance="outline">
               <mat-label>Valeur d'aquisition</mat-label>
               <input type="number" min="0" matInput formControlName="valeuraquisition" placeholder="Valeur d'aquisition de l'équipement en DH" readonly>
             </mat-form-field>
-            <br>
 
             <mat-form-field appearance="outline">
               <mat-label>Date mis en Service</mat-label>
@@ -43,19 +41,16 @@
               <mat-datepicker-toggle matSuffix [for]="dates"></mat-datepicker-toggle>
               <mat-datepicker #dates disabled></mat-datepicker>
             </mat-form-field>
-            <br>
 
             <mat-form-field appearance="outline">
               <mat-label>Durée de garantie</mat-label>
               <input type="number" min="0" matInput formControlName="dureegarantie" placeholder="Durée de garantie de l'équipement en Années" readonly>
             </mat-form-field>
-            <br>
 
             <mat-form-field appearance="outline">
               <mat-label>Poids</mat-label>
               <input type="text" matInput formControlName="poids" placeholder="Poids de l'équipement" readonly>
             </mat-form-field>
-            <br>
 
             <mat-form-field appearance="outline">
               <mat-label>Taille</mat-label>

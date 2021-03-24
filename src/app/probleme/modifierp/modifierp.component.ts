@@ -1,21 +1,23 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Agent} from '../../_model/agent';
-import {Router} from '@angular/router';
-import {MatSnackBar} from '@angular/material/snack-bar';
-import {AgentService} from '../../_services/agent.service';
 import {Equipement} from '../../_model/equipement';
 import {Probleme} from '../../_model/probleme';
+import {Router} from '@angular/router';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {DatePipe} from '@angular/common';
+import {AgentService} from '../../_services/agent.service';
 import {EquipementService} from '../../_services/equipement.service';
 import {ProblemeService} from '../../_services/probleme.service';
-import {DatePipe} from '@angular/common';
+import {ComfirmDialogComponent} from '../../comfirm-dialog/comfirm-dialog.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-ajoutp',
-  templateUrl: './ajoutp.component.html',
-  styleUrls: ['./ajoutp.component.css']
+  selector: 'app-modifierp',
+  templateUrl: './modifierp.component.html',
+  styleUrls: ['./modifierp.component.css']
 })
-export class AjoutpComponent implements OnInit {
+export class ModifierpComponent implements OnInit {
   myForm: FormGroup;
   form: FormControl;
   agent:Agent;
@@ -24,6 +26,7 @@ export class AjoutpComponent implements OnInit {
   showe=false;
   showre=false;
   probleme:Probleme;
+  problemsave:Probleme;
   types = [
     {value: 'Software', viewValue: 'Software'},
     {value: 'Hardware', viewValue: 'Hardware'},
@@ -36,7 +39,7 @@ export class AjoutpComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private router: Router,
               private snackBar: MatSnackBar,
-              private datePipe:DatePipe,
+              public dialog: MatDialog,
               private agentService:AgentService,
               private equipementService:EquipementService,
               private problemeService:ProblemeService) {
@@ -46,6 +49,15 @@ export class AjoutpComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if(JSON.parse(localStorage.getItem('Probleme')) == null)
+      this.router.navigate(['/app/probleme']).then();
+    this.probleme=JSON.parse(localStorage.getItem('Probleme'));
+    this.problemsave=this.probleme;
+    this.chercherAgent(this.probleme.agent.numero);
+    if(this.probleme.type == "Hardware"){
+      this.showre=true;
+      this.chercherEquipement(this.probleme.equipement.numero);
+    }
     this.createForm();
   }
 
@@ -58,14 +70,28 @@ export class AjoutpComponent implements OnInit {
     this.el2.nativeElement.value="";
   }
 
+  openDialog(){
+    const dialogRef = this.dialog.open(ComfirmDialogComponent, {
+      width: '400px',
+      data: "Voulez-vous vraiment faire cette modification ?"
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+      if(result == true){
+        this.problemeService.update(this.probleme).subscribe();
+        this.openSnackBar('Le Problème a été modifier', '');
+        this.router.navigate(['/app/problemes']).then();
+      }
+    });
+  }
+
   submit(myForm) {
     this.probleme= myForm.value;
-    this.probleme.isdeleted=false;
-    this.probleme.resolu=false;
-    this.probleme.datesoumission= this.datePipe.transform(new Date(), 'yyyy-MM-dd');
-    this.problemeService.save(this.probleme).subscribe();
-    this.openSnackBar('Le Problème a été soumis', '');
-    this.router.navigate(['/app/problemes']).then();
+    this.probleme.idprob=this.problemsave.idprob;
+    this.probleme.isdeleted=this.problemsave.isdeleted;
+    this.probleme.resolu=this.problemsave.resolu;
+    this.probleme.datesoumission= this.problemsave.datesoumission;
+    this.openDialog();
   }
 
   openSnackBar(message: string, action: string) {
