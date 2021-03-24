@@ -7,28 +7,28 @@
 
           <mat-form-field appearance="outline">
             <mat-label>Numéro</mat-label>
-            <input matInput formControlName="numero" placeholder="Numéro de l'agent">
+            <input type="text" matInput formControlName="numero" placeholder="Numéro de l'agent">
           </mat-form-field>
 
           <mat-form-field appearance="outline">
             <mat-label>Nom et Prénom</mat-label>
-            <input matInput formControlName="nom" placeholder="Nom de l'agent">
+            <input type="text" matInput formControlName="nom" placeholder="Nom de l'agent">
           </mat-form-field>
 
           <mat-form-field appearance="outline">
             <mat-label>Email</mat-label>
-            <input matInput formControlName="email" placeholder="Email address">
+            <input type="email" matInput formControlName="email" placeholder="Email address">
             <mat-error *ngIf="myForm.get('email').invalid">Email est pas valider</mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="outline">
             <mat-label>Téléphone</mat-label>
-            <input matInput formControlName="tel" placeholder="Téléphone de l'agent">
+            <input type="tel" matInput formControlName="tel" placeholder="Téléphone de l'agent">
           </mat-form-field>
 
           <mat-form-field appearance="outline">
             <mat-label>Departement</mat-label>
-            <input matInput formControlName="departement" placeholder="Département de l'agent">
+            <input type="text" matInput formControlName="departement" placeholder="Département de l'agent">
           </mat-form-field>
 
           <mat-form-field appearance="outline">

@@ -39,6 +39,8 @@ import { ModifieraComponent } from './agent/modifiera/modifiera.component';
 import { InfoaComponent } from './agent/infoa/infoa.component';
 import { ListpComponent } from './probleme/listp/listp.component';
 import { ListaProblemeComponent } from './agent/lista-probleme/lista-probleme.component';
+import { AjoutpComponent } from './probleme/ajoutp/ajoutp.component';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -58,7 +60,8 @@ import { ListaProblemeComponent } from './agent/lista-probleme/lista-probleme.co
     ModifieraComponent,
     InfoaComponent,
     ListpComponent,
-    ListaProblemeComponent
+    ListaProblemeComponent,
+    AjoutpComponent
   ],
   imports: [
     BrowserModule,
@@ -66,6 +69,7 @@ import { ListaProblemeComponent } from './agent/lista-probleme/lista-probleme.co
     AppRoutingModule,
     RouterModule,
     MatCardModule,
+    MatSelectModule,
     MatFormFieldModule,
     MatInputModule,
     MatSnackBarModule,

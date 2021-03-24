@@ -7,25 +7,25 @@
 
             <mat-form-field appearance="outline">
               <mat-label>Numéro</mat-label>
-              <input matInput formControlName="numero" placeholder="Numéro de l'équipement">
+              <input type="text" matInput formControlName="numero" placeholder="Numéro de l'équipement">
             </mat-form-field>
             <br>
 
             <mat-form-field appearance="outline">
               <mat-label>Désignation</mat-label>
-              <input matInput formControlName="designation" placeholder="Désignation de l'équipement">
+              <input type="text" matInput formControlName="designation" placeholder="Désignation de l'équipement">
             </mat-form-field>
             <br>
 
             <mat-form-field appearance="outline">
               <mat-label>Fabriquant</mat-label>
-              <input matInput formControlName="fabriquant" placeholder="Fabriquant de l'équipement">
+              <input type="text" matInput formControlName="fabriquant" placeholder="Fabriquant de l'équipement">
             </mat-form-field>
             <br>
 
             <mat-form-field appearance="outline">
               <mat-label>Date d'aquisition</mat-label>
-              <input matInput [matDatepicker]="datea" formControlName="dateaquisition" placeholder="Date d'aquisition de l'équipement" readonly>
+              <input type="text" matInput [matDatepicker]="datea" formControlName="dateaquisition" placeholder="Date d'aquisition de l'équipement" readonly>
               <mat-datepicker-toggle matSuffix [for]="datea"></mat-datepicker-toggle>
               <mat-datepicker #datea></mat-datepicker>
             </mat-form-field>
@@ -39,7 +39,7 @@
 
             <mat-form-field appearance="outline">
               <mat-label>Date mis en Service</mat-label>
-              <input matInput [matDatepicker]="dates"  formControlName="dateservice" placeholder="Date mis en Service de l'équipement" readonly>
+              <input type="text" matInput [matDatepicker]="dates"  formControlName="dateservice" placeholder="Date mis en Service de l'équipement" readonly>
               <mat-datepicker-toggle matSuffix [for]="dates"></mat-datepicker-toggle>
               <mat-datepicker #dates></mat-datepicker>
             </mat-form-field>
@@ -59,7 +59,7 @@
 
             <mat-form-field appearance="outline">
               <mat-label>Taille</mat-label>
-              <input matInput formControlName="taille" placeholder="Taille de l'équipement">
+              <input type="text" matInput formControlName="taille" placeholder="Taille de l'équipement">
             </mat-form-field>
             <br>
 

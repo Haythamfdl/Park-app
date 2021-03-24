@@ -38,8 +38,8 @@ export class AffecterComponent implements OnInit {
 
   get numero() { return this.myForm.get('numero'); }
 
-  recheche(myForm: FormGroup){
-    this.num = myForm.value['numero'];
+  recheche(){
+    this.num = this.myForm.value['numero'];
     this.agentService.getAgentbyNum(this.num).subscribe(data =>{
       if(data !== null){
         this.agent =data;

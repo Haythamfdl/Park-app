@@ -8,10 +8,11 @@
           <mat-form-field appearance="outline">
             <mat-label>Numéro d'un Agent</mat-label>
             <input matInput formControlName="numero" placeholder="Numéro d'un Agent">
+            <button type="button" mat-button matSuffix mat-stroked-button mat-icon-button aria-label="Recherche" class="waves-light" mdbWavesEffec  (click)="recheche()">
+              <mat-icon>search</mat-icon>
+            </button>
           </mat-form-field>
-          <br>
-          <button mat-raised-button class="waves-light" type="button" mdbWavesEffect (click)="recheche(myForm)">Recherche</button>
-          <br>
+
           <mat-label *ngIf="show">Nom de l'agent: {{agent.nom}}</mat-label>
           <br>
           <button mat-raised-button color="primary" type="submit" mdbWavesEffect disabled="{{!show}}">Affecter</button>

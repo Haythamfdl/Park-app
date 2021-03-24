@@ -1,0 +1,33 @@
+.flex-container {
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  display: flex;
+}
+
+.flex-item {
+  margin-top: 200px;
+  background-color: transparent;
+  height: auto;
+  width: 80%;
+  min-width: 200px;
+  margin: 10px;
+  line-height: 20px;
+  margin: 15px;
+  display: inline-block;
+  border-radius: 0;
+}
+.example-container {
+  display: flex;
+  flex-direction: column;
+}
+mat-card-title{
+  text-align: center;
+  font-size: x-large;
+}
+
+mat-form-field.mat-form-field {
+  width: 100%;
+}

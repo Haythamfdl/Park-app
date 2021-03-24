@@ -17,6 +17,7 @@ import {InfoaComponent} from './agent/infoa/infoa.component';
 import {ProblemeService} from './_services/probleme.service';
 import {ListpComponent} from './probleme/listp/listp.component';
 import {ListaProblemeComponent} from './agent/lista-probleme/lista-probleme.component';
+import {AjoutpComponent} from './probleme/ajoutp/ajoutp.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -34,7 +35,8 @@ const routes: Routes = [
     {path: 'agents/ajout',component:AjoutaComponent},
     {path: 'agents/modifier',component:ModifieraComponent},
     {path: 'agents/info/:num',component:InfoaComponent},
-    {path: 'problemes',component:ListpComponent}
+    {path: 'problemes',component:ListpComponent},
+    {path: 'problemes/ajout',component:AjoutpComponent}
   ]}
 ];
 
