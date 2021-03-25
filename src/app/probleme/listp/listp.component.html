@@ -42,6 +42,7 @@
             <button mat-raised-button color="primary" (click)="info(data.idprob)">Info</button>
             <button mat-raised-button class="action" color="primary" (click)="modifier(data)">Modifier</button>
             <button mat-raised-button class="action" color="primary" (click)="solution(data)">Voir Solution</button>
+            <button *ngIf="!data.resolu" mat-raised-button class="action" color="primary" (click)="resolu(data)">Résolu</button>
             <button mat-raised-button class="action" color="warn" (click)="openDialog(data)">Supprimer</button>
           </td>
         </ng-container>

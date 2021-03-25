@@ -3,7 +3,6 @@ import {FormBuilder} from '@angular/forms';
 import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatDialog} from '@angular/material/dialog';
-import {EquipementService} from '../../_services/equipement.service';
 import {Equipement} from '../../_model/equipement';
 import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
@@ -23,7 +22,6 @@ export class ListpComponent implements OnInit {
               private router: Router,
               private snackBar: MatSnackBar,
               public dialog: MatDialog,
-              private equipementService: EquipementService,
               private problemeService:ProblemeService) {
   }
 
@@ -85,7 +83,15 @@ export class ListpComponent implements OnInit {
 
   solution(value: any){
     this.probleme = value;
-    this.router.navigate(['/app/solutions/'+this.probleme.idprob]).then();
+    localStorage.setItem('Probleme', JSON.stringify(this.probleme));
+    this.router.navigate(['/app/solutions/probleme/'+this.probleme.idprob]).then();
+  }
+
+  resolu(value: any) {
+    this.probleme = value;
+    this.probleme.resolu = true;
+    this.problemeService.update(this.probleme).subscribe();
+    this.openSnackBar('Problemes a été Résolu !','');
   }
 
   supprimer(value: any) {

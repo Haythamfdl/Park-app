@@ -47,6 +47,11 @@ import { ListpRComponent } from './probleme/listp-r/listp-r.component';
 import { ListpMenuComponent } from './probleme/listp-menu/listp-menu.component';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { ListpNrComponent } from './probleme/listp-nr/listp-nr.component';
+import { ListsComponent } from './solution/lists/lists.component';
+import { AjoutersComponent } from './solution/ajouters/ajouters.component';
+import { ModifiersComponent } from './solution/modifiers/modifiers.component';
+import { InfosComponent } from './solution/infos/infos.component';
+import { ListsUComponent } from './solution/lists-u/lists-u.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +77,12 @@ import { ListpNrComponent } from './probleme/listp-nr/listp-nr.component';
     InfopComponent,
     ListpRComponent,
     ListpMenuComponent,
-    ListpNrComponent
+    ListpNrComponent,
+    ListsComponent,
+    AjoutersComponent,
+    ModifiersComponent,
+    InfosComponent,
+    ListsUComponent
   ],
   imports: [
     BrowserModule,

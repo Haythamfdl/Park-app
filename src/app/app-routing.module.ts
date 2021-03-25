@@ -23,6 +23,11 @@ import {InfopComponent} from './probleme/infop/infop.component';
 import {ListpMenuComponent} from './probleme/listp-menu/listp-menu.component';
 import {ListpRComponent} from './probleme/listp-r/listp-r.component';
 import {ListpNrComponent} from './probleme/listp-nr/listp-nr.component';
+import {ListsComponent} from './solution/lists/lists.component';
+import {AjoutersComponent} from './solution/ajouters/ajouters.component';
+import {ModifiersComponent} from './solution/modifiers/modifiers.component';
+import {InfosComponent} from './solution/infos/infos.component';
+import {ListsUComponent} from './solution/lists-u/lists-u.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -48,6 +53,11 @@ const routes: Routes = [
     {path: 'problemes/ajout',component:AjoutpComponent},
     {path: 'problemes/modifier',component:ModifierpComponent},
     {path: 'problemes/info/:id',component:InfopComponent},
+    {path: 'solutions/probleme/:id',component:ListsComponent},
+    {path: 'solutions/ajout',component:AjoutersComponent},
+    {path: 'solutions/modifier',component:ModifiersComponent},
+    {path: 'solutions/info/:id',component:InfosComponent},
+    {path: 'solutions/user/:id',component:ListsUComponent}
   ]},
 
   {path: '**', redirectTo: 'app'}

@@ -3,7 +3,6 @@ import {FormBuilder} from '@angular/forms';
 import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatDialog} from '@angular/material/dialog';
-import {EquipementService} from '../../_services/equipement.service';
 import {ProblemeService} from '../../_services/probleme.service';
 import {Probleme} from '../../_model/probleme';
 import {MatSort} from '@angular/material/sort';
@@ -22,7 +21,6 @@ export class ListpRComponent implements OnInit {
               private router: Router,
               private snackBar: MatSnackBar,
               public dialog: MatDialog,
-              private equipementService: EquipementService,
               private problemeService:ProblemeService) {
   }
 
@@ -84,7 +82,7 @@ export class ListpRComponent implements OnInit {
 
   solution(value: any){
     this.probleme = value;
-    this.router.navigate(['/app/solutions/'+this.probleme.idprob]).then();
+    this.router.navigate(['/app/solutions/probleme/'+this.probleme.idprob]).then();
   }
 
   supprimer(value: any) {

@@ -91,7 +91,6 @@ export class ListComponent implements OnInit {
     this.equipement.agent = null;
     this.equipement.dateaffectation = null;
     this.equipementService.update(this.equipement).subscribe();
-    window.location.reload();
     this.openSnackBar('Equipement a été Désaffecter !','');
   }
 

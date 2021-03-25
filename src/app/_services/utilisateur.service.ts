@@ -16,6 +16,10 @@ export class UtilisateurService {
     this.Url = 'http://localhost:8080/utilisateurs';
   }
 
+  public getById(id): Observable<Utilisateur> {
+    return this.http.get<Utilisateur>(this.Url + '/id/' + id);
+  }
+
   public login(user: Utilisateur): Observable<Utilisateur> {
     return this.http.get<Utilisateur>(this.Url + '/' + user.email + '/' + user.pass);
   }

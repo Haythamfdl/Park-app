@@ -1,0 +1,25 @@
+<div class="flex-container" xmlns="http://www.w3.org/1999/html">
+  <mat-card class="flex-item mat-elevation-z8">
+    <mat-card-title><h2>Soumission d'une Solution</h2></mat-card-title>
+    <form [formGroup]="myForm" (ngSubmit)="submit(myForm)">
+      <mat-card-content>
+        <div class="example-container mtb-2 text-center">
+
+          <mat-form-field appearance="outline">
+            <mat-label>Titre</mat-label>
+            <input type="text" matInput formControlName="titre" placeholder="Titre de la Solution">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Détail de la Solution</mat-label>
+            <textarea type="textarea" matInput rows="6" formControlName="solution" placeholder="Détail de la Solution"></textarea>
+          </mat-form-field>
+
+          <button mat-raised-button class="waves-light" type="reset" mdbWavesEffect>Réinitialiser</button>
+          <br>
+          <button mat-raised-button color="primary" type="submit" [disabled]="!myForm.valid" mdbWavesEffect>Ajouter</button>
+        </div>
+      </mat-card-content>
+    </form>
+  </mat-card>
+</div>
