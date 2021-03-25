@@ -25,6 +25,8 @@ export class ModifieraComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if(JSON.parse(localStorage.getItem('Utilisateur')) == null)
+      this.router.navigate(['/']).then();
     if(JSON.parse(localStorage.getItem('Agent')) == null)
       this.router.navigate(['/app/agents']).then();
     this.agent=JSON.parse(localStorage.getItem('Agent'));

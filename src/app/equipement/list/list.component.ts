@@ -33,6 +33,8 @@ export class ListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngOnInit(): void {
+    if(JSON.parse(localStorage.getItem('Utilisateur')) == null)
+      this.router.navigate(['/']).then();
     localStorage.removeItem('Equipement');
     this.equipementService.getAllEquipements().subscribe(data =>{
       this.dataSource= new MatTableDataSource<Equipement>(data);

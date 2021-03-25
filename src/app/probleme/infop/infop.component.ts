@@ -28,6 +28,8 @@ export class InfopComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if(JSON.parse(localStorage.getItem('Utilisateur')) == null)
+      this.router.navigate(['/']).then();
     this.probleme.agent=new Agent();
     this.probleme.equipement=new Equipement();
     this.problemeService.getProbleme(this.id).subscribe(data =>{

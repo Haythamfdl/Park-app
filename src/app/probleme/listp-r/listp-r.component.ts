@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatDialog} from '@angular/material/dialog';
 import {EquipementService} from '../../_services/equipement.service';
@@ -21,25 +21,21 @@ export class ListpRComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private router: Router,
               private snackBar: MatSnackBar,
-              private activatedRoute:ActivatedRoute,
               public dialog: MatDialog,
               private equipementService: EquipementService,
               private problemeService:ProblemeService) {
-   // this.activatedRoute.params.subscribe(params => {this.resolu = params['resolu']});
   }
 
   displayedColumns: string[] = ['titre', 'type', 'agent', 'datesoumission' , 'Action'];
   dataSource;
   probleme:Probleme;
- // resolu;
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngOnInit(): void {
-   /* if(this.resolu != 'true' && this.resolu != 'false')
-      this.router.navigate(['/app/problemes']).then();
-    else {*/
+    if(JSON.parse(localStorage.getItem('Utilisateur')) == null)
+      this.router.navigate(['/']).then();
     localStorage.removeItem('Equipement');
     localStorage.removeItem('Agent');
     this.problemeService.getProblemesResolu(true).subscribe(data =>{
@@ -47,7 +43,6 @@ export class ListpRComponent implements OnInit {
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
     });
-   // }
   }
 
   openSnackBar(message: string, action: string) {

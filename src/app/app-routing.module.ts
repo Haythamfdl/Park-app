@@ -48,8 +48,9 @@ const routes: Routes = [
     {path: 'problemes/ajout',component:AjoutpComponent},
     {path: 'problemes/modifier',component:ModifierpComponent},
     {path: 'problemes/info/:id',component:InfopComponent},
+  ]},
 
-  ]}
+  {path: '**', redirectTo: 'app'}
 ];
 
 @NgModule({

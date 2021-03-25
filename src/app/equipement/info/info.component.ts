@@ -27,6 +27,8 @@ export class InfoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if(JSON.parse(localStorage.getItem('Utilisateur')) == null)
+      this.router.navigate(['/']).then();
     this.equipement.agent =new Agent();
     this.equipementService.getEquipementbyNum(this.num).subscribe(data =>{
       this.equipement = data;

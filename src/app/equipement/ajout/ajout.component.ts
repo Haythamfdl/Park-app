@@ -21,6 +21,8 @@ export class AjoutComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if(JSON.parse(localStorage.getItem('Utilisateur')) == null)
+      this.router.navigate(['/']).then();
     this.createForm();
   }
 

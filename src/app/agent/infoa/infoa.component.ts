@@ -29,6 +29,8 @@ export class InfoaComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if(JSON.parse(localStorage.getItem('Utilisateur')) == null)
+      this.router.navigate(['/']).then();
     this.agentService.getAgentbyNum(this.num).subscribe(data =>{
       this.agent = data;
       if(this.agent == null){

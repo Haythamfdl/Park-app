@@ -17,6 +17,8 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.user=JSON.parse(localStorage.getItem('Utilisateur'));
+    if(JSON.parse(localStorage.getItem('Utilisateur')) == null)
+      this.router.navigate(['/']).then();
   }
 
   openSnackBar(message: string, action: string) {

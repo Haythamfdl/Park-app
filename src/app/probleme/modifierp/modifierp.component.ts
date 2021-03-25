@@ -49,6 +49,8 @@ export class ModifierpComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if(JSON.parse(localStorage.getItem('Utilisateur')) == null)
+      this.router.navigate(['/']).then();
     if(JSON.parse(localStorage.getItem('Probleme')) == null)
       this.router.navigate(['/app/probleme']).then();
     this.probleme=JSON.parse(localStorage.getItem('Probleme'));

@@ -39,6 +39,8 @@ export class ListaEquipComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngOnInit(): void {
+    if(JSON.parse(localStorage.getItem('Utilisateur')) == null)
+      this.router.navigate(['/']).then();
     localStorage.removeItem('Equipement');
     localStorage.removeItem('Agent');
     this.agentService.getAgentbyNum(this.num).subscribe(dataid=>{
