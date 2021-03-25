@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
 
   submit(myForm) {
     this.user = myForm.value;
-    this.utilisateurService.login(this.user).subscribe(data => {
+    this.utilisateurService.login(this.user.email,this.user.pass).subscribe(data => {
      this.user = data;
      this.alert();
     });

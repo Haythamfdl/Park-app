@@ -16,7 +16,6 @@ import {UtilisateurService} from '../../_services/utilisateur.service';
 })
 export class InfouComponent implements OnInit {
   myForm: FormGroup;
-  agent:Agent;
   user:Utilisateur;
   id: string;
   constructor(private fb: FormBuilder,

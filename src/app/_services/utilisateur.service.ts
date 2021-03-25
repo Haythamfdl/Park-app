@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Utilisateur} from '../_model/utilisateur';
 import {Observable} from 'rxjs';
+import {Agent} from '../_model/agent';
 
 @Injectable({
   providedIn: 'root'
@@ -20,11 +21,15 @@ export class UtilisateurService {
     return this.http.get<Utilisateur>(this.Url + '/id/' + id);
   }
 
-  public login(user: Utilisateur): Observable<Utilisateur> {
-    return this.http.get<Utilisateur>(this.Url + '/' + user.email + '/' + user.pass);
+  public login(email:string, pass:string): Observable<Utilisateur> {
+    return this.http.get<Utilisateur>(this.Url + '/' + email + '/' + pass);
   }
 
   public getByEmail(user: Utilisateur): Observable<Utilisateur> {
     return this.http.get<Utilisateur>(this.Url + '/' + user.email);
+  }
+
+  public update(utilisateur: Utilisateur): Observable<Object> {
+    return this.http.put(this.Url, utilisateur, this.httpOptions);
   }
 }

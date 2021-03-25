@@ -1,0 +1,43 @@
+<div class="flex-container" xmlns="http://www.w3.org/1999/html">
+  <mat-card class="flex-item mat-elevation-z8">
+    <mat-card-title>
+      <h2>Mon Profile</h2>
+    </mat-card-title>
+    <form [formGroup]="myForm" *ngIf="myForm" (submit)="submit(myForm)">
+      <mat-card-content>
+        <div class="example-container mtb-2 text-center">
+
+          <mat-form-field appearance="outline">
+            <mat-label>Nom et Prénom</mat-label>
+            <input type="text" matInput formControlName="nom" placeholder="Nom de l'utilisateur">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input type="email" matInput formControlName="email" placeholder="Email address">
+            <mat-error *ngIf="myForm.get('email').invalid">Email est pas valider</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Mots de Passe Courant</mat-label>
+            <input type="text" matInput formControlName="pass" placeholder="Mots de Passe Courant de l'utilisateur">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Nouveau Mots de Passe</mat-label>
+            <input type="text" matInput placeholder="Nouveau Mots de Passe de l'utilisateur" #npass>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Téléphone</mat-label>
+            <input type="tel" matInput formControlName="tel" placeholder="Téléphone de l'agent">
+          </mat-form-field>
+
+          <button mat-raised-button class="waves-light" type="reset"  mdbWavesEffect>Réinitialiser</button>
+          <br>
+          <button mat-raised-button color="primary" type="submit" [disabled]="!myForm.valid" mdbWavesEffect>Modifier</button>
+        </div>
+      </mat-card-content>
+    </form>
+  </mat-card>
+</div>

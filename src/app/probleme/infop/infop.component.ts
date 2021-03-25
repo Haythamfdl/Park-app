@@ -62,4 +62,9 @@ export class InfopComponent implements OnInit {
       isdeleted:[this.probleme.isdeleted]
     });
   }
+
+  solution(){
+    localStorage.setItem('Probleme', JSON.stringify(this.probleme));
+    this.router.navigate(['/app/solutions/probleme/'+this.probleme.idprob]).then();
+  }
 }

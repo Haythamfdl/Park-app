@@ -54,6 +54,7 @@ import { InfosComponent } from './solution/infos/infos.component';
 import { ListsUComponent } from './solution/lists-u/lists-u.component';
 import { InfouComponent } from './utilisateur/infou/infou.component';
 import {MatFabMenuModule} from '@angular-material-extensions/fab-menu';
+import { ModifieruComponent } from './utilisateur/modifieru/modifieru.component';
 
 @NgModule({
   declarations: [
@@ -85,7 +86,8 @@ import {MatFabMenuModule} from '@angular-material-extensions/fab-menu';
     ModifiersComponent,
     InfosComponent,
     ListsUComponent,
-    InfouComponent
+    InfouComponent,
+    ModifieruComponent
   ],
   imports: [
     BrowserModule,

@@ -30,7 +30,7 @@
             <mat-label>Numéro Agent</mat-label>
             <input type="text" matInput value="{{probleme.agent.numero}}" readonly>
           </mat-form-field>
-          <mat-label *ngIf="probleme.agent !== null" style="text-align: left">Nom de l'agent: {{probleme.agent.nom}}</mat-label>
+          <mat-label *ngIf="probleme.agent !== null" style="text-align: left">Nom de l'agent: <a href="/app/agents/info/{{probleme.agent.numero}}">{{probleme.agent.nom}}</a></mat-label>
           <br>
 
           <mat-form-field appearance="outline">
@@ -43,9 +43,9 @@
             <input type="text" matInput value="{{probleme.equipement.numero}}" readonly>
           </mat-form-field>
 
-          <mat-label *ngIf="probleme.equipement !== null" style="text-align: left">Nom de l'agent: {{probleme.equipement.designation}}</mat-label>
+          <mat-label *ngIf="probleme.equipement !== null" style="text-align: left">Designation de l'equipement: <a href="/app/equipements/info/{{probleme.equipement.numero}}">{{probleme.equipement.designation}}</a></mat-label>
           <br>
-          <button mat-raised-button class="waves-light" type="button" mdbWavesEffect>Voir Solution</button>
+          <button mat-raised-button class="waves-light" type="button" mdbWavesEffect (click)="solution()">Voir Solution</button>
         </div>
       </mat-card-content>
     </form>

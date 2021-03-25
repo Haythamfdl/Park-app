@@ -34,6 +34,8 @@
         <a dropdownToggle type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
           <mdb-icon fas icon="user"></mdb-icon> Profile ({{user.nom}})<span class="caret"></span></a>
         <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
+          <a class="dropdown-item waves-light mat-warn" mdbWavesEffect href="/app/myprofile">Mon Profile</a>
+          <a class="dropdown-item waves-light mat-warn" mdbWavesEffect href="/app/solutions/user/{{user.iduser}}">Mes Solutions</a>
           <a class="dropdown-item waves-light mat-warn" mdbWavesEffect href="#" (click)="deconexion()">Déconnexion</a>
         </div>
       </li>

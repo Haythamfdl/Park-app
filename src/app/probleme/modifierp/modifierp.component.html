@@ -22,7 +22,7 @@
               <mat-icon>search</mat-icon>
             </button>
           </mat-form-field>
-          <mat-label *ngIf="showa" style="text-align: left">Nom de l'agent: {{agent.nom}}</mat-label>
+          <mat-label *ngIf="showa" style="text-align: left">Nom de l'agent: <a href="/app/agents/info/{{probleme.agent.numero}}">{{agent.nom}}</a></mat-label>
           <br>
 
           <mat-form-field appearance="outline">
@@ -42,7 +42,7 @@
               <mat-icon>search</mat-icon>
             </button>
           </mat-form-field>
-          <mat-label *ngIf="showe" style="text-align: left">La désignation de l'équipement: {{equipement.designation}}</mat-label>
+          <mat-label *ngIf="showe" style="text-align: left">La désignation de l'équipement: <a href="/app/equipements/info/{{probleme.equipement.numero}}">{{equipement.designation}}</a></mat-label>
           <br>
 
           <button mat-raised-button class="waves-light" type="button" (click)="reset()" mdbWavesEffect>Réinitialiser</button>
