@@ -52,6 +52,8 @@ import { AjoutersComponent } from './solution/ajouters/ajouters.component';
 import { ModifiersComponent } from './solution/modifiers/modifiers.component';
 import { InfosComponent } from './solution/infos/infos.component';
 import { ListsUComponent } from './solution/lists-u/lists-u.component';
+import { InfouComponent } from './utilisateur/infou/infou.component';
+import {MatFabMenuModule} from '@angular-material-extensions/fab-menu';
 
 @NgModule({
   declarations: [
@@ -82,7 +84,8 @@ import { ListsUComponent } from './solution/lists-u/lists-u.component';
     AjoutersComponent,
     ModifiersComponent,
     InfosComponent,
-    ListsUComponent
+    ListsUComponent,
+    InfouComponent
   ],
   imports: [
     BrowserModule,
@@ -105,6 +108,7 @@ import { ListsUComponent } from './solution/lists-u/lists-u.component';
     MatDialogModule,
     MatNativeDateModule,
     MatDatepickerModule,
+    MatFabMenuModule,
     MatButtonToggleModule,
     MDBBootstrapModule.forRoot(),
     FlexModule,

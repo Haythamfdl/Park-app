@@ -1,5 +1,6 @@
 .flex-container {
-  margin-top: 9vh;
+  margin-top: 5vh;
+  margin-bottom: 5vh;
   justify-content: center;
   align-items: center;
   padding: 0;
@@ -10,7 +11,7 @@
   margin-top: 200px;
   background-color: transparent;
   height: auto;
-  width: 100%;
+  width: 80%;
   min-width: 200px;
   margin: 10px;
   line-height: 20px;
@@ -18,18 +19,14 @@
   display: inline-block;
   border-radius: 0;
 }
-
-mat-card-title, mat-card-content{
-  text-align: center;
-  font-weight: bold;
+.example-container {
+  display: flex;
+  flex-direction: column;
 }
-
-h2{
+mat-card-title{
+  text-align: center;
   font-size: x-large;
 }
-
-mat-button-toggle{
-  font-size: medium;
-  width: 110px;
+h3{
+  color: red;
 }
-

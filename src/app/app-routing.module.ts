@@ -28,6 +28,7 @@ import {AjoutersComponent} from './solution/ajouters/ajouters.component';
 import {ModifiersComponent} from './solution/modifiers/modifiers.component';
 import {InfosComponent} from './solution/infos/infos.component';
 import {ListsUComponent} from './solution/lists-u/lists-u.component';
+import {InfouComponent} from './utilisateur/infou/infou.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -57,7 +58,8 @@ const routes: Routes = [
     {path: 'solutions/ajout',component:AjoutersComponent},
     {path: 'solutions/modifier',component:ModifiersComponent},
     {path: 'solutions/info/:id',component:InfosComponent},
-    {path: 'solutions/user/:id',component:ListsUComponent}
+    {path: 'solutions/user/:id',component:ListsUComponent},
+    {path: 'user/info/:id',component:InfouComponent},
   ]},
 
   {path: '**', redirectTo: 'app'}

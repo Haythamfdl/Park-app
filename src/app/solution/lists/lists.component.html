@@ -15,7 +15,7 @@
         <!-- Utilisateur Column -->
         <ng-container matColumnDef="utilisateur">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Utilisateur</th>
-          <td mat-cell *matCellDef="let data"><span *ngIf="data.user != null">{{data.user.nom}}</span></td>
+          <td mat-cell *matCellDef="let data"><a href="/app/user/info/{{data.user.iduser}}">{{data.user.nom}}</a></td>
         </ng-container>
 
         <!-- Date de Soumission Column -->
