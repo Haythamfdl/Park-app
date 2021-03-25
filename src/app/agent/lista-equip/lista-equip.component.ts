@@ -29,7 +29,7 @@ export class ListaEquipComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {this.num = params['num']});
   }
 
-  displayedColumns: string[] = ['numero', 'designation', 'agent', 'Action'];
+  displayedColumns: string[] = ['numero', 'designation', 'Action'];
   dataSource;
   equipement:Equipement;
   agent:Agent;
