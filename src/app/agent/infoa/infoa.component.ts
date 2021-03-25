@@ -1,11 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Equipement} from '../../_model/equipement';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatDialog} from '@angular/material/dialog';
-import {EquipementService} from '../../_services/equipement.service';
-import {ComfirmDialogComponent} from '../../comfirm-dialog/comfirm-dialog.component';
 import {Agent} from '../../_model/agent';
 import {AgentService} from '../../_services/agent.service';
 

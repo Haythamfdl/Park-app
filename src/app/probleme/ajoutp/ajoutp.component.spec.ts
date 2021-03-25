@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AjoutpComponent } from './ajoutp.component';
+import {AjoutpComponent} from './ajoutp.component';
 
 describe('AjoutpComponent', () => {
   let component: AjoutpComponent;

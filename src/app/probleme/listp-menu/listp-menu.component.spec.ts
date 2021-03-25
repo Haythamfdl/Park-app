@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ListpMenuComponent } from './listp-menu.component';
+import {ListpMenuComponent} from './listp-menu.component';
 
 describe('ListpMenuComponent', () => {
   let component: ListpMenuComponent;

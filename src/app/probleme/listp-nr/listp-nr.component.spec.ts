@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ListpNrComponent } from './listp-nr.component';
+import {ListpNrComponent} from './listp-nr.component';
 
 describe('ListpNrComponent', () => {
   let component: ListpNrComponent;

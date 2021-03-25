@@ -1,9 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Equipement} from '../../_model/equipement';
 import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {EquipementService} from '../../_services/equipement.service';
 import {Agent} from '../../_model/agent';
 import {AgentService} from '../../_services/agent.service';
 

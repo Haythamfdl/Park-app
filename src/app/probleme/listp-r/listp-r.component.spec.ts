@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ListpRComponent } from './listp-r.component';
+import {ListpRComponent} from './listp-r.component';
 
 describe('ListpRComponent', () => {
   let component: ListpRComponent;

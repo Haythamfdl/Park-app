@@ -5,7 +5,6 @@ import {Equipement} from '../../_model/equipement';
 import {Probleme} from '../../_model/probleme';
 import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {DatePipe} from '@angular/common';
 import {AgentService} from '../../_services/agent.service';
 import {EquipementService} from '../../_services/equipement.service';
 import {ProblemeService} from '../../_services/probleme.service';
