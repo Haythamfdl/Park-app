@@ -20,6 +20,9 @@ import {ListaProblemeComponent} from './agent/lista-probleme/lista-probleme.comp
 import {AjoutpComponent} from './probleme/ajoutp/ajoutp.component';
 import {ModifierpComponent} from './probleme/modifierp/modifierp.component';
 import {InfopComponent} from './probleme/infop/infop.component';
+import {ListpMenuComponent} from './probleme/listp-menu/listp-menu.component';
+import {ListpRComponent} from './probleme/listp-r/listp-r.component';
+import {ListpNrComponent} from './probleme/listp-nr/listp-nr.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -37,10 +40,15 @@ const routes: Routes = [
     {path: 'agents/ajout',component:AjoutaComponent},
     {path: 'agents/modifier',component:ModifieraComponent},
     {path: 'agents/info/:num',component:InfoaComponent},
-    {path: 'problemes',component:ListpComponent},
+    {path: 'problemes',component:ListpMenuComponent, children:[
+        {path: '',component:ListpComponent},
+        {path: 'true',component:ListpRComponent},
+        {path: 'false',component:ListpNrComponent}
+      ]},
     {path: 'problemes/ajout',component:AjoutpComponent},
     {path: 'problemes/modifier',component:ModifierpComponent},
-    {path: 'problemes/info/:id',component:InfopComponent}
+    {path: 'problemes/info/:id',component:InfopComponent},
+
   ]}
 ];
 

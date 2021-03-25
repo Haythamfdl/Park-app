@@ -1,0 +1,13 @@
+<div class="flex-container">
+  <mat-card class="flex-item mat-elevation-z8">
+    <mat-card-title><h2>Liste des Problèmes</h2></mat-card-title>
+    <mat-card-content>
+      <mat-button-toggle-group>
+        <mat-button-toggle (click)="redirect('')">Tous</mat-button-toggle>
+        <mat-button-toggle (click)="redirect('true')">Résolu</mat-button-toggle>
+        <mat-button-toggle (click)="redirect('false')">Non Résolu</mat-button-toggle>
+      </mat-button-toggle-group>
+    </mat-card-content>
+    <router-outlet></router-outlet>
+  </mat-card>
+</div>

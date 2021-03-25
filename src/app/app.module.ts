@@ -43,6 +43,10 @@ import { AjoutpComponent } from './probleme/ajoutp/ajoutp.component';
 import {MatSelectModule} from '@angular/material/select';
 import { ModifierpComponent } from './probleme/modifierp/modifierp.component';
 import { InfopComponent } from './probleme/infop/infop.component';
+import { ListpRComponent } from './probleme/listp-r/listp-r.component';
+import { ListpMenuComponent } from './probleme/listp-menu/listp-menu.component';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { ListpNrComponent } from './probleme/listp-nr/listp-nr.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +69,10 @@ import { InfopComponent } from './probleme/infop/infop.component';
     ListaProblemeComponent,
     AjoutpComponent,
     ModifierpComponent,
-    InfopComponent
+    InfopComponent,
+    ListpRComponent,
+    ListpMenuComponent,
+    ListpNrComponent
   ],
   imports: [
     BrowserModule,
@@ -88,6 +95,7 @@ import { InfopComponent } from './probleme/infop/infop.component';
     MatDialogModule,
     MatNativeDateModule,
     MatDatepickerModule,
+    MatButtonToggleModule,
     MDBBootstrapModule.forRoot(),
     FlexModule,
     FormsModule

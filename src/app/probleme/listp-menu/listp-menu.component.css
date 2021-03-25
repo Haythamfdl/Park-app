@@ -1,4 +1,5 @@
 .flex-container {
+  margin-top: 9vh;
   justify-content: center;
   align-items: center;
   padding: 0;
@@ -18,23 +19,11 @@
   border-radius: 0;
 }
 
-mat-card-title{
+mat-card-title, mat-card-content{
   text-align: center;
+}
+
+h2{
   font-size: x-large;
-}
-
-table {
-  width: 100%;
-  table-layout: auto;
-}
-
-.action{
-  justify-content: center;
-  margin-left: 5px;
-}
-
-th{
-  font-weight: bold;
-  font-size: medium;
 }
 

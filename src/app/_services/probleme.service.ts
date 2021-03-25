@@ -27,8 +27,8 @@ export class ProblemeService {
     return this.http.get<Probleme[]>(this.Url+'/agent/'+agent.idagent);
   }
 
-  public getProblemesResolu(resolu:boolean): Observable<Probleme[]> {
-    return this.http.get<Probleme[]>(this.Url+'/'+resolu);
+  public getProblemesResolu(resolu): Observable<Probleme[]> {
+    return this.http.get<Probleme[]>(this.Url+'/resolu/'+resolu);
   }
 
   public getProbleme(id:string): Observable<Probleme> {
