@@ -21,9 +21,14 @@
 
 mat-card-title, mat-card-content{
   text-align: center;
+  font-weight: bold;
 }
 
 h2{
   font-size: x-large;
+}
+
+mat-button-toggle{
+  font-size: medium;
 }
 
