@@ -29,9 +29,17 @@ export class AjoutComponent implements OnInit {
   submit(myForm) {
     this.equipement= myForm.value;
     this.equipement.isdeleted=false;
-    this.equipementService.save(this.equipement).subscribe();
-    this.openSnackBar('L\'équipement a été ajouter', '');
-    this.router.navigate(['/app/equipements']).then();
+    this.equipementService.getEquipementbyNum(this.equipement.numero).subscribe(data=>{
+      if(data == null){
+        this.equipementService.save(this.equipement).subscribe();
+        this.openSnackBar('L\'équipement a été ajouter', '');
+        this.router.navigate(['/app/equipements']).then();
+      }
+      else {
+        this.openSnackBar('Ce numéro est déja utiliser !', '');
+      }
+    })
+
   }
 
   openSnackBar(message: string, action: string) {

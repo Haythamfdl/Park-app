@@ -52,6 +52,7 @@ export class ModifierComponent implements OnInit {
   submit(myForm) {
     this.equipement= myForm.value;
     this.equipement.idequip = this.equipsave.idequip;
+    this.equipement.numero = this.equipsave.numero;
     this.equipement.isdeleted = false;
     this.equipement.dateaffectation = this.equipsave.dateaffectation;
     this.equipement.agent = this.equipsave.agent;
@@ -68,7 +69,7 @@ export class ModifierComponent implements OnInit {
   createForm() {
     this.myForm = this.fb.group({
       idequip: [this.equipement.idequip],
-      numero: [this.equipement.numero, [Validators.required]],
+      numero: [this.equipement.numero],
       designation: [this.equipement.designation, [Validators.required]],
       fabriquant: [this.equipement.fabriquant, [Validators.required]],
       dateaquisition:[this.equipement.dateaquisition,[Validators.required]],

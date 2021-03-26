@@ -29,9 +29,16 @@ export class AjoutaComponent implements OnInit {
   submit(myForm) {
     this.agent= myForm.value;
     this.agent.isdeleted=false;
-    this.agentService.save(this.agent).subscribe();
-    this.openSnackBar('L\'agent a été ajouter', '');
-    this.router.navigate(['/app/agents']).then();
+    this.agentService.getAgentbyNum(this.agent.numero).subscribe(data=>{
+      if(data == null){
+        this.agentService.save(this.agent).subscribe();
+        this.openSnackBar('L\'agent a été ajouter', '');
+        this.router.navigate(['/app/agents']).then();
+      }
+      else{
+        this.openSnackBar('Ce numéro est déja utiliser !', '');
+      }
+    })
   }
 
   openSnackBar(message: string, action: string) {

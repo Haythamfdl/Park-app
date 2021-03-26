@@ -15,7 +15,7 @@ import {MatDialog} from '@angular/material/dialog';
 export class ModifieraComponent implements OnInit {
   myForm: FormGroup;
   agent:Agent;
-  id;
+  agentsave:Agent;
   constructor(private fb: FormBuilder,
               private router: Router,
               private snackBar: MatSnackBar,
@@ -30,7 +30,7 @@ export class ModifieraComponent implements OnInit {
     if(JSON.parse(localStorage.getItem('Agent')) == null)
       this.router.navigate(['/app/agents']).then();
     this.agent=JSON.parse(localStorage.getItem('Agent'));
-    this.id=this.agent.idagent;
+    this.agentsave=this.agent;
     this.createForm();
   }
 
@@ -51,7 +51,8 @@ export class ModifieraComponent implements OnInit {
 
   submit(myForm) {
     this.agent= myForm.value;
-    this.agent.idagent=this.id;
+    this.agent.idagent=this.agentsave.idagent;
+    this.agent.numero=this.agentsave.numero;
     this.agent.isdeleted=false;
     this.openDialog();
   }
@@ -66,7 +67,7 @@ export class ModifieraComponent implements OnInit {
   createForm() {
     this.myForm = this.fb.group({
       idequip: [this.agent.idagent],
-      numero: [this.agent.numero, [Validators.required]],
+      numero: [this.agent.numero],
       nom: [this.agent.nom, [Validators.required]],
       email: [this.agent.email, [Validators.required, Validators.email]],
       tel:[this.agent.tel,[Validators.required]],
