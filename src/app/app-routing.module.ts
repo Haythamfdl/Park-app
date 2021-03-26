@@ -30,6 +30,7 @@ import {InfosComponent} from './solution/infos/infos.component';
 import {ListsUComponent} from './solution/lists-u/lists-u.component';
 import {InfouComponent} from './utilisateur/infou/infou.component';
 import {ModifieruComponent} from './utilisateur/modifieru/modifieru.component';
+import {ListmMenuComponent} from './message/listm-menu/listm-menu.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -61,7 +62,10 @@ const routes: Routes = [
     {path: 'solutions/info/:id',component:InfosComponent},
     {path: 'solutions/user/:id',component:ListsUComponent},
     {path: 'user/info/:id',component:InfouComponent},
-    {path: 'myprofile',component:ModifieruComponent}
+    {path: 'myprofile',component:ModifieruComponent},
+    {path: 'messages',component:ListmMenuComponent,children:[
+
+    ]}
   ]},
 
   {path: '**', redirectTo: 'app'}

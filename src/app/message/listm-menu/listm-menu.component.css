@@ -1,0 +1,35 @@
+.flex-container {
+  margin-top: 5vh;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  display: flex;
+}
+
+.flex-item {
+  margin-top: 200px;
+  background-color: transparent;
+  height: auto;
+  width: 100%;
+  min-width: 200px;
+  margin: 10px;
+  line-height: 20px;
+  margin: 15px;
+  display: inline-block;
+  border-radius: 0;
+}
+
+mat-card-title, mat-card-content{
+  text-align: center;
+  font-weight: bold;
+}
+
+h2{
+  font-size: x-large;
+}
+
+mat-button-toggle{
+  font-size: medium;
+  width: 110px;
+}
+
