@@ -67,6 +67,11 @@ export class ListaComponent implements OnInit {
     });
   }
 
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
   ajouter(){
     this.router.navigate(['/app/agents/ajout']).then();
   }

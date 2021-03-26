@@ -3,7 +3,13 @@
     <mat-card-title><h2 >Liste de toutes les Solutions soumise</h2></mat-card-title>
     <mat-card-content>
       <button mat-raised-button color="primary" class="mt-3" (click)="ajouter()">Soumettre une Solution</button>
-      <table class="mt-3" mat-table [dataSource]="dataSource" matSort >
+
+      <mat-form-field style="float: right">
+        <mat-label>Recherche</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Recherche">
+      </mat-form-field>
+
+      <table mat-table [dataSource]="dataSource" matSort >
 
         <!-- Titre Column -->
         <ng-container matColumnDef="titre">
