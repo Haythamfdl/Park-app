@@ -8,9 +8,9 @@ describe('ListpRComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ListpRComponent ]
+      declarations: [ListpRComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

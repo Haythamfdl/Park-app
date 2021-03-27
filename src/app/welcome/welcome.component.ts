@@ -9,12 +9,15 @@ import {Router} from '@angular/router';
 })
 export class WelcomeComponent implements OnInit {
   user: Utilisateur;
-  constructor(private router: Router) { }
+
+  constructor(private router: Router) {
+  }
 
   ngOnInit(): void {
-    this.user=JSON.parse(localStorage.getItem('Utilisateur'));
-    if(JSON.parse(localStorage.getItem('Utilisateur')) == null)
+    this.user = JSON.parse(localStorage.getItem('Utilisateur'));
+    if (JSON.parse(localStorage.getItem('Utilisateur')) == null) {
       this.router.navigate(['/']).then();
+    }
   }
 
 }

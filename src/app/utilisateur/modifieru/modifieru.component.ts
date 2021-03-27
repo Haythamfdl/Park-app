@@ -1,7 +1,7 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Utilisateur} from '../../_model/utilisateur';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatDialog} from '@angular/material/dialog';
 import {UtilisateurService} from '../../_services/utilisateur.service';

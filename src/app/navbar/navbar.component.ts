@@ -2,7 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Utilisateur} from '../_model/utilisateur';
-import {interval, Observable, Subscription} from 'rxjs';
+import {interval, Subscription} from 'rxjs';
+import {MessageService} from '../_services/message.service';
 
 @Component({
   selector: 'app-navbar',
@@ -12,20 +13,27 @@ import {interval, Observable, Subscription} from 'rxjs';
 export class NavbarComponent implements OnInit {
 
   user: Utilisateur;
-  subscription:Subscription;
-  num=0;
+  subscription: Subscription;
+  nb = '0';
 
   constructor(private router: Router,
-              private snackBar: MatSnackBar) {
-    this.subscription = interval(1000).subscribe((func =>{
-
-    }))
+              private snackBar: MatSnackBar,
+              private messageService: MessageService) {
+    this.subscription = interval(60000).subscribe((func => {
+      this.messageService.getAllMessagesOuvertCount(this.user.iduser, false).subscribe(data => {
+        this.nb = data;
+      });
+    }));
   }
 
   ngOnInit(): void {
-    this.user=JSON.parse(localStorage.getItem('Utilisateur'));
-    if(JSON.parse(localStorage.getItem('Utilisateur')) == null)
+    this.user = JSON.parse(localStorage.getItem('Utilisateur'));
+    if (JSON.parse(localStorage.getItem('Utilisateur')) == null) {
       this.router.navigate(['/']).then();
+    }
+    this.messageService.getAllMessagesOuvertCount(this.user.iduser, false).subscribe(data => {
+      this.nb = data;
+    });
   }
 
 
@@ -36,7 +44,7 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-  deconexion(){
+  deconexion() {
     localStorage.removeItem('Utilisateur');
     this.openSnackBar('Vous êtes déconnecter', '');
     this.router.navigate(['/']).then();

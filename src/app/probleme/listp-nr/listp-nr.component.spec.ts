@@ -8,9 +8,9 @@ describe('ListpNrComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ListpNrComponent ]
+      declarations: [ListpNrComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

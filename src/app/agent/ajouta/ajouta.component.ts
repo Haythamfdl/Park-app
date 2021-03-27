@@ -12,33 +12,34 @@ import {AgentService} from '../../_services/agent.service';
 })
 export class AjoutaComponent implements OnInit {
   myForm: FormGroup;
-  agent:Agent;
+  agent: Agent;
+
   constructor(private fb: FormBuilder,
               private router: Router,
               private snackBar: MatSnackBar,
-              private agentService:AgentService) {
-    this.agent=new Agent();
+              private agentService: AgentService) {
+    this.agent = new Agent();
   }
 
   ngOnInit(): void {
     this.createForm();
-    if(JSON.parse(localStorage.getItem('Utilisateur')) == null)
+    if (JSON.parse(localStorage.getItem('Utilisateur')) == null) {
       this.router.navigate(['/']).then();
+    }
   }
 
   submit(myForm) {
-    this.agent= myForm.value;
-    this.agent.isdeleted=false;
-    this.agentService.getAgentbyNum(this.agent.numero).subscribe(data=>{
-      if(data == null){
+    this.agent = myForm.value;
+    this.agent.isdeleted = false;
+    this.agentService.getAgentbyNum(this.agent.numero).subscribe(data => {
+      if (data == null) {
         this.agentService.save(this.agent).subscribe();
         this.openSnackBar('L\'agent a été ajouter', '');
         this.router.navigate(['/app/agents']).then();
-      }
-      else{
+      } else {
         this.openSnackBar('Ce numéro est déja utiliser !', '');
       }
-    })
+    });
   }
 
   openSnackBar(message: string, action: string) {
@@ -54,10 +55,10 @@ export class AjoutaComponent implements OnInit {
       numero: [this.agent.numero, [Validators.required]],
       nom: [this.agent.nom, [Validators.required]],
       email: [this.agent.email, [Validators.required, Validators.email]],
-      tel:[this.agent.tel,[Validators.required]],
-      departement:[this.agent.departement,[Validators.required]],
-      fonction:[this.agent.fonction,[Validators.required]],
-      isdeleted:[this.agent.isdeleted]
+      tel: [this.agent.tel, [Validators.required]],
+      departement: [this.agent.departement, [Validators.required]],
+      fonction: [this.agent.fonction, [Validators.required]],
+      isdeleted: [this.agent.isdeleted]
     });
   }
 }

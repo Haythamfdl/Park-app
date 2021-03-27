@@ -1,33 +1,37 @@
 <div class="flex-container" xmlns="http://www.w3.org/1999/html">
   <mat-card class="flex-item mat-elevation-z8">
     <mat-card-title><h2>Information sur la Solution</h2></mat-card-title>
-    <form [formGroup]="myForm" *ngIf="myForm">
+    <form *ngIf="myForm" [formGroup]="myForm">
       <mat-card-content>
         <div class="example-container mtb-2 text-center">
 
           <mat-form-field appearance="outline">
             <mat-label>Titre</mat-label>
-            <input type="text" matInput formControlName="titre" placeholder="Titre de la Solution" readonly>
+            <input formControlName="titre" matInput placeholder="Titre de la Solution" readonly type="text">
           </mat-form-field>
 
           <mat-form-field appearance="outline">
             <mat-label>Date de Soumission</mat-label>
-            <input type="text" matInput [matDatepicker]="datea" formControlName="datesoumission" placeholder="Date de Soumission du Problème" readonly>
-            <mat-datepicker-toggle matSuffix [for]="datea"></mat-datepicker-toggle>
+            <input [matDatepicker]="datea" formControlName="datesoumission" matInput placeholder="Date de Soumission du Problème"
+                   readonly type="text">
+            <mat-datepicker-toggle [for]="datea" matSuffix></mat-datepicker-toggle>
             <mat-datepicker #datea disabled></mat-datepicker>
           </mat-form-field>
 
           <mat-form-field appearance="outline">
             <mat-label>Détail de la Solution</mat-label>
-            <textarea type="textarea" matInput rows="6" formControlName="solution" placeholder="Détail de la Solution" readonly></textarea>
+            <textarea formControlName="solution" matInput placeholder="Détail de la Solution" readonly rows="6"
+                      type="textarea"></textarea>
           </mat-form-field>
 
           <mat-form-field appearance="outline">
             <mat-label>Solution Soumise par:</mat-label>
-            <input type="text" matInput value="{{solution.user.nom}}" readonly>
+            <input matInput readonly type="text" value="{{solution.user.nom}}">
           </mat-form-field>
           <br>
-          <button mat-raised-button class="waves-light" type="button" (click)="afficher()" mdbWavesEffect>Afficher les Solutions soumises par cet utilisateur</button>
+          <button (click)="afficher()" class="waves-light" mat-raised-button mdbWavesEffect type="button">Afficher les
+            Solutions soumises par cet utilisateur
+          </button>
         </div>
       </mat-card-content>
     </form>

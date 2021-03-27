@@ -1,63 +1,67 @@
 <div fxLayout="column" style="height: 100%">
-<!--Navbar-->
-<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark indigo darken-1" [containerInside]="false">
+  <!--Navbar-->
+  <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark indigo darken-1" [containerInside]="false">
 
-  <!-- Navbar brand -->
-  <mdb-navbar-brand><a class="navbar-brand" href="/app">Gestion Park</a></mdb-navbar-brand>
+    <!-- Navbar brand -->
+    <mdb-navbar-brand><a class="navbar-brand" href="/app">Gestion Park</a></mdb-navbar-brand>
 
-  <!-- Collapsible content -->
-  <links>
+    <!-- Collapsible content -->
+    <links>
 
-    <!-- Links -->
-    <ul class="navbar-nav ">
-      <li class="nav-item">
-        <a class="nav-link waves-light" mdbWavesEffect href="/app/equipements">Gestion Equipements</a>
-      </li>
-    </ul>
+      <!-- Links -->
+      <ul class="navbar-nav ">
+        <li class="nav-item">
+          <a class="nav-link waves-light" href="/app/equipements" mdbWavesEffect>Gestion Equipements</a>
+        </li>
+      </ul>
 
-    <ul class="navbar-nav ">
-      <li class="nav-item">
-        <a class="nav-link waves-light" mdbWavesEffect href="/app/agents">Gestion Agents</a>
-      </li>
-    </ul>
+      <ul class="navbar-nav ">
+        <li class="nav-item">
+          <a class="nav-link waves-light" href="/app/agents" mdbWavesEffect>Gestion Agents</a>
+        </li>
+      </ul>
 
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link waves-light" mdbWavesEffect href="/app/problemes">Gestion Problèmes</a>
-      </li>
-    </ul>
-    <!-- Links -->
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link waves-light" href="/app/problemes" mdbWavesEffect>Gestion Problèmes</a>
+        </li>
+      </ul>
+      <!-- Links -->
 
-    <ul class="navbar-nav ml-auto nav-flex-icons">
-      <li class="nav-item">
-        <a class="nav-link" href="/app/messages">{{num}} <mdb-icon fas icon="envelope"></mdb-icon></a>
-      </li>
-      <!-- Dropdown -->
-      <li class="nav-item dropdown" dropdown>
-        <a dropdownToggle type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
-          <mdb-icon fas icon="user"></mdb-icon> Profile ({{user.nom}})<span class="caret"></span></a>
-        <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
-          <a class="dropdown-item waves-light mat-warn" mdbWavesEffect href="/app/myprofile">Mon Profile</a>
-          <a class="dropdown-item waves-light mat-warn" mdbWavesEffect href="/app/solutions/user/{{user.iduser}}">Mes Solutions</a>
-          <a class="dropdown-item waves-light mat-warn" mdbWavesEffect href="#" (click)="deconexion()">Déconnexion</a>
-        </div>
-      </li>
-    </ul>
-  </links>
-  <!-- Collapsible content -->
+      <ul class="navbar-nav ml-auto nav-flex-icons">
+        <li class="nav-item">
+          <a class="nav-link" href="/app/messages">{{nb}}
+            <mdb-icon fas icon="envelope"></mdb-icon>
+          </a>
+        </li>
+        <!-- Dropdown -->
+        <li class="nav-item dropdown" dropdown>
+          <a class="nav-link dropdown-toggle waves-light" dropdownToggle mdbWavesEffect type="button">
+            <mdb-icon fas icon="user"></mdb-icon>
+            Profile ({{user.nom}})<span class="caret"></span></a>
+          <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
+            <a class="dropdown-item waves-light mat-warn" href="/app/myprofile" mdbWavesEffect>Mon Profile</a>
+            <a class="dropdown-item waves-light mat-warn" href="/app/solutions/user/{{user.iduser}}" mdbWavesEffect>Mes
+              Solutions</a>
+            <a (click)="deconexion()" class="dropdown-item waves-light mat-warn" href="#" mdbWavesEffect>Déconnexion</a>
+          </div>
+        </li>
+      </ul>
+    </links>
+    <!-- Collapsible content -->
 
-</mdb-navbar>
-<!--/.Navbar-->
+  </mdb-navbar>
+  <!--/.Navbar-->
   <router-outlet></router-outlet>
-<!-- Footer -->
-<footer class="page-footer font-small indigo" fxFlexOffset="auto">
+  <!-- Footer -->
+  <footer class="page-footer font-small indigo" fxFlexOffset="auto">
 
-  <!-- Copyright -->
-  <div class="footer-copyright text-center py-3">© 2021 Copyright:
-    <a href="https://www.dxc.technology/"> DXC</a>
-  </div>
-  <!-- Copyright -->
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">© 2021 Copyright:
+      <a href="https://www.dxc.technology/"> DXC</a>
+    </div>
+    <!-- Copyright -->
 
-</footer>
-<!-- Footer -->
+  </footer>
+  <!-- Footer -->
 </div>

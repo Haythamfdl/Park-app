@@ -8,9 +8,9 @@ describe('InfopComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ InfopComponent ]
+      declarations: [InfopComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

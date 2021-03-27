@@ -1,11 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import {MatFabMenu} from '@angular-material-extensions/fab-menu';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Agent} from '../../_model/agent';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatDialog} from '@angular/material/dialog';
-import {AgentService} from '../../_services/agent.service';
 import {Utilisateur} from '../../_model/utilisateur';
 import {UtilisateurService} from '../../_services/utilisateur.service';
 

@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AffecterComponent } from './affecter.component';
+import {AffecterComponent} from './affecter.component';
 
 describe('AffecterComponent', () => {
   let component: AffecterComponent;

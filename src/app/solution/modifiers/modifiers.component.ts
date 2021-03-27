@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Solution} from '../../_model/solution';
 import {Probleme} from '../../_model/probleme';
@@ -17,60 +17,63 @@ import {ComfirmDialogComponent} from '../../comfirm-dialog/comfirm-dialog.compon
 })
 export class ModifiersComponent implements OnInit {
   myForm: FormGroup;
-  solution:Solution;
-  probleme:Probleme;
-  utilisateur:Utilisateur;
-  solutionsave:Solution;
+  solution: Solution;
+  probleme: Probleme;
+  utilisateur: Utilisateur;
+  solutionsave: Solution;
+
   constructor(private fb: FormBuilder,
               private router: Router,
               private snackBar: MatSnackBar,
               public dialog: MatDialog,
-              private datePipe:DatePipe,
-              private solutionService:SolutionService) {
-    this.solution=new Solution();
+              private datePipe: DatePipe,
+              private solutionService: SolutionService) {
+    this.solution = new Solution();
   }
 
   ngOnInit(): void {
-    if(JSON.parse(localStorage.getItem('Probleme')) == null)
+    if (JSON.parse(localStorage.getItem('Probleme')) == null) {
       this.router.navigate(['/app/problemes']).then();
-    else
+    } else {
       this.probleme = JSON.parse(localStorage.getItem('Probleme'));
+    }
 
-    if(JSON.parse(localStorage.getItem('Utilisateur')) == null)
+    if (JSON.parse(localStorage.getItem('Utilisateur')) == null) {
       this.router.navigate(['/']).then();
-    else
+    } else {
       this.utilisateur = JSON.parse(localStorage.getItem('Utilisateur'));
+    }
 
-    if(JSON.parse(localStorage.getItem('Solution')) == null)
-      this.router.navigate(['/app/solutions/probleme/'+this.probleme.idprob]).then();
-    else {
+    if (JSON.parse(localStorage.getItem('Solution')) == null) {
+      this.router.navigate(['/app/solutions/probleme/' + this.probleme.idprob]).then();
+    } else {
       this.solution = JSON.parse(localStorage.getItem('Solution'));
-      this.solutionsave=this.solution;
+      this.solutionsave = this.solution;
     }
     this.createForm();
   }
 
   submit(myForm) {
-    this.solution= myForm.value;
-    this.solution.idsol=this.solutionsave.idsol;
-    this.solution.isdeleted=this.solutionsave.isdeleted;
-    this.solution.probleme=this.solutionsave.probleme;
-    this.solution.user=this.solutionsave.user;
-    this.solution.datesoumission=this.solutionsave.datesoumission;
+    this.solution = myForm.value;
+    this.solution.idsol = this.solutionsave.idsol;
+    this.solution.isdeleted = this.solutionsave.isdeleted;
+    this.solution.probleme = this.solutionsave.probleme;
+    this.solution.user = this.solutionsave.user;
+    this.solution.datesoumission = this.solutionsave.datesoumission;
     this.openDialog();
   }
 
-  openDialog(){
+  openDialog() {
     const dialogRef = this.dialog.open(ComfirmDialogComponent, {
       width: '400px',
-      data: "Voulez-vous vraiment faire cette modification ?"
+      data: 'Voulez-vous vraiment faire cette modification ?'
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
-      if(result == true){
+      if (result == true) {
         this.solutionService.update(this.solution).subscribe();
         this.openSnackBar('Le Solution a été modifier', '');
-        this.router.navigate(['/app/solutions/probleme/'+this.probleme.idprob]).then();
+        this.router.navigate(['/app/solutions/probleme/' + this.probleme.idprob]).then();
       }
     });
   }
@@ -88,9 +91,9 @@ export class ModifiersComponent implements OnInit {
       titre: [this.solution.titre, [Validators.required]],
       solution: [this.solution.solution, [Validators.required]],
       probleme: [this.solution.probleme],
-      datesoumission:[this.solution.datesoumission],
-      user:[this.solution.user],
-      isdeleted:[this.solution.isdeleted]
+      datesoumission: [this.solution.datesoumission],
+      user: [this.solution.user],
+      isdeleted: [this.solution.isdeleted]
     });
   }
 }

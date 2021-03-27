@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ListmMenuComponent } from './listm-menu.component';
+import {ListmMenuComponent} from './listm-menu.component';
 
 describe('ListmMenuComponent', () => {
   let component: ListmMenuComponent;
@@ -8,9 +8,9 @@ describe('ListmMenuComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ListmMenuComponent ]
+      declarations: [ListmMenuComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

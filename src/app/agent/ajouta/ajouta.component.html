@@ -1,44 +1,45 @@
 <div class="flex-container" xmlns="http://www.w3.org/1999/html">
   <mat-card class="flex-item mat-elevation-z8">
-    <mat-card-title><h2 >Ajout d'un agent</h2></mat-card-title>
-    <form [formGroup]="myForm" (ngSubmit)="submit(myForm)">
+    <mat-card-title><h2>Ajout d'un agent</h2></mat-card-title>
+    <form (ngSubmit)="submit(myForm)" [formGroup]="myForm">
       <mat-card-content>
         <div class="example-container mtb-2 text-center">
 
           <mat-form-field appearance="outline">
             <mat-label>Numéro</mat-label>
-            <input type="text" matInput formControlName="numero" placeholder="Numéro de l'agent">
+            <input formControlName="numero" matInput placeholder="Numéro de l'agent" type="text">
           </mat-form-field>
 
           <mat-form-field appearance="outline">
             <mat-label>Nom et Prénom</mat-label>
-            <input type="text" matInput formControlName="nom" placeholder="Nom de l'agent">
+            <input formControlName="nom" matInput placeholder="Nom de l'agent" type="text">
           </mat-form-field>
 
           <mat-form-field appearance="outline">
             <mat-label>Email</mat-label>
-            <input type="email" matInput formControlName="email" placeholder="Email address">
+            <input formControlName="email" matInput placeholder="Email address" type="email">
             <mat-error *ngIf="myForm.get('email').invalid">Email est pas valider</mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="outline">
             <mat-label>Téléphone</mat-label>
-            <input type="tel" matInput formControlName="tel" placeholder="Téléphone de l'agent">
+            <input formControlName="tel" matInput placeholder="Téléphone de l'agent" type="tel">
           </mat-form-field>
 
           <mat-form-field appearance="outline">
             <mat-label>Departement</mat-label>
-            <input type="text" matInput formControlName="departement" placeholder="Département de l'agent">
+            <input formControlName="departement" matInput placeholder="Département de l'agent" type="text">
           </mat-form-field>
 
           <mat-form-field appearance="outline">
             <mat-label>Fonction</mat-label>
-            <input type="text" matInput formControlName="fonction" placeholder="Fonction de l'agent">
+            <input formControlName="fonction" matInput placeholder="Fonction de l'agent" type="text">
           </mat-form-field>
 
-          <button mat-raised-button class="waves-light" type="reset" mdbWavesEffect>Réinitialiser</button>
+          <button class="waves-light" mat-raised-button mdbWavesEffect type="reset">Réinitialiser</button>
           <br>
-          <button mat-raised-button color="primary" type="submit" [disabled]="!myForm.valid" mdbWavesEffect>Ajouter</button>
+          <button [disabled]="!myForm.valid" color="primary" mat-raised-button mdbWavesEffect type="submit">Ajouter
+          </button>
         </div>
       </mat-card-content>
     </form>

@@ -20,41 +20,43 @@ import {AgentService} from '../../_services/agent.service';
 })
 export class ListaProblemeComponent implements OnInit {
 
-  constructor(private fb: FormBuilder,
-              private router: Router,
-              private snackBar: MatSnackBar,
-              private activatedRoute:ActivatedRoute,
-              public dialog: MatDialog,
-              private equipementService: EquipementService,
-              private problemeService:ProblemeService,
-              private agentService:AgentService) {
-    this.activatedRoute.params.subscribe(params => {this.num = params['num']});
-    this.agent=new Agent();
-  }
-
-  displayedColumns: string[] = ['titre', 'type', 'agent', 'datesoumission' ,'resolu' , 'Action'];
+  displayedColumns: string[] = ['titre', 'type', 'agent', 'datesoumission', 'resolu', 'Action'];
   dataSource;
-  probleme:Probleme;
-  agent:Agent;
+  probleme: Probleme;
+  agent: Agent;
   num;
-
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
+  constructor(private fb: FormBuilder,
+              private router: Router,
+              private snackBar: MatSnackBar,
+              private activatedRoute: ActivatedRoute,
+              public dialog: MatDialog,
+              private equipementService: EquipementService,
+              private problemeService: ProblemeService,
+              private agentService: AgentService) {
+    this.activatedRoute.params.subscribe(params => {
+      this.num = params['num'];
+    });
+    this.agent = new Agent();
+  }
+
   ngOnInit(): void {
-    if(JSON.parse(localStorage.getItem('Utilisateur')) == null)
+    if (JSON.parse(localStorage.getItem('Utilisateur')) == null) {
       this.router.navigate(['/']).then();
+    }
     localStorage.removeItem('Equipement');
     localStorage.removeItem('Agent');
     localStorage.removeItem('Probleme');
-    this.agentService.getAgentbyNum(this.num).subscribe(data =>{
+    this.agentService.getAgentbyNum(this.num).subscribe(data => {
       this.agent = data;
-      if(this.agent == null){
+      if (this.agent == null) {
         this.router.navigate(['/app/agents']).then();
         this.openSnackBar('Le numéro de l\'agent est invalide', '');
       }
-      this.problemeService.getProblemesAgent(this.agent).subscribe(data =>{
-        this.dataSource= new MatTableDataSource<Probleme>(data);
+      this.problemeService.getProblemesAgent(this.agent).subscribe(data => {
+        this.dataSource = new MatTableDataSource<Probleme>(data);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
       });
@@ -73,39 +75,39 @@ export class ListaProblemeComponent implements OnInit {
     });
   }
 
-  openDialog(value :any){
+  openDialog(value: any) {
     const dialogRef = this.dialog.open(ComfirmDialogComponent, {
       width: '400px',
-      data: "Voulez-vous vraiment faire cette suppression ?"
+      data: 'Voulez-vous vraiment faire cette suppression ?'
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
-      if(result == true){
+      if (result == true) {
         this.supprimer(value);
         window.location.reload();
-        this.openSnackBar('Problemes a été Supprimer !','');
+        this.openSnackBar('Problemes a été Supprimer !', '');
       }
     });
   }
 
-  ajouter(){
+  ajouter() {
     this.router.navigate(['/app/problemes/ajout']).then();
   }
 
-  info(value :any){
-    this.router.navigate(['/app/problemes/info/'+value]).then();
+  info(value: any) {
+    this.router.navigate(['/app/problemes/info/' + value]).then();
   }
 
-  modifier(value: any){
+  modifier(value: any) {
     this.probleme = value;
     localStorage.setItem('Probleme', JSON.stringify(this.probleme));
     this.router.navigate(['/app/problemes/modifier']).then();
   }
 
-  solution(value: any){
+  solution(value: any) {
     this.probleme = value;
-    this.router.navigate(['/app/solutions/'+this.probleme.idprob]).then();
+    this.router.navigate(['/app/solutions/' + this.probleme.idprob]).then();
   }
 
   supprimer(value: any) {

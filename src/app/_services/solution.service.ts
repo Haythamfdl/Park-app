@@ -1,8 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Agent} from '../_model/agent';
 import {Observable} from 'rxjs';
-import {Probleme} from '../_model/probleme';
 import {Solution} from '../_model/solution';
 
 @Injectable({
@@ -19,22 +17,22 @@ export class SolutionService {
   }
 
   public getSolutionsProblem(id): Observable<Solution[]> {
-    return this.http.get<Solution[]>(this.Url+'/problem/'+id);
+    return this.http.get<Solution[]>(this.Url + '/problem/' + id);
   }
 
   public getSolutionsUtilisateur(id): Observable<Solution[]> {
-    return this.http.get<Solution[]>(this.Url+'/user/'+id);
+    return this.http.get<Solution[]>(this.Url + '/user/' + id);
   }
 
   public getSolution(id): Observable<Solution> {
-    return this.http.get<Solution>(this.Url+'/'+id);
+    return this.http.get<Solution>(this.Url + '/' + id);
   }
 
-  public save(solution : Solution): Observable<Object> {
+  public save(solution: Solution): Observable<Object> {
     return this.http.post(this.Url, solution, this.httpOptions);
   }
 
-  public update(solution : Solution): Observable<Object> {
+  public update(solution: Solution): Observable<Object> {
     return this.http.put(this.Url, solution, this.httpOptions);
   }
 }

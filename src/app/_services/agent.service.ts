@@ -20,7 +20,7 @@ export class AgentService {
     return this.http.get<Agent[]>(this.Url);
   }
 
-  public getAgentbyNum(num : string): Observable<Agent> {
+  public getAgentbyNum(num: string): Observable<Agent> {
     return this.http.get<Agent>(this.Url + '/' + num);
   }
 

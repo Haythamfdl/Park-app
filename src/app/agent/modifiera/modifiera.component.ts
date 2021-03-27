@@ -14,34 +14,37 @@ import {MatDialog} from '@angular/material/dialog';
 })
 export class ModifieraComponent implements OnInit {
   myForm: FormGroup;
-  agent:Agent;
-  agentsave:Agent;
+  agent: Agent;
+  agentsave: Agent;
+
   constructor(private fb: FormBuilder,
               private router: Router,
               private snackBar: MatSnackBar,
               public dialog: MatDialog,
-              private agentService:AgentService) {
-    this.agent=new Agent();
+              private agentService: AgentService) {
+    this.agent = new Agent();
   }
 
   ngOnInit(): void {
-    if(JSON.parse(localStorage.getItem('Utilisateur')) == null)
+    if (JSON.parse(localStorage.getItem('Utilisateur')) == null) {
       this.router.navigate(['/']).then();
-    if(JSON.parse(localStorage.getItem('Agent')) == null)
+    }
+    if (JSON.parse(localStorage.getItem('Agent')) == null) {
       this.router.navigate(['/app/agents']).then();
-    this.agent=JSON.parse(localStorage.getItem('Agent'));
-    this.agentsave=this.agent;
+    }
+    this.agent = JSON.parse(localStorage.getItem('Agent'));
+    this.agentsave = this.agent;
     this.createForm();
   }
 
-  openDialog(){
+  openDialog() {
     const dialogRef = this.dialog.open(ComfirmDialogComponent, {
       width: '400px',
-      data: "Voulez-vous vraiment faire cette modification ?"
+      data: 'Voulez-vous vraiment faire cette modification ?'
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
-      if(result == true){
+      if (result == true) {
         this.agentService.update(this.agent).subscribe();
         this.openSnackBar('L\'agent a été modifier', '');
         this.router.navigate(['/app/agents']).then();
@@ -50,10 +53,10 @@ export class ModifieraComponent implements OnInit {
   }
 
   submit(myForm) {
-    this.agent= myForm.value;
-    this.agent.idagent=this.agentsave.idagent;
-    this.agent.numero=this.agentsave.numero;
-    this.agent.isdeleted=false;
+    this.agent = myForm.value;
+    this.agent.idagent = this.agentsave.idagent;
+    this.agent.numero = this.agentsave.numero;
+    this.agent.isdeleted = false;
     this.openDialog();
   }
 
@@ -70,10 +73,10 @@ export class ModifieraComponent implements OnInit {
       numero: [this.agent.numero],
       nom: [this.agent.nom, [Validators.required]],
       email: [this.agent.email, [Validators.required, Validators.email]],
-      tel:[this.agent.tel,[Validators.required]],
-      departement:[this.agent.departement,[Validators.required]],
-      fonction:[this.agent.fonction,[Validators.required]],
-      isdeleted:[this.agent.isdeleted]
+      tel: [this.agent.tel, [Validators.required]],
+      departement: [this.agent.departement, [Validators.required]],
+      fonction: [this.agent.fonction, [Validators.required]],
+      isdeleted: [this.agent.isdeleted]
     });
   }
 }

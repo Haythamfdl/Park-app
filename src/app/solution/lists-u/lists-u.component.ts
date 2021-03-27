@@ -19,36 +19,38 @@ import {Utilisateur} from '../../_model/utilisateur';
 })
 export class ListsUComponent implements OnInit {
 
-  constructor(private fb: FormBuilder,
-              private router: Router,
-              private snackBar: MatSnackBar,
-              private activatedRoute:ActivatedRoute,
-              public dialog: MatDialog,
-              private solutionService:SolutionService,
-              private utilisateurService:UtilisateurService) {
-    this.activatedRoute.params.subscribe(params => {this.idprob = params['id']});
-  }
-
-  displayedColumns: string[] = ['titre', 'datesoumission' , 'Action'];
+  displayedColumns: string[] = ['titre', 'datesoumission', 'Action'];
   dataSource;
-  solution:Solution;
+  solution: Solution;
   idprob;
-  utilisateur:Utilisateur;
-
+  utilisateur: Utilisateur;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
+  constructor(private fb: FormBuilder,
+              private router: Router,
+              private snackBar: MatSnackBar,
+              private activatedRoute: ActivatedRoute,
+              public dialog: MatDialog,
+              private solutionService: SolutionService,
+              private utilisateurService: UtilisateurService) {
+    this.activatedRoute.params.subscribe(params => {
+      this.idprob = params['id'];
+    });
+  }
+
   ngOnInit(): void {
-    if(JSON.parse(localStorage.getItem('Utilisateur')) == null)
+    if (JSON.parse(localStorage.getItem('Utilisateur')) == null) {
       this.router.navigate(['/']).then();
+    }
     localStorage.removeItem('Equipement');
     localStorage.removeItem('Agent');
-    this.solutionService.getSolutionsUtilisateur(this.idprob).subscribe(data =>{
-      this.dataSource= new MatTableDataSource<Solution>(data);
+    this.solutionService.getSolutionsUtilisateur(this.idprob).subscribe(data => {
+      this.dataSource = new MatTableDataSource<Solution>(data);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
-      this.utilisateurService.getById(this.idprob).subscribe(data =>{
-        this.utilisateur =data;
+      this.utilisateurService.getById(this.idprob).subscribe(data => {
+        this.utilisateur = data;
       });
     });
   }
@@ -65,30 +67,30 @@ export class ListsUComponent implements OnInit {
     });
   }
 
-  openDialog(value :any){
+  openDialog(value: any) {
     const dialogRef = this.dialog.open(ComfirmDialogComponent, {
       width: '400px',
-      data: "Voulez-vous vraiment faire cette suppression ?"
+      data: 'Voulez-vous vraiment faire cette suppression ?'
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result == true){
+      if (result == true) {
         this.supprimer(value);
         window.location.reload();
-        this.openSnackBar('Solution a été Supprimer !','');
+        this.openSnackBar('Solution a été Supprimer !', '');
       }
     });
   }
 
-  ajouter(){
+  ajouter() {
     this.router.navigate(['/app/solutions/ajout']).then();
   }
 
-  info(value :any){
-    this.router.navigate(['/app/solutions/info/'+value]).then();
+  info(value: any) {
+    this.router.navigate(['/app/solutions/info/' + value]).then();
   }
 
-  modifier(value: any){
+  modifier(value: any) {
     this.solution = value;
     localStorage.setItem('Solution', JSON.stringify(this.solution));
     this.router.navigate(['/app/solutions/modifier']).then();

@@ -15,39 +15,42 @@ import {ProblemeService} from '../../_services/probleme.service';
 export class InfopComponent implements OnInit {
   myForm: FormGroup;
   form: FormControl;
-  probleme:Probleme;
-  id:string;
+  probleme: Probleme;
+  id: string;
 
   constructor(private fb: FormBuilder,
               private router: Router,
-              private activatedRoute:ActivatedRoute,
+              private activatedRoute: ActivatedRoute,
               private snackBar: MatSnackBar,
-              private problemeService:ProblemeService) {
-    this.activatedRoute.params.subscribe(params => {this.id = params['id']});
-    this.probleme=new Probleme();
+              private problemeService: ProblemeService) {
+    this.activatedRoute.params.subscribe(params => {
+      this.id = params['id'];
+    });
+    this.probleme = new Probleme();
   }
 
   ngOnInit(): void {
-    if(JSON.parse(localStorage.getItem('Utilisateur')) == null)
+    if (JSON.parse(localStorage.getItem('Utilisateur')) == null) {
       this.router.navigate(['/']).then();
-    this.probleme.agent=new Agent();
-    this.probleme.equipement=new Equipement();
-    this.problemeService.getProbleme(this.id).subscribe(data =>{
+    }
+    this.probleme.agent = new Agent();
+    this.probleme.equipement = new Equipement();
+    this.problemeService.getProbleme(this.id).subscribe(data => {
       this.probleme = data;
-      if(this.probleme == null){
+      if (this.probleme == null) {
         this.router.navigate(['/app/problems']).then();
         this.openSnackBar('Le problème n\'éxiste pas !', '');
       }
-    this.createForm();
-  });
+      this.createForm();
+    });
   }
 
-    openSnackBar(message: string, action: string) {
-      this.snackBar.open(message, action, {
-        duration: 2000,
-        panelClass: ['simple-snack-bar']
-      });
-    }
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000,
+      panelClass: ['simple-snack-bar']
+    });
+  }
 
   createForm() {
     this.myForm = this.fb.group({
@@ -55,16 +58,16 @@ export class InfopComponent implements OnInit {
       titre: [this.probleme.titre, [Validators.required]],
       probleme: [this.probleme.probleme, [Validators.required]],
       agent: [this.probleme.agent, [Validators.required]],
-      type:[this.probleme.type,[Validators.required]],
-      equipement:[this.probleme.equipement],
-      datesoumission:[this.probleme.datesoumission],
-      resolu:[this.probleme.resolu],
-      isdeleted:[this.probleme.isdeleted]
+      type: [this.probleme.type, [Validators.required]],
+      equipement: [this.probleme.equipement],
+      datesoumission: [this.probleme.datesoumission],
+      resolu: [this.probleme.resolu],
+      isdeleted: [this.probleme.isdeleted]
     });
   }
 
-  solution(){
+  solution() {
     localStorage.setItem('Probleme', JSON.stringify(this.probleme));
-    this.router.navigate(['/app/solutions/probleme/'+this.probleme.idprob]).then();
+    this.router.navigate(['/app/solutions/probleme/' + this.probleme.idprob]).then();
   }
 }

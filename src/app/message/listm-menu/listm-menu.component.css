@@ -19,16 +19,16 @@
   border-radius: 0;
 }
 
-mat-card-title, mat-card-content{
+mat-card-title, mat-card-content {
   text-align: center;
   font-weight: bold;
 }
 
-h2{
+h2 {
   font-size: x-large;
 }
 
-mat-button-toggle{
+mat-button-toggle {
   font-size: medium;
   width: 110px;
 }

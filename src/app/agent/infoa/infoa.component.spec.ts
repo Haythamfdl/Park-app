@@ -8,9 +8,9 @@ describe('InfoaComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ InfoaComponent ]
+      declarations: [InfoaComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

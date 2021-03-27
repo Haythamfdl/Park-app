@@ -1,6 +1,6 @@
 <div class="flex-container">
   <mat-card class="flex-item mat-elevation-z8">
-    <form [formGroup]="myForm" (ngSubmit)="submit(myForm)">
+    <form (ngSubmit)="submit(myForm)" [formGroup]="myForm">
       <mat-card-content>
         <br>
         <h3 class="mt-2">LOGIN</h3>
@@ -11,19 +11,22 @@
 
           <mat-form-field appearance="outline">
             <mat-label>Email</mat-label>
-            <input type="email" matInput formControlName="email" placeholder="Email address">
+            <input formControlName="email" matInput placeholder="Email address" type="email">
             <mat-error *ngIf="myForm.get('email').invalid">Email est pas valider</mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="outline">
             <mat-label>Mot de passe</mat-label>
-            <input matInput formControlName="pass" placeholder="Mot de passe" [type]="hide ? 'password' : 'text'">
-            <button type="button" mat-icon-button matSuffix (click)="hide = !hide"><mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon></button>
+            <input [type]="hide ? 'password' : 'text'" formControlName="pass" matInput placeholder="Mot de passe">
+            <button (click)="hide = !hide" mat-icon-button matSuffix type="button">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
           </mat-form-field>
           <br>
-          <button mat-raised-button class="waves-light" type="reset" mdbWavesEffect>Vider</button>
+          <button class="waves-light" mat-raised-button mdbWavesEffect type="reset">Vider</button>
           <br>
-          <button mat-raised-button color="primary" type="submit" [disabled]="!myForm.valid" mdbWavesEffect>Login</button>
+          <button [disabled]="!myForm.valid" color="primary" mat-raised-button mdbWavesEffect type="submit">Login
+          </button>
         </div>
       </mat-card-content>
     </form>

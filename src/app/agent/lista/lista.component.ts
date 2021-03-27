@@ -18,27 +18,27 @@ import {Agent} from '../../_model/agent';
 })
 export class ListaComponent implements OnInit {
 
+  displayedColumns: string[] = ['numero', 'nom', 'departement', 'Action'];
+  dataSource;
+  agent: Agent;
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
   constructor(private fb: FormBuilder,
               private router: Router,
               private snackBar: MatSnackBar,
               public dialog: MatDialog,
-              private agentService:AgentService) {
+              private agentService: AgentService) {
   }
 
-  displayedColumns: string[] = ['numero', 'nom', 'departement', 'Action'];
-  dataSource;
-  agent:Agent;
-
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-
   ngOnInit(): void {
-    if(JSON.parse(localStorage.getItem('Utilisateur')) == null)
+    if (JSON.parse(localStorage.getItem('Utilisateur')) == null) {
       this.router.navigate(['/']).then();
+    }
     localStorage.removeItem('Equipement');
     localStorage.removeItem('Agent');
-    this.agentService.getAllAgent().subscribe(data =>{
-      this.dataSource= new MatTableDataSource<Agent>(data);
+    this.agentService.getAllAgent().subscribe(data => {
+      this.dataSource = new MatTableDataSource<Agent>(data);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
     });
@@ -51,18 +51,18 @@ export class ListaComponent implements OnInit {
     });
   }
 
-  openDialog(value :any){
+  openDialog(value: any) {
     const dialogRef = this.dialog.open(ComfirmDialogComponent, {
       width: '400px',
-      data: "Voulez-vous vraiment faire cette suppression ?"
+      data: 'Voulez-vous vraiment faire cette suppression ?'
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
-      if(result == true){
+      if (result == true) {
         this.supprimer(value);
-          window.location.reload();
-          this.openSnackBar('Agent a été Supprimer !','');
+        window.location.reload();
+        this.openSnackBar('Agent a été Supprimer !', '');
       }
     });
   }
@@ -72,23 +72,23 @@ export class ListaComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  ajouter(){
+  ajouter() {
     this.router.navigate(['/app/agents/ajout']).then();
   }
 
-  info(value :any){
-    this.router.navigate(['/app/agents/info/'+value]).then();
+  info(value: any) {
+    this.router.navigate(['/app/agents/info/' + value]).then();
   }
 
-  afficherEquipements(value :any){
-    this.router.navigate(['/app/agents/equipements/'+value]).then();
+  afficherEquipements(value: any) {
+    this.router.navigate(['/app/agents/equipements/' + value]).then();
   }
 
-  afficherProblemes(value :any){
-    this.router.navigate(['/app/agents/problemes/'+value]).then();
+  afficherProblemes(value: any) {
+    this.router.navigate(['/app/agents/problemes/' + value]).then();
   }
 
-  modifier(value: any){
+  modifier(value: any) {
     this.agent = value;
     localStorage.setItem('Agent', JSON.stringify(this.agent));
     this.router.navigate(['/app/agents/modifier']).then();

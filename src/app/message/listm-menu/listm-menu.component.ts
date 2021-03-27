@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 
 @Component({
@@ -13,12 +13,13 @@ export class ListmMenuComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if(JSON.parse(localStorage.getItem('Utilisateur')) == null)
+    if (JSON.parse(localStorage.getItem('Utilisateur')) == null) {
       this.router.navigate(['/']).then();
+    }
   }
 
-  redirect(value:any) {
-    this.router.navigate(['/app/problemes/'+value]).then();
+  redirect(value: any) {
+    this.router.navigate(['/app/messages/' + value]).then();
   }
 }
 

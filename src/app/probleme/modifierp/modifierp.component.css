@@ -19,11 +19,13 @@
   display: inline-block;
   border-radius: 0;
 }
+
 .example-container {
   display: flex;
   flex-direction: column;
 }
-mat-card-title{
+
+mat-card-title {
   text-align: center;
   font-size: x-large;
 }

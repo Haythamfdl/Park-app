@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
   myForm: FormGroup;
   hide = true;
   user: Utilisateur;
+
   constructor(private fb: FormBuilder,
               private router: Router,
               private snackBar: MatSnackBar,
@@ -21,10 +22,19 @@ export class LoginComponent implements OnInit {
     this.user = new Utilisateur();
   }
 
+  get email() {
+    return this.myForm.get('email');
+  }
+
+  get password() {
+    return this.myForm.get('password');
+  }
+
   ngOnInit(): void {
     this.createForm();
-    if(JSON.parse(localStorage.getItem('Utilisateur')) !== null)
+    if (JSON.parse(localStorage.getItem('Utilisateur')) !== null) {
       this.router.navigate(['/app']).then();
+    }
   }
 
   createForm() {
@@ -34,14 +44,11 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  get email() { return this.myForm.get('email'); }
-  get password() { return this.myForm.get('password'); }
-
   submit(myForm) {
     this.user = myForm.value;
-    this.utilisateurService.login(this.user.email,this.user.pass).subscribe(data => {
-     this.user = data;
-     this.alert();
+    this.utilisateurService.login(this.user.email, this.user.pass).subscribe(data => {
+      this.user = data;
+      this.alert();
     });
   }
 
@@ -55,7 +62,7 @@ export class LoginComponent implements OnInit {
   alert() {
     if (this.user == null) {
       this.user = new Utilisateur();
-      this.openSnackBar('Email ou mots de passe incorrecte','');
+      this.openSnackBar('Email ou mots de passe incorrecte', '');
       localStorage.removeItem('Utilisateur');
     } else {
       localStorage.setItem('Utilisateur', JSON.stringify(this.user));

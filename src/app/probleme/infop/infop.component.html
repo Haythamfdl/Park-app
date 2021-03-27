@@ -1,8 +1,8 @@
-<div class="flex-container" xmlns="http://www.w3.org/1999/html" *ngIf="myForm">
+<div *ngIf="myForm" class="flex-container" xmlns="http://www.w3.org/1999/html">
   <mat-card class="flex-item mat-elevation-z8">
     <mat-card-title>
       <h2>Information sur le Problème</h2>
-      <h3 class="non-resolu" *ngIf="!probleme.resolu"><b>Problème non Résolu</b></h3>
+      <h3 *ngIf="!probleme.resolu" class="non-resolu"><b>Problème non Résolu</b></h3>
       <h3 *ngIf="probleme.resolu"><b>Problème Résolu</b></h3>
     </mat-card-title>
     <form [formGroup]="myForm">
@@ -11,41 +11,48 @@
 
           <mat-form-field appearance="outline">
             <mat-label>Titre du Problème</mat-label>
-            <input type="text" matInput formControlName="titre" placeholder="Titre du Problème" readonly>
+            <input formControlName="titre" matInput placeholder="Titre du Problème" readonly type="text">
           </mat-form-field>
 
           <mat-form-field appearance="outline">
             <mat-label>Date de Soumission</mat-label>
-            <input type="text" matInput [matDatepicker]="datea" formControlName="datesoumission" placeholder="Date de Soumission du Problème" readonly>
-            <mat-datepicker-toggle matSuffix [for]="datea"></mat-datepicker-toggle>
+            <input [matDatepicker]="datea" formControlName="datesoumission" matInput placeholder="Date de Soumission du Problème"
+                   readonly type="text">
+            <mat-datepicker-toggle [for]="datea" matSuffix></mat-datepicker-toggle>
             <mat-datepicker #datea disabled></mat-datepicker>
           </mat-form-field>
 
           <mat-form-field appearance="outline">
             <mat-label>Détail du Problème</mat-label>
-            <textarea type="textarea" matInput rows="6" formControlName="probleme" placeholder="Détail du Problème" readonly></textarea>
+            <textarea formControlName="probleme" matInput placeholder="Détail du Problème" readonly rows="6"
+                      type="textarea"></textarea>
           </mat-form-field>
 
           <mat-form-field appearance="outline">
             <mat-label>Numéro Agent</mat-label>
-            <input type="text" matInput value="{{probleme.agent.numero}}" readonly>
+            <input matInput readonly type="text" value="{{probleme.agent.numero}}">
           </mat-form-field>
-          <mat-label *ngIf="probleme.agent !== null" style="text-align: left">Nom de l'agent: <a href="/app/agents/info/{{probleme.agent.numero}}">{{probleme.agent.nom}}</a></mat-label>
+          <mat-label *ngIf="probleme.agent !== null" style="text-align: left">Nom de l'agent: <a
+            href="/app/agents/info/{{probleme.agent.numero}}">{{probleme.agent.nom}}</a></mat-label>
           <br>
 
           <mat-form-field appearance="outline">
             <mat-label>Type</mat-label>
-            <input type="text" matInput formControlName="type" placeholder="Type du Problème" readonly>
+            <input formControlName="type" matInput placeholder="Type du Problème" readonly type="text">
           </mat-form-field>
 
           <mat-form-field *ngIf="probleme.equipement !== null" appearance="outline">
             <mat-label>Numéro équipement</mat-label>
-            <input type="text" matInput value="{{probleme.equipement.numero}}" readonly>
+            <input matInput readonly type="text" value="{{probleme.equipement.numero}}">
           </mat-form-field>
 
-          <mat-label *ngIf="probleme.equipement !== null" style="text-align: left">Designation de l'equipement: <a href="/app/equipements/info/{{probleme.equipement.numero}}">{{probleme.equipement.designation}}</a></mat-label>
+          <mat-label *ngIf="probleme.equipement !== null" style="text-align: left">Designation de l'equipement: <a
+            href="/app/equipements/info/{{probleme.equipement.numero}}">{{probleme.equipement.designation}}</a>
+          </mat-label>
           <br>
-          <button mat-raised-button class="waves-light" type="button" mdbWavesEffect (click)="solution()">Voir Solution</button>
+          <button (click)="solution()" class="waves-light" mat-raised-button mdbWavesEffect type="button">Voir
+            Solution
+          </button>
         </div>
       </mat-card-content>
     </form>

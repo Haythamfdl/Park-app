@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {LoginComponent} from './login/login.component';
 import {RouterModule, Routes} from '@angular/router';
 import {NavbarComponent} from './navbar/navbar.component';
@@ -14,7 +14,6 @@ import {ListaEquipComponent} from './agent/lista-equip/lista-equip.component';
 import {AjoutaComponent} from './agent/ajouta/ajouta.component';
 import {ModifieraComponent} from './agent/modifiera/modifiera.component';
 import {InfoaComponent} from './agent/infoa/infoa.component';
-import {ProblemeService} from './_services/probleme.service';
 import {ListpComponent} from './probleme/listp/listp.component';
 import {ListaProblemeComponent} from './agent/lista-probleme/lista-probleme.component';
 import {AjoutpComponent} from './probleme/ajoutp/ajoutp.component';
@@ -31,6 +30,9 @@ import {ListsUComponent} from './solution/lists-u/lists-u.component';
 import {InfouComponent} from './utilisateur/infou/infou.component';
 import {ModifieruComponent} from './utilisateur/modifieru/modifieru.component';
 import {ListmMenuComponent} from './message/listm-menu/listm-menu.component';
+import {ListmComponent} from './message/listm/listm.component';
+import {ListmLComponent} from './message/listm-l/listm-l.component';
+import {ListmNlComponent} from './message/listm-nl/listm-nl.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -64,7 +66,9 @@ const routes: Routes = [
     {path: 'user/info/:id',component:InfouComponent},
     {path: 'myprofile',component:ModifieruComponent},
     {path: 'messages',component:ListmMenuComponent,children:[
-
+        {path: '',component:ListmComponent},
+        {path: 'true',component:ListmLComponent},
+        {path: 'false',component:ListmNlComponent}
     ]}
   ]},
 

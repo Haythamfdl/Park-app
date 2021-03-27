@@ -19,34 +19,36 @@ import {Agent} from '../../_model/agent';
 })
 export class ListaEquipComponent implements OnInit {
 
-  constructor(private fb: FormBuilder,
-              private router: Router,
-              private snackBar: MatSnackBar,
-              private activatedRoute:ActivatedRoute,
-              public dialog: MatDialog,
-              private equipementService: EquipementService,
-              private agentService:AgentService) {
-    this.activatedRoute.params.subscribe(params => {this.num = params['num']});
-  }
-
   displayedColumns: string[] = ['numero', 'designation', 'Action'];
   dataSource;
-  equipement:Equipement;
-  agent:Agent;
+  equipement: Equipement;
+  agent: Agent;
   num: string;
-
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
+  constructor(private fb: FormBuilder,
+              private router: Router,
+              private snackBar: MatSnackBar,
+              private activatedRoute: ActivatedRoute,
+              public dialog: MatDialog,
+              private equipementService: EquipementService,
+              private agentService: AgentService) {
+    this.activatedRoute.params.subscribe(params => {
+      this.num = params['num'];
+    });
+  }
+
   ngOnInit(): void {
-    if(JSON.parse(localStorage.getItem('Utilisateur')) == null)
+    if (JSON.parse(localStorage.getItem('Utilisateur')) == null) {
       this.router.navigate(['/']).then();
+    }
     localStorage.removeItem('Equipement');
     localStorage.removeItem('Agent');
-    this.agentService.getAgentbyNum(this.num).subscribe(dataid=>{
+    this.agentService.getAgentbyNum(this.num).subscribe(dataid => {
       this.agent = dataid;
-      this.equipementService.getEquipmentsAgent(this.agent).subscribe(data =>{
-        this.dataSource= new MatTableDataSource<Equipement>(data);
+      this.equipementService.getEquipmentsAgent(this.agent).subscribe(data => {
+        this.dataSource = new MatTableDataSource<Equipement>(data);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
       });
@@ -65,43 +67,43 @@ export class ListaEquipComponent implements OnInit {
     });
   }
 
-  openDialog(value :any){
+  openDialog(value: any) {
     const dialogRef = this.dialog.open(ComfirmDialogComponent, {
       width: '400px',
-      data: "Voulez-vous vraiment faire cette suppression ?"
+      data: 'Voulez-vous vraiment faire cette suppression ?'
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
-      if(result == true){
+      if (result == true) {
         this.supprimer(value);
         window.location.reload();
-        this.openSnackBar('Equipement a été Supprimer !','');
+        this.openSnackBar('Equipement a été Supprimer !', '');
       }
     });
   }
 
-  info(value :any){
-    this.router.navigate(['/app/equipements/info/'+value]).then();
+  info(value: any) {
+    this.router.navigate(['/app/equipements/info/' + value]).then();
   }
 
-  modifier(value: any){
+  modifier(value: any) {
     this.equipement = value;
     localStorage.setItem('Equipement', JSON.stringify(this.equipement));
     this.router.navigate(['/app/equipements/modifier']).then();
   }
 
-  affecter(){
+  affecter() {
     this.router.navigate(['/app/equipements']).then();
   }
 
-  desaffecter(value: any){
+  desaffecter(value: any) {
     this.equipement = value;
     this.equipement.agent = null;
     this.equipement.dateaffectation = null;
     this.equipementService.update(this.equipement).subscribe();
     window.location.reload();
-    this.openSnackBar('Equipement a été Désaffecter !','');
+    this.openSnackBar('Equipement a été Désaffecter !', '');
   }
 
   supprimer(value: any) {

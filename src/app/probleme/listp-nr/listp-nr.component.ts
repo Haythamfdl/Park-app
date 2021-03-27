@@ -17,27 +17,27 @@ import {ComfirmDialogComponent} from '../../comfirm-dialog/comfirm-dialog.compon
 })
 export class ListpNrComponent implements OnInit {
 
+  displayedColumns: string[] = ['titre', 'type', 'agent', 'datesoumission', 'Action'];
+  dataSource;
+  probleme: Probleme;
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
   constructor(private fb: FormBuilder,
               private router: Router,
               private snackBar: MatSnackBar,
               public dialog: MatDialog,
-              private problemeService:ProblemeService) {
+              private problemeService: ProblemeService) {
   }
 
-  displayedColumns: string[] = ['titre', 'type', 'agent', 'datesoumission' , 'Action'];
-  dataSource;
-  probleme:Probleme;
-
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-
   ngOnInit(): void {
-    if(JSON.parse(localStorage.getItem('Utilisateur')) == null)
+    if (JSON.parse(localStorage.getItem('Utilisateur')) == null) {
       this.router.navigate(['/']).then();
+    }
     localStorage.removeItem('Equipement');
     localStorage.removeItem('Agent');
-    this.problemeService.getProblemesResolu(false).subscribe(data =>{
-      this.dataSource= new MatTableDataSource<Probleme>(data);
+    this.problemeService.getProblemesResolu(false).subscribe(data => {
+      this.dataSource = new MatTableDataSource<Probleme>(data);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
     });
@@ -55,46 +55,46 @@ export class ListpNrComponent implements OnInit {
     });
   }
 
-  openDialog(value :any){
+  openDialog(value: any) {
     const dialogRef = this.dialog.open(ComfirmDialogComponent, {
       width: '400px',
-      data: "Voulez-vous vraiment faire cette suppression ?"
+      data: 'Voulez-vous vraiment faire cette suppression ?'
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
-      if(result == true){
+      if (result == true) {
         this.supprimer(value);
         window.location.reload();
-        this.openSnackBar('Problemes a été Supprimer !','');
+        this.openSnackBar('Problemes a été Supprimer !', '');
       }
     });
   }
 
-  ajouter(){
+  ajouter() {
     this.router.navigate(['/app/problemes/ajout']).then();
   }
 
-  info(value :any){
-    this.router.navigate(['/app/problemes/info/'+value]).then();
+  info(value: any) {
+    this.router.navigate(['/app/problemes/info/' + value]).then();
   }
 
-  modifier(value: any){
+  modifier(value: any) {
     this.probleme = value;
     localStorage.setItem('Probleme', JSON.stringify(this.probleme));
     this.router.navigate(['/app/problemes/modifier']).then();
   }
 
-  solution(value: any){
+  solution(value: any) {
     this.probleme = value;
-    this.router.navigate(['/app/solutions/probleme/'+this.probleme.idprob]).then();
+    this.router.navigate(['/app/solutions/probleme/' + this.probleme.idprob]).then();
   }
 
   resolu(value: any) {
     this.probleme = value;
     this.probleme.resolu = true;
     this.problemeService.update(this.probleme).subscribe();
-    this.openSnackBar('Problemes a été Résolu !','');
+    this.openSnackBar('Problemes a été Résolu !', '');
   }
 
   supprimer(value: any) {

@@ -13,12 +13,13 @@ export class ListpMenuComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if(JSON.parse(localStorage.getItem('Utilisateur')) == null)
+    if (JSON.parse(localStorage.getItem('Utilisateur')) == null) {
       this.router.navigate(['/']).then();
+    }
   }
 
-  redirect(value:any) {
-    this.router.navigate(['/app/problemes/'+value]).then();
+  redirect(value: any) {
+    this.router.navigate(['/app/problemes/' + value]).then();
   }
 }
 
