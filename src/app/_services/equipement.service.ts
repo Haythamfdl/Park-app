@@ -21,7 +21,7 @@ export class EquipementService {
     return this.http.get<Equipement[]>(this.Url);
   }
 
-  public getEquipementbyNum(num : string): Observable<Equipement> {
+  public getEquipementbyNum(num: string): Observable<Equipement> {
     return this.http.get<Equipement>(this.Url + '/' + num);
   }
 

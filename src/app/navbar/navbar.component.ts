@@ -15,11 +15,12 @@ export class NavbarComponent implements OnInit {
   user: Utilisateur;
   subscription: Subscription;
   nb = '0';
+  timer = 10000;
 
   constructor(private router: Router,
               private snackBar: MatSnackBar,
               private messageService: MessageService) {
-    this.subscription = interval(60000).subscribe((func => {
+    this.subscription = interval(this.timer).subscribe((func => {
       this.messageService.getAllMessagesOuvertCount(this.user.iduser, false).subscribe(data => {
         this.nb = data;
       });

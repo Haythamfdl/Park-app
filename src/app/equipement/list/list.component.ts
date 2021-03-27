@@ -18,6 +18,12 @@ import {MatDialog} from '@angular/material/dialog';
 })
 export class ListComponent implements OnInit {
 
+  displayedColumns: string[] = ['numero', 'designation', 'agent', 'Action'];
+  dataSource;
+  equipement: Equipement;
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
   constructor(private fb: FormBuilder,
               private router: Router,
               private snackBar: MatSnackBar,
@@ -25,19 +31,13 @@ export class ListComponent implements OnInit {
               private equipementService: EquipementService) {
   }
 
-  displayedColumns: string[] = ['numero', 'designation', 'agent', 'Action'];
-  dataSource;
-  equipement:Equipement;
-
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-
   ngOnInit(): void {
-    if(JSON.parse(localStorage.getItem('Utilisateur')) == null)
+    if (JSON.parse(localStorage.getItem('Utilisateur')) == null) {
       this.router.navigate(['/']).then();
+    }
     localStorage.removeItem('Equipement');
-    this.equipementService.getAllEquipements().subscribe(data =>{
-      this.dataSource= new MatTableDataSource<Equipement>(data);
+    this.equipementService.getAllEquipements().subscribe(data => {
+      this.dataSource = new MatTableDataSource<Equipement>(data);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
     });
@@ -55,48 +55,48 @@ export class ListComponent implements OnInit {
     });
   }
 
-  openDialog(value :any){
+  openDialog(value: any) {
     const dialogRef = this.dialog.open(ComfirmDialogComponent, {
       width: '400px',
-      data: "Voulez-vous vraiment faire cette suppression ?"
+      data: 'Voulez-vous vraiment faire cette suppression ?'
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
-      if(result == true){
+      if (result == true) {
         this.supprimer(value);
         window.location.reload();
-        this.openSnackBar('Equipement a été Supprimer !','');
+        this.openSnackBar('Equipement a été Supprimer !', '');
       }
     });
   }
 
-  ajouter(){
+  ajouter() {
     this.router.navigate(['/app/equipements/ajout']).then();
   }
 
-  info(value :any){
-    this.router.navigate(['/app/equipements/info/'+value]).then();
+  info(value: any) {
+    this.router.navigate(['/app/equipements/info/' + value]).then();
   }
 
-  modifier(value: any){
+  modifier(value: any) {
     this.equipement = value;
     localStorage.setItem('Equipement', JSON.stringify(this.equipement));
     this.router.navigate(['/app/equipements/modifier']).then();
   }
 
-  affecter(value: any){
+  affecter(value: any) {
     this.equipement = value;
     localStorage.setItem('Equipement', JSON.stringify(this.equipement));
     this.router.navigate(['/app/equipements/affecter']).then();
   }
 
-  desaffecter(value: any){
+  desaffecter(value: any) {
     this.equipement = value;
     this.equipement.agent = null;
     this.equipement.dateaffectation = null;
     this.equipementService.update(this.equipement).subscribe();
-    this.openSnackBar('Equipement a été Désaffecter !','');
+    this.openSnackBar('Equipement a été Désaffecter !', '');
   }
 
   supprimer(value: any) {

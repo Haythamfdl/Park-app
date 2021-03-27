@@ -1,5 +1,5 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Agent} from '../../_model/agent';
 import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
@@ -17,7 +17,6 @@ import {DatePipe} from '@angular/common';
 })
 export class AjoutpComponent implements OnInit {
   myForm: FormGroup;
-  form: FormControl;
   agent: Agent;
   equipement: Equipement;
   showa = false;

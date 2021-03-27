@@ -41,7 +41,7 @@
         <ng-container matColumnDef="Action">
           <th *matHeaderCellDef mat-header-cell>Action</th>
           <td *matCellDef="let data" mat-cell>
-            <button (click)="info(data.idprob)" color="primary" mat-raised-button>Ouvrir</button>
+            <button (click)="info(data)" color="primary" mat-raised-button>Ouvrir</button>
             <button (click)="openDialog(data)" class="action" color="warn" mat-raised-button>Supprimer</button>
           </td>
         </ng-container>

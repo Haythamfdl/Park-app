@@ -1,0 +1,38 @@
+<div class="flex-container" xmlns="http://www.w3.org/1999/html">
+  <mat-card class="flex-item mat-elevation-z8">
+    <mat-card-title><h2>Message</h2></mat-card-title>
+    <form *ngIf="myForm" [formGroup]="myForm">
+      <mat-card-content>
+        <div class="example-container mtb-2 text-center">
+
+          <mat-form-field appearance="outline">
+            <mat-label>Email de l'Envoyeur</mat-label>
+            <input matInput placeholder="Email de l'Utilisateur" readonly type="text"
+                   value="{{message.envoyeur.email}}">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Date de Réception du Message</mat-label>
+            <input [matDatepicker]="datea" formControlName="dateenvoie" matInput
+                   placeholder="Date de Réception du Problème"
+                   readonly type="text">
+            <mat-datepicker-toggle [for]="datea" matSuffix></mat-datepicker-toggle>
+            <mat-datepicker #datea disabled></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Sujet</mat-label>
+            <input formControlName="sujet" matInput placeholder="Sujet du Message" readonly type="text">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Message</mat-label>
+            <textarea formControlName="message" matInput placeholder="Message" readonly
+                      rows="6" type="textarea"></textarea>
+          </mat-form-field>
+
+        </div>
+      </mat-card-content>
+    </form>
+  </mat-card>
+</div>

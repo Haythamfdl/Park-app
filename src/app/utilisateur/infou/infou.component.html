@@ -4,27 +4,29 @@
       <h2>Information sur l'utilisateur</h2>
       <h3 *ngIf="user.isdeleted"><b>Utilisateur Supprimer !</b></h3>
     </mat-card-title>
-    <form [formGroup]="myForm" *ngIf="myForm">
+    <form *ngIf="myForm" [formGroup]="myForm">
       <mat-card-content>
         <div class="example-container mtb-2 text-center">
 
           <mat-form-field appearance="outline">
             <mat-label>Nom et Prénom</mat-label>
-            <input type="text" matInput formControlName="nom" placeholder="Nom de l'utilisateur" readonly>
+            <input formControlName="nom" matInput placeholder="Nom de l'utilisateur" readonly type="text">
           </mat-form-field>
 
           <mat-form-field appearance="outline">
             <mat-label>Email</mat-label>
-            <input type="email" matInput formControlName="email" placeholder="Email address" readonly>
+            <input formControlName="email" matInput placeholder="Email address" readonly type="email">
             <mat-error *ngIf="myForm.get('email').invalid">Email est pas valider</mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="outline">
             <mat-label>Téléphone</mat-label>
-            <input type="tel" matInput formControlName="tel" placeholder="Téléphone de l'utilisateur" readonly>
+            <input formControlName="tel" matInput placeholder="Téléphone de l'utilisateur" readonly type="tel">
           </mat-form-field>
 
-          <button mat-raised-button class="waves-light" type="button" (click)="afficher()" mdbWavesEffect>Afficher les Solutions soumises par cet utilisateur</button>
+          <button (click)="afficher()" class="waves-light" mat-raised-button mdbWavesEffect type="button">Afficher les
+            Solutions soumises par cet utilisateur
+          </button>
 
         </div>
       </mat-card-content>

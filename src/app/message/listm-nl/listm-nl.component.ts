@@ -75,10 +75,12 @@ export class ListmNlComponent implements OnInit {
   }
 
   ajouter() {
-    this.router.navigate(['/app/messages/ajout']).then();
+    this.router.navigate(['/app/messages/envoyer']).then();
   }
 
   info(value: any) {
+    this.message = value;
+    localStorage.setItem('Message', JSON.stringify(this.message));
     this.router.navigate(['/app/messages/info']).then();
   }
 

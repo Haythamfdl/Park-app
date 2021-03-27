@@ -16,7 +16,8 @@
 
           <mat-form-field appearance="outline">
             <mat-label>Date de Soumission</mat-label>
-            <input [matDatepicker]="datea" formControlName="datesoumission" matInput placeholder="Date de Soumission du Problème"
+            <input [matDatepicker]="datea" formControlName="datesoumission" matInput
+                   placeholder="Date de Soumission du Problème"
                    readonly type="text">
             <mat-datepicker-toggle [for]="datea" matSuffix></mat-datepicker-toggle>
             <mat-datepicker #datea disabled></mat-datepicker>

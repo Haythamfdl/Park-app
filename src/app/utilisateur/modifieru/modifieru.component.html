@@ -3,41 +3,43 @@
     <mat-card-title>
       <h2>Mon Profile</h2>
     </mat-card-title>
-    <form [formGroup]="myForm" *ngIf="myForm" (submit)="submit(myForm)">
+    <form (submit)="submit(myForm)" *ngIf="myForm" [formGroup]="myForm">
       <mat-card-content>
         <div class="example-container mtb-2 text-center">
 
           <mat-form-field appearance="outline">
             <mat-label>Nom et Prénom</mat-label>
-            <input type="text" matInput formControlName="nom" placeholder="Nom de l'utilisateur">
+            <input formControlName="nom" matInput placeholder="Nom de l'utilisateur" type="text">
           </mat-form-field>
 
           <mat-form-field appearance="outline">
             <mat-label>Email</mat-label>
-            <input type="email" matInput formControlName="email" placeholder="Email address">
+            <input formControlName="email" matInput placeholder="Email address" type="email">
             <mat-error *ngIf="myForm.get('email').invalid">Email est pas valider</mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="outline">
             <mat-label>Mots de Passe Courant</mat-label>
-            <input type="text" matInput formControlName="pass" placeholder="Mots de Passe Courant de l'utilisateur">
+            <input formControlName="pass" matInput placeholder="Mots de Passe Courant de l'utilisateur" type="text">
           </mat-form-field>
-          <mat-label style="text-align: left">Date de la dernière modification du Mots de Passe: <b>{{user.datemodifpass}}</b></mat-label>
+          <mat-label style="text-align: left">Date de la dernière modification du Mots de Passe:
+            <b>{{user.datemodifpass}}</b></mat-label>
           <br>
 
           <mat-form-field appearance="outline">
             <mat-label>Nouveau Mots de Passe</mat-label>
-            <input type="text" matInput placeholder="Nouveau Mots de Passe de l'utilisateur" #npass>
+            <input #npass matInput placeholder="Nouveau Mots de Passe de l'utilisateur" type="text">
           </mat-form-field>
 
           <mat-form-field appearance="outline">
             <mat-label>Téléphone</mat-label>
-            <input type="tel" matInput formControlName="tel" placeholder="Téléphone de l'agent">
+            <input formControlName="tel" matInput placeholder="Téléphone de l'agent" type="tel">
           </mat-form-field>
 
-          <button mat-raised-button class="waves-light" type="reset"  mdbWavesEffect>Réinitialiser</button>
+          <button class="waves-light" mat-raised-button mdbWavesEffect type="reset">Réinitialiser</button>
           <br>
-          <button mat-raised-button color="primary" type="submit" [disabled]="!myForm.valid" mdbWavesEffect>Modifier</button>
+          <button [disabled]="!myForm.valid" color="primary" mat-raised-button mdbWavesEffect type="submit">Modifier
+          </button>
         </div>
       </mat-card-content>
     </form>

@@ -1,20 +1,20 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {ModifierComponent} from './modifier.component';
+import {EnvoyermComponent} from './envoyerm.component';
 
-describe('ModifierComponent', () => {
-  let component: ModifierComponent;
-  let fixture: ComponentFixture<ModifierComponent>;
+describe('EnvoyermComponent', () => {
+  let component: EnvoyermComponent;
+  let fixture: ComponentFixture<EnvoyermComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ModifierComponent]
+      declarations: [EnvoyermComponent]
     })
       .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ModifierComponent);
+    fixture = TestBed.createComponent(EnvoyermComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

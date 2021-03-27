@@ -7,6 +7,7 @@ import {Message} from '../_model/message';
   providedIn: 'root'
 })
 export class MessageService {
+  nb = '0';
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
   };

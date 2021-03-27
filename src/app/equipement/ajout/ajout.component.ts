@@ -12,33 +12,34 @@ import {EquipementService} from '../../_services/equipement.service';
 })
 export class AjoutComponent implements OnInit {
   myForm: FormGroup;
-  equipement:Equipement;
+  equipement: Equipement;
+
   constructor(private fb: FormBuilder,
               private router: Router,
               private snackBar: MatSnackBar,
-              private equipementService:EquipementService) {
-    this.equipement=new Equipement();
+              private equipementService: EquipementService) {
+    this.equipement = new Equipement();
   }
 
   ngOnInit(): void {
-    if(JSON.parse(localStorage.getItem('Utilisateur')) == null)
+    if (JSON.parse(localStorage.getItem('Utilisateur')) == null) {
       this.router.navigate(['/']).then();
+    }
     this.createForm();
   }
 
   submit(myForm) {
-    this.equipement= myForm.value;
-    this.equipement.isdeleted=false;
-    this.equipementService.getEquipementbyNum(this.equipement.numero).subscribe(data=>{
-      if(data == null){
+    this.equipement = myForm.value;
+    this.equipement.isdeleted = false;
+    this.equipementService.getEquipementbyNum(this.equipement.numero).subscribe(data => {
+      if (data == null) {
         this.equipementService.save(this.equipement).subscribe();
         this.openSnackBar('L\'équipement a été ajouter', '');
         this.router.navigate(['/app/equipements']).then();
-      }
-      else {
+      } else {
         this.openSnackBar('Ce numéro est déja utiliser !', '');
       }
-    })
+    });
 
   }
 
@@ -55,15 +56,15 @@ export class AjoutComponent implements OnInit {
       numero: [this.equipement.numero, [Validators.required]],
       designation: [this.equipement.designation, [Validators.required]],
       fabriquant: [this.equipement.fabriquant, [Validators.required]],
-      dateaquisition:[this.equipement.dateaquisition,[Validators.required]],
-      dateservice:[this.equipement.dateservice,[Validators.required]],
-      valeuraquisition:[this.equipement.valeuraquisition,[Validators.required]],
-      dureegarantie:[this.equipement.dureegarantie,[Validators.required]],
-      poids:[this.equipement.poids,[Validators.required]],
-      taille:[this.equipement.taille,[Validators.required]],
-      dateaffectation:[this.equipement.dateaffectation],
-      isdeleted:[this.equipement.isdeleted],
-      agent:[this.equipement.agent]
+      dateaquisition: [this.equipement.dateaquisition, [Validators.required]],
+      dateservice: [this.equipement.dateservice, [Validators.required]],
+      valeuraquisition: [this.equipement.valeuraquisition, [Validators.required]],
+      dureegarantie: [this.equipement.dureegarantie, [Validators.required]],
+      poids: [this.equipement.poids, [Validators.required]],
+      taille: [this.equipement.taille, [Validators.required]],
+      dateaffectation: [this.equipement.dateaffectation],
+      isdeleted: [this.equipement.isdeleted],
+      agent: [this.equipement.agent]
     });
   }
 }

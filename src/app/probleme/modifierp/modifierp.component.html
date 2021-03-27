@@ -19,7 +19,8 @@
           <mat-form-field appearance="outline">
             <mat-label>Numéro Agent</mat-label>
             <input #numa matInput placeholder="Numéro de l'agent" type="text">
-            <button (click)="chercherAgent(numa.value)" aria-label="Recherche" class="waves-light" color="primary" mat-icon-button mat-raised-button
+            <button (click)="chercherAgent(numa.value)" aria-label="Recherche" class="waves-light" color="primary"
+                    mat-icon-button mat-raised-button
                     matSuffix mdbWavesEffec type="button">
               <mat-icon>search</mat-icon>
             </button>
@@ -41,7 +42,8 @@
           <mat-form-field *ngIf="showre" appearance="outline">
             <mat-label>Numéro Equipement</mat-label>
             <input #nume matInput placeholder="Numéro de l'equipement" type="text">
-            <button (click)="chercherEquipement(nume.value)" aria-label="Recherche" class="waves-light" color="primary" mat-icon-button mat-raised-button
+            <button (click)="chercherEquipement(nume.value)" aria-label="Recherche" class="waves-light" color="primary"
+                    mat-icon-button mat-raised-button
                     matSuffix mdbWavesEffec type="button">
               <mat-icon>search</mat-icon>
             </button>

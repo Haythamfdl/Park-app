@@ -1,7 +1,7 @@
 import {Utilisateur} from './utilisateur';
 
 export class Message {
-  idamess: string;
+  idmess: string;
   sujet: string;
   message: string;
   ouvert: boolean;

@@ -33,44 +33,54 @@ import {ListmMenuComponent} from './message/listm-menu/listm-menu.component';
 import {ListmComponent} from './message/listm/listm.component';
 import {ListmLComponent} from './message/listm-l/listm-l.component';
 import {ListmNlComponent} from './message/listm-nl/listm-nl.component';
+import {EnvoyermComponent} from './message/envoyerm/envoyerm.component';
+import {InfomComponent} from './message/infom/infom.component';
 
 const routes: Routes = [
-  { path: '', component: LoginComponent },
-  { path: 'app', component: NavbarComponent,
-  children:[
-    {path: '',component:WelcomeComponent},
-    {path: 'equipements',component:ListComponent},
-    {path: 'equipements/ajout',component:AjoutComponent},
-    {path: 'equipements/modifier',component:ModifierComponent},
-    {path: 'equipements/info/:num',component:InfoComponent},
-    {path: 'equipements/affecter',component:AffecterComponent},
-    {path: 'agents',component:ListaComponent},
-    {path: 'agents/equipements/:num',component:ListaEquipComponent},
-    {path: 'agents/problemes/:num',component:ListaProblemeComponent},
-    {path: 'agents/ajout',component:AjoutaComponent},
-    {path: 'agents/modifier',component:ModifieraComponent},
-    {path: 'agents/info/:num',component:InfoaComponent},
-    {path: 'problemes',component:ListpMenuComponent, children:[
-        {path: '',component:ListpComponent},
-        {path: 'true',component:ListpRComponent},
-        {path: 'false',component:ListpNrComponent}
-      ]},
-    {path: 'problemes/ajout',component:AjoutpComponent},
-    {path: 'problemes/modifier',component:ModifierpComponent},
-    {path: 'problemes/info/:id',component:InfopComponent},
-    {path: 'solutions/probleme/:id',component:ListsComponent},
-    {path: 'solutions/ajout',component:AjoutersComponent},
-    {path: 'solutions/modifier',component:ModifiersComponent},
-    {path: 'solutions/info/:id',component:InfosComponent},
-    {path: 'solutions/user/:id',component:ListsUComponent},
-    {path: 'user/info/:id',component:InfouComponent},
-    {path: 'myprofile',component:ModifieruComponent},
-    {path: 'messages',component:ListmMenuComponent,children:[
-        {path: '',component:ListmComponent},
-        {path: 'true',component:ListmLComponent},
-        {path: 'false',component:ListmNlComponent}
-    ]}
-  ]},
+  {path: '', component: LoginComponent},
+  {
+    path: 'app', component: NavbarComponent,
+    children: [
+      {path: '', component: WelcomeComponent},
+      {path: 'equipements', component: ListComponent},
+      {path: 'equipements/ajout', component: AjoutComponent},
+      {path: 'equipements/modifier', component: ModifierComponent},
+      {path: 'equipements/info/:num', component: InfoComponent},
+      {path: 'equipements/affecter', component: AffecterComponent},
+      {path: 'agents', component: ListaComponent},
+      {path: 'agents/equipements/:num', component: ListaEquipComponent},
+      {path: 'agents/problemes/:num', component: ListaProblemeComponent},
+      {path: 'agents/ajout', component: AjoutaComponent},
+      {path: 'agents/modifier', component: ModifieraComponent},
+      {path: 'agents/info/:num', component: InfoaComponent},
+      {
+        path: 'problemes', component: ListpMenuComponent, children: [
+          {path: '', component: ListpComponent},
+          {path: 'true', component: ListpRComponent},
+          {path: 'false', component: ListpNrComponent}
+        ]
+      },
+      {path: 'problemes/ajout', component: AjoutpComponent},
+      {path: 'problemes/modifier', component: ModifierpComponent},
+      {path: 'problemes/info/:id', component: InfopComponent},
+      {path: 'solutions/probleme/:id', component: ListsComponent},
+      {path: 'solutions/ajout', component: AjoutersComponent},
+      {path: 'solutions/modifier', component: ModifiersComponent},
+      {path: 'solutions/info/:id', component: InfosComponent},
+      {path: 'solutions/user/:id', component: ListsUComponent},
+      {path: 'user/info/:id', component: InfouComponent},
+      {path: 'myprofile', component: ModifieruComponent},
+      {
+        path: 'messages', component: ListmMenuComponent, children: [
+          {path: '', component: ListmComponent},
+          {path: 'true', component: ListmLComponent},
+          {path: 'false', component: ListmNlComponent}
+        ]
+      },
+      {path: 'messages/envoyer', component: EnvoyermComponent},
+      {path: 'messages/info', component: InfomComponent}
+    ]
+  },
 
   {path: '**', redirectTo: 'app'}
 ];
@@ -83,4 +93,5 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

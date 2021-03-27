@@ -1,0 +1,41 @@
+<div class="flex-container" xmlns="http://www.w3.org/1999/html">
+  <mat-card class="flex-item mat-elevation-z8">
+    <mat-card-title><h2>Envoyer un Message</h2></mat-card-title>
+    <form (ngSubmit)="submit(myForm)" *ngIf="myForm" [formGroup]="myForm">
+      <mat-card-content>
+        <div class="example-container mtb-2 text-center">
+
+          <mat-form-field appearance="outline">
+            <mat-label>Sujet</mat-label>
+            <input formControlName="sujet" matInput placeholder="Sujet du Message" type="text">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Message</mat-label>
+            <textarea formControlName="message" matInput placeholder="Message" rows="6"
+                      type="textarea"></textarea>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Email de l'Utilisateur</mat-label>
+            <input #email matInput placeholder="Email de l'Utilisateur" type="text">
+            <button (click)="chercherUser(email.value)" aria-label="Recherche" class="waves-light" color="primary"
+                    mat-icon-button mat-raised-button
+                    matSuffix mdbWavesEffec type="button">
+              <mat-icon>search</mat-icon>
+            </button>
+          </mat-form-field>
+          <mat-label *ngIf="showu" style="text-align: left">Nom de l'agent: <a
+            href="/app/user/info/{{recepteur.iduser}}">{{recepteur.nom}}</a></mat-label>
+          <br>
+
+          <button (click)="reset()" class="waves-light" mat-raised-button mdbWavesEffect type="button">Réinitialiser
+          </button>
+          <br>
+          <button [disabled]="!myForm.valid" color="primary" mat-raised-button mdbWavesEffect type="submit">Ajouter
+          </button>
+        </div>
+      </mat-card-content>
+    </form>
+  </mat-card>
+</div>

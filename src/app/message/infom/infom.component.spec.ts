@@ -1,20 +1,20 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {ModifierComponent} from './modifier.component';
+import {InfomComponent} from './infom.component';
 
-describe('ModifierComponent', () => {
-  let component: ModifierComponent;
-  let fixture: ComponentFixture<ModifierComponent>;
+describe('InfomComponent', () => {
+  let component: InfomComponent;
+  let fixture: ComponentFixture<InfomComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ModifierComponent]
+      declarations: [InfomComponent]
     })
       .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ModifierComponent);
+    fixture = TestBed.createComponent(InfomComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

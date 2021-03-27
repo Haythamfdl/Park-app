@@ -14,34 +14,37 @@ import {ComfirmDialogComponent} from '../../comfirm-dialog/comfirm-dialog.compon
 })
 export class ModifierComponent implements OnInit {
   myForm: FormGroup;
-  equipement:Equipement;
-  equipsave:Equipement;
+  equipement: Equipement;
+  equipsave: Equipement;
+
   constructor(private fb: FormBuilder,
               private router: Router,
               private snackBar: MatSnackBar,
               public dialog: MatDialog,
-              private equipementService:EquipementService) {
-    this.equipement=new Equipement();
+              private equipementService: EquipementService) {
+    this.equipement = new Equipement();
   }
 
   ngOnInit(): void {
-    if(JSON.parse(localStorage.getItem('Utilisateur')) == null)
+    if (JSON.parse(localStorage.getItem('Utilisateur')) == null) {
       this.router.navigate(['/']).then();
-    if(JSON.parse(localStorage.getItem('Equipement')) == null)
+    }
+    if (JSON.parse(localStorage.getItem('Equipement')) == null) {
       this.router.navigate(['/app/equipements']).then();
-    this.equipement=JSON.parse(localStorage.getItem('Equipement'));
-    this.equipsave=this.equipement;
+    }
+    this.equipement = JSON.parse(localStorage.getItem('Equipement'));
+    this.equipsave = this.equipement;
     this.createForm();
   }
 
-  openDialog(){
+  openDialog() {
     const dialogRef = this.dialog.open(ComfirmDialogComponent, {
       width: '400px',
-      data: "Voulez-vous vraiment faire cette modification ?"
+      data: 'Voulez-vous vraiment faire cette modification ?'
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
-      if(result == true){
+      if (result == true) {
         this.equipementService.update(this.equipement).subscribe();
         this.router.navigate(['/app/equipements']).then();
         this.openSnackBar('L\'équipement a été modifier', '');
@@ -50,7 +53,7 @@ export class ModifierComponent implements OnInit {
   }
 
   submit(myForm) {
-    this.equipement= myForm.value;
+    this.equipement = myForm.value;
     this.equipement.idequip = this.equipsave.idequip;
     this.equipement.numero = this.equipsave.numero;
     this.equipement.isdeleted = false;
@@ -72,15 +75,15 @@ export class ModifierComponent implements OnInit {
       numero: [this.equipement.numero],
       designation: [this.equipement.designation, [Validators.required]],
       fabriquant: [this.equipement.fabriquant, [Validators.required]],
-      dateaquisition:[this.equipement.dateaquisition,[Validators.required]],
-      dateservice:[this.equipement.dateservice,[Validators.required]],
-      valeuraquisition:[this.equipement.valeuraquisition,[Validators.required]],
-      dureegarantie:[this.equipement.dureegarantie,[Validators.required]],
-      poids:[this.equipement.poids,[Validators.required]],
-      taille:[this.equipement.taille,[Validators.required]],
-      dateaffectation:[this.equipement.dateaffectation],
-      isdeleted:[this.equipement.isdeleted],
-      agent:[this.equipement.agent]
+      dateaquisition: [this.equipement.dateaquisition, [Validators.required]],
+      dateservice: [this.equipement.dateservice, [Validators.required]],
+      valeuraquisition: [this.equipement.valeuraquisition, [Validators.required]],
+      dureegarantie: [this.equipement.dureegarantie, [Validators.required]],
+      poids: [this.equipement.poids, [Validators.required]],
+      taille: [this.equipement.taille, [Validators.required]],
+      dateaffectation: [this.equipement.dateaffectation],
+      isdeleted: [this.equipement.isdeleted],
+      agent: [this.equipement.agent]
     });
   }
 }

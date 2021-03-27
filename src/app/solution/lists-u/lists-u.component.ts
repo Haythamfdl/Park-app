@@ -19,7 +19,7 @@ import {Utilisateur} from '../../_model/utilisateur';
 })
 export class ListsUComponent implements OnInit {
 
-  displayedColumns: string[] = ['titre', 'datesoumission', 'Action'];
+  displayedColumns: string[] = ['titre', 'probleme', 'datesoumission', 'Action'];
   dataSource;
   solution: Solution;
   idprob;

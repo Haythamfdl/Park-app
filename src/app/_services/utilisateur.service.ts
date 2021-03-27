@@ -20,12 +20,12 @@ export class UtilisateurService {
     return this.http.get<Utilisateur>(this.Url + '/id/' + id);
   }
 
-  public login(email:string, pass:string): Observable<Utilisateur> {
+  public login(email: string, pass: string): Observable<Utilisateur> {
     return this.http.get<Utilisateur>(this.Url + '/' + email + '/' + pass);
   }
 
-  public getByEmail(user: Utilisateur): Observable<Utilisateur> {
-    return this.http.get<Utilisateur>(this.Url + '/' + user.email);
+  public getByEmail(email: string): Observable<Utilisateur> {
+    return this.http.get<Utilisateur>(this.Url + '/' + email);
   }
 
   public update(utilisateur: Utilisateur): Observable<Object> {

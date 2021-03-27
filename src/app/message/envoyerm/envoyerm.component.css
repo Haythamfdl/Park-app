@@ -1,5 +1,6 @@
 .flex-container {
   margin-top: 5vh;
+  margin-bottom: 5vh;
   justify-content: center;
   align-items: center;
   padding: 0;
@@ -10,7 +11,7 @@
   margin-top: 200px;
   background-color: transparent;
   height: auto;
-  width: 100%;
+  width: 80%;
   min-width: 200px;
   margin: 10px;
   line-height: 20px;
@@ -19,23 +20,13 @@
   border-radius: 0;
 }
 
+.example-container {
+  display: flex;
+  flex-direction: column;
+}
+
 mat-card-title {
   text-align: center;
   font-size: x-large;
-}
-
-table {
-  width: 100%;
-  table-layout: auto;
-}
-
-.action {
-  justify-content: center;
-  margin-left: 5px;
-}
-
-th {
-  font-weight: bold;
-  font-size: medium;
 }
 

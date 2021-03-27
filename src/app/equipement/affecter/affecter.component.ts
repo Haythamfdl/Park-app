@@ -15,39 +15,43 @@ import {DatePipe} from '@angular/common';
 })
 export class AffecterComponent implements OnInit {
   myForm: FormGroup;
-  equipement:Equipement;
-  agent:Agent;
+  equipement: Equipement;
+  agent: Agent;
   num;
   show = false;
+
   constructor(private fb: FormBuilder,
               private router: Router,
               private snackBar: MatSnackBar,
-              private datePipe:DatePipe,
-              private equipementService:EquipementService,
-              private agentService:AgentService) {
-    this.equipement=new Equipement();
-    this.agent=new Agent();
+              private datePipe: DatePipe,
+              private equipementService: EquipementService,
+              private agentService: AgentService) {
+    this.equipement = new Equipement();
+    this.agent = new Agent();
+  }
+
+  get numero() {
+    return this.myForm.get('numero');
   }
 
   ngOnInit(): void {
-    if(JSON.parse(localStorage.getItem('Utilisateur')) == null)
+    if (JSON.parse(localStorage.getItem('Utilisateur')) == null) {
       this.router.navigate(['/']).then();
-    if(JSON.parse(localStorage.getItem('Equipement')) == null)
+    }
+    if (JSON.parse(localStorage.getItem('Equipement')) == null) {
       this.router.navigate(['/app/equipements']).then();
-    this.equipement=JSON.parse(localStorage.getItem('Equipement'));
+    }
+    this.equipement = JSON.parse(localStorage.getItem('Equipement'));
     this.createForm();
   }
 
-  get numero() { return this.myForm.get('numero'); }
-
-  recheche(){
+  recheche() {
     this.num = this.myForm.value['numero'];
-    this.agentService.getAgentbyNum(this.num).subscribe(data =>{
-      if(data !== null){
-        this.agent =data;
+    this.agentService.getAgentbyNum(this.num).subscribe(data => {
+      if (data !== null) {
+        this.agent = data;
         this.show = true;
-      }
-      else {
+      } else {
         this.show = false;
         this.openSnackBar('Numéro invalide', '');
       }
@@ -55,8 +59,8 @@ export class AffecterComponent implements OnInit {
   }
 
   submit() {
-    this.equipement.agent =this.agent;
-    this.equipement.dateaffectation= this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+    this.equipement.agent = this.agent;
+    this.equipement.dateaffectation = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
     this.equipementService.update(this.equipement).subscribe();
     this.router.navigate(['/app/equipements']).then();
     this.openSnackBar('L\'équipement a été affecter', '');

@@ -56,9 +56,11 @@ import {InfouComponent} from './utilisateur/infou/infou.component';
 import {MatFabMenuModule} from '@angular-material-extensions/fab-menu';
 import {ModifieruComponent} from './utilisateur/modifieru/modifieru.component';
 import {ListmMenuComponent} from './message/listm-menu/listm-menu.component';
-import { ListmComponent } from './message/listm/listm.component';
-import { ListmLComponent } from './message/listm-l/listm-l.component';
-import { ListmNlComponent } from './message/listm-nl/listm-nl.component';
+import {ListmComponent} from './message/listm/listm.component';
+import {ListmLComponent} from './message/listm-l/listm-l.component';
+import {ListmNlComponent} from './message/listm-nl/listm-nl.component';
+import {EnvoyermComponent} from './message/envoyerm/envoyerm.component';
+import {InfomComponent} from './message/infom/infom.component';
 
 @NgModule({
   declarations: [
@@ -96,6 +98,8 @@ import { ListmNlComponent } from './message/listm-nl/listm-nl.component';
     ListmComponent,
     ListmLComponent,
     ListmNlComponent,
+    EnvoyermComponent,
+    InfomComponent,
   ],
   imports: [
     BrowserModule,
@@ -127,4 +131,5 @@ import { ListmNlComponent } from './message/listm-nl/listm-nl.component';
   providers: [DatePipe],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

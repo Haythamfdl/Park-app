@@ -13,31 +13,34 @@ import {Agent} from '../../_model/agent';
 })
 export class InfoComponent implements OnInit {
   myForm: FormGroup;
-  equipement:Equipement;
-  agent = "Aucun";
+  equipement: Equipement;
+  agent = 'Aucun';
   num: string;
 
   constructor(private fb: FormBuilder,
               private router: Router,
-              private activatedRoute:ActivatedRoute,
+              private activatedRoute: ActivatedRoute,
               private snackBar: MatSnackBar,
-              private equipementService:EquipementService) {
-    this.activatedRoute.params.subscribe(params => {this.num = params['num']});
-    this.equipement =new  Equipement();
+              private equipementService: EquipementService) {
+    this.activatedRoute.params.subscribe(params => {
+      this.num = params['num'];
+    });
+    this.equipement = new Equipement();
   }
 
   ngOnInit(): void {
-    if(JSON.parse(localStorage.getItem('Utilisateur')) == null)
+    if (JSON.parse(localStorage.getItem('Utilisateur')) == null) {
       this.router.navigate(['/']).then();
-    this.equipement.agent =new Agent();
-    this.equipementService.getEquipementbyNum(this.num).subscribe(data =>{
+    }
+    this.equipement.agent = new Agent();
+    this.equipementService.getEquipementbyNum(this.num).subscribe(data => {
       this.equipement = data;
-      if(this.equipement == null){
+      if (this.equipement == null) {
         this.router.navigate(['/app/equipements']).then();
         this.openSnackBar('Le numéro de l\'équipement est invalide', '');
       }
-      if(this.equipement.agent !== null) {
-        this.agent= this.equipement.agent.nom+" ("+this.equipement.agent.numero+")";
+      if (this.equipement.agent !== null) {
+        this.agent = this.equipement.agent.nom + ' (' + this.equipement.agent.numero + ')';
       }
       this.createForm();
     });
@@ -56,14 +59,14 @@ export class InfoComponent implements OnInit {
       numero: [this.equipement.numero],
       designation: [this.equipement.designation],
       fabriquant: [this.equipement.fabriquant],
-      dateaquisition:[this.equipement.dateaquisition],
-      dateservice:[this.equipement.dateservice],
-      valeuraquisition:[this.equipement.valeuraquisition],
-      dureegarantie:[this.equipement.dureegarantie],
-      poids:[this.equipement.poids],
-      taille:[this.equipement.taille],
-      dateaffectation:[this.equipement.dateaffectation],
-      isdeleted:[this.equipement.isdeleted],
+      dateaquisition: [this.equipement.dateaquisition],
+      dateservice: [this.equipement.dateservice],
+      valeuraquisition: [this.equipement.valeuraquisition],
+      dureegarantie: [this.equipement.dureegarantie],
+      poids: [this.equipement.poids],
+      taille: [this.equipement.taille],
+      dateaffectation: [this.equipement.dateaffectation],
+      isdeleted: [this.equipement.isdeleted],
     });
   }
 }

@@ -1,50 +1,56 @@
 <div class="flex-container">
   <mat-card class="flex-item mat-elevation-z8">
-    <mat-card-title><h2 >Liste des équipements</h2></mat-card-title>
+    <mat-card-title><h2>Liste des équipements</h2></mat-card-title>
     <mat-card-content>
-      <button mat-raised-button color="primary" class="mt-3" (click)="ajouter()">Ajouter un Equipement</button>
+      <button (click)="ajouter()" class="mt-3" color="primary" mat-raised-button>Ajouter un Equipement</button>
       <mat-form-field style="float: right">
         <mat-label>Recherche</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="Recherche">
+        <input (keyup)="applyFilter($event)" matInput placeholder="Recherche">
       </mat-form-field>
 
-    <table mat-table [dataSource]="dataSource" matSort >
+      <table [dataSource]="dataSource" mat-table matSort>
 
-      <!-- Numéro Equipement Column -->
-      <ng-container matColumnDef="numero">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Numéro Equipement</th>
-        <td mat-cell *matCellDef="let data"> {{data.numero}} </td>
-      </ng-container>
+        <!-- Numéro Equipement Column -->
+        <ng-container matColumnDef="numero">
+          <th *matHeaderCellDef mat-header-cell mat-sort-header>Numéro Equipement</th>
+          <td *matCellDef="let data" mat-cell> {{data.numero}} </td>
+        </ng-container>
 
-      <!-- Désignation Column -->
-      <ng-container matColumnDef="designation">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Désignation</th>
-        <td mat-cell *matCellDef="let data"> {{data.designation}} </td>
-      </ng-container>
+        <!-- Désignation Column -->
+        <ng-container matColumnDef="designation">
+          <th *matHeaderCellDef mat-header-cell mat-sort-header>Désignation</th>
+          <td *matCellDef="let data" mat-cell> {{data.designation}} </td>
+        </ng-container>
 
-      <!-- Agent affecter Column -->
-      <ng-container matColumnDef="agent">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Agent affecter</th>
-        <td mat-cell *matCellDef="let data"><a href="/app/agents/info/{{data.agent.numero}}" *ngIf="data.agent != null">{{data.agent.nom}}</a><span *ngIf="data.agent == null">Aucun</span></td>
-      </ng-container>
+        <!-- Agent affecter Column -->
+        <ng-container matColumnDef="agent">
+          <th *matHeaderCellDef mat-header-cell mat-sort-header>Agent affecter</th>
+          <td *matCellDef="let data" mat-cell><a *ngIf="data.agent != null"
+                                                 href="/app/agents/info/{{data.agent.numero}}">{{data.agent.nom}}</a><span
+            *ngIf="data.agent == null">Aucun</span></td>
+        </ng-container>
 
-      <!-- Action Column -->
-      <ng-container matColumnDef="Action">
-        <th mat-header-cell *matHeaderCellDef>Action</th>
-        <td mat-cell *matCellDef="let data">
-          <button mat-raised-button color="primary" (click)="info(data.numero)">Info</button>
-          <button mat-raised-button class="action" color="primary" (click)="modifier(data)">Modifier</button>
-          <button *ngIf="data.agent == null" mat-raised-button class="action" color="primary" (click)="affecter(data)">Affecter a un Agent</button>
-          <button *ngIf="data.agent !== null" mat-raised-button class="action" color="primary" (click)="desaffecter(data)">Enlever Affectation</button>
-          <button mat-raised-button class="action" color="warn" (click)="openDialog(data)">Supprimer</button>
-        </td>
-      </ng-container>
+        <!-- Action Column -->
+        <ng-container matColumnDef="Action">
+          <th *matHeaderCellDef mat-header-cell>Action</th>
+          <td *matCellDef="let data" mat-cell>
+            <button (click)="info(data.numero)" color="primary" mat-raised-button>Info</button>
+            <button (click)="modifier(data)" class="action" color="primary" mat-raised-button>Modifier</button>
+            <button (click)="affecter(data)" *ngIf="data.agent == null" class="action" color="primary"
+                    mat-raised-button>Affecter a un Agent
+            </button>
+            <button (click)="desaffecter(data)" *ngIf="data.agent !== null" class="action" color="primary"
+                    mat-raised-button>Enlever Affectation
+            </button>
+            <button (click)="openDialog(data)" class="action" color="warn" mat-raised-button>Supprimer</button>
+          </td>
+        </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
+        <tr *matHeaderRowDef="displayedColumns; sticky: true" mat-header-row></tr>
+        <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+      </table>
 
-    <mat-paginator [pageSizeOptions]="[5, 10, 25, 50, 100]" showFirstLastButtons></mat-paginator>
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 50, 100]" showFirstLastButtons></mat-paginator>
     </mat-card-content>
   </mat-card>
 </div>
