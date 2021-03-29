@@ -15,7 +15,7 @@ export class NavbarComponent implements OnInit {
   user: Utilisateur;
   subscription: Subscription;
   nb = '0';
-  timer = 10000;
+  timer = 1000;
 
   constructor(private router: Router,
               private snackBar: MatSnackBar,

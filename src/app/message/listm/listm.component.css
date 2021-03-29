@@ -37,3 +37,15 @@ th {
   font-weight: bold;
   font-size: medium;
 }
+
+table{
+  width: 100%;
+  table-layout: fixed;
+}
+
+.col
+{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
