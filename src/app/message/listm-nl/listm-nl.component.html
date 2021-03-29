@@ -11,16 +11,16 @@
 
       <table [dataSource]="dataSource" mat-table matSort>
 
-        <!-- Envoyeur Column -->
+        <!-- Expéditeur Column -->
         <ng-container matColumnDef="user">
-          <th *matHeaderCellDef mat-header-cell mat-sort-header>Envoyeur</th>
+          <th *matHeaderCellDef mat-header-cell mat-sort-header>Expéditeur</th>
           <td *matCellDef="let data" mat-cell><a
             href="/app/user/info/{{data.envoyeur.iduser}}">{{data.envoyeur.nom}}</a></td>
         </ng-container>
 
-        <!-- Titre Column -->
+        <!-- Sujet Column -->
         <ng-container matColumnDef="sujet">
-          <th *matHeaderCellDef mat-header-cell mat-sort-header>Titre</th>
+          <th *matHeaderCellDef mat-header-cell mat-sort-header>Sujet</th>
           <td *matCellDef="let data" mat-cell> {{data.sujet}} </td>
         </ng-container>
 
