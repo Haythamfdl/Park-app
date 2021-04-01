@@ -16,13 +16,13 @@ import {Solution} from '../../_model/solution';
   styleUrls: ['./lists.component.css']
 })
 export class ListsComponent implements OnInit {
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   displayedColumns: string[] = ['titre', 'utilisateur', 'datesoumission', 'Action'];
   dataSource;
   solution: Solution;
   idprob;
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private fb: FormBuilder,
               private router: Router,
@@ -31,7 +31,7 @@ export class ListsComponent implements OnInit {
               public dialog: MatDialog,
               private solutionService: SolutionService) {
     this.activatedRoute.params.subscribe(params => {
-      this.idprob = params['id'];
+      this.idprob = params.id;
     });
   }
 
@@ -67,7 +67,7 @@ export class ListsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result == true) {
+      if (result === true) {
         this.supprimer(value);
         window.location.reload();
         this.openSnackBar('Solution a été Supprimer !', '');

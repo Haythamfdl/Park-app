@@ -23,7 +23,7 @@ export class InfouComponent implements OnInit {
               private dialog: MatDialog,
               private utilisateurService: UtilisateurService) {
     this.activatedRoute.params.subscribe(params => {
-      this.id = params['id'];
+      this.id = params.id;
     });
     this.user = new Utilisateur();
   }

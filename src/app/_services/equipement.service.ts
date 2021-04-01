@@ -11,29 +11,29 @@ export class EquipementService {
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
   };
-  private readonly Url: string;
+  private readonly url: string;
 
   constructor(private http: HttpClient) {
-    this.Url = 'http://localhost:8080/equipements';
+    this.url = 'http://localhost:8080/equipements';
   }
 
   public getAllEquipements(): Observable<Equipement[]> {
-    return this.http.get<Equipement[]>(this.Url);
+    return this.http.get<Equipement[]>(this.url);
   }
 
   public getEquipementbyNum(num: string): Observable<Equipement> {
-    return this.http.get<Equipement>(this.Url + '/' + num);
+    return this.http.get<Equipement>(this.url + '/' + num);
   }
 
   public getEquipmentsAgent(agent: Agent): Observable<Equipement[]> {
-    return this.http.get<Equipement[]>(this.Url + '/agent/' + agent.idagent);
+    return this.http.get<Equipement[]>(this.url + '/agent/' + agent.idagent);
   }
 
-  public save(equipement: Equipement): Observable<Object> {
-    return this.http.post(this.Url, equipement, this.httpOptions);
+  public save(equipement: Equipement): Observable<any> {
+    return this.http.post(this.url, equipement, this.httpOptions);
   }
 
-  public update(equipement: Equipement): Observable<Object> {
-    return this.http.put(this.Url, equipement, this.httpOptions);
+  public update(equipement: Equipement): Observable<any> {
+    return this.http.put(this.url, equipement, this.httpOptions);
   }
 }

@@ -14,13 +14,14 @@ import {MessageService} from '../../_services/message.service';
   styleUrls: ['./envoyerm.component.css']
 })
 export class EnvoyermComponent implements OnInit {
+
+  @ViewChild('email') el1: ElementRef;
+
   myForm: FormGroup;
   showu = false;
   message: Message;
   envoyeur: Utilisateur;
   recepteur: Utilisateur;
-
-  @ViewChild('email') el1: ElementRef;
 
   constructor(private fb: FormBuilder,
               private router: Router,
@@ -64,17 +65,17 @@ export class EnvoyermComponent implements OnInit {
   }
 
   chercherUser(email) {
-    if (email == '') {
+    if (email === '') {
       email = null;
     }
     this.utilisateurService.getByEmail(email).subscribe(data => {
       if (data !== null) {
         this.recepteur = data;
-        this.myForm.controls['recepteur'].setValue(this.recepteur);
+        this.myForm.controls.recepteur.setValue(this.recepteur);
         this.showu = true;
       } else {
         this.showu = false;
-        this.myForm.controls['recepteur'].setValue(null);
+        this.myForm.controls.recepteur.setValue(null);
         this.openSnackBar('Email invalide', '');
       }
     });

@@ -10,29 +10,29 @@ export class SolutionService {
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
   };
-  private readonly Url: string;
+  private readonly url: string;
 
   constructor(private http: HttpClient) {
-    this.Url = 'http://localhost:8080/solutions';
+    this.url = 'http://localhost:8080/solutions';
   }
 
   public getSolutionsProblem(id): Observable<Solution[]> {
-    return this.http.get<Solution[]>(this.Url + '/problem/' + id);
+    return this.http.get<Solution[]>(this.url + '/problem/' + id);
   }
 
   public getSolutionsUtilisateur(id): Observable<Solution[]> {
-    return this.http.get<Solution[]>(this.Url + '/user/' + id);
+    return this.http.get<Solution[]>(this.url + '/user/' + id);
   }
 
   public getSolution(id): Observable<Solution> {
-    return this.http.get<Solution>(this.Url + '/' + id);
+    return this.http.get<Solution>(this.url + '/' + id);
   }
 
-  public save(solution: Solution): Observable<Object> {
-    return this.http.post(this.Url, solution, this.httpOptions);
+  public save(solution: Solution): Observable<any> {
+    return this.http.post(this.url, solution, this.httpOptions);
   }
 
-  public update(solution: Solution): Observable<Object> {
-    return this.http.put(this.Url, solution, this.httpOptions);
+  public update(solution: Solution): Observable<any> {
+    return this.http.put(this.url, solution, this.httpOptions);
   }
 }

@@ -70,7 +70,7 @@ export class ModifiersComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
-      if (result == true) {
+      if (result === true) {
         this.solutionService.update(this.solution).subscribe();
         this.openSnackBar('Le Solution a été modifier', '');
         this.router.navigate(['/app/solutions/probleme/' + this.probleme.idprob]).then();

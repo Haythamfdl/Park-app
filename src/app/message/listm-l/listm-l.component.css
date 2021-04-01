@@ -39,13 +39,12 @@ th {
 }
 
 
-table{
+table {
   width: 100%;
   table-layout: fixed;
 }
 
-.col
-{
+.col {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

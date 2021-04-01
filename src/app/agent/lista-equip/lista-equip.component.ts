@@ -19,13 +19,13 @@ import {Agent} from '../../_model/agent';
 })
 export class ListaEquipComponent implements OnInit {
 
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   displayedColumns: string[] = ['numero', 'designation', 'Action'];
   dataSource;
   equipement: Equipement;
   agent: Agent;
   num: string;
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private fb: FormBuilder,
               private router: Router,
@@ -35,7 +35,7 @@ export class ListaEquipComponent implements OnInit {
               private equipementService: EquipementService,
               private agentService: AgentService) {
     this.activatedRoute.params.subscribe(params => {
-      this.num = params['num'];
+      this.num = params.num;
     });
   }
 
@@ -75,7 +75,7 @@ export class ListaEquipComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
-      if (result == true) {
+      if (result === true) {
         this.supprimer(value);
         window.location.reload();
         this.openSnackBar('Equipement a été Supprimer !', '');

@@ -20,13 +20,14 @@ import {AgentService} from '../../_services/agent.service';
 })
 export class ListaProblemeComponent implements OnInit {
 
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
   displayedColumns: string[] = ['titre', 'type', 'agent', 'datesoumission', 'resolu', 'Action'];
   dataSource;
   probleme: Probleme;
   agent: Agent;
   num;
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private fb: FormBuilder,
               private router: Router,
@@ -37,7 +38,7 @@ export class ListaProblemeComponent implements OnInit {
               private problemeService: ProblemeService,
               private agentService: AgentService) {
     this.activatedRoute.params.subscribe(params => {
-      this.num = params['num'];
+      this.num = params.num;
     });
     this.agent = new Agent();
   }
@@ -55,8 +56,8 @@ export class ListaProblemeComponent implements OnInit {
         this.router.navigate(['/app/agents']).then();
         this.openSnackBar('Le numéro de l\'agent est invalide', '');
       }
-      this.problemeService.getProblemesAgent(this.agent).subscribe(data => {
-        this.dataSource = new MatTableDataSource<Probleme>(data);
+      this.problemeService.getProblemesAgent(this.agent).subscribe(data2 => {
+        this.dataSource = new MatTableDataSource<Probleme>(data2);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
       });
@@ -83,7 +84,7 @@ export class ListaProblemeComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
-      if (result == true) {
+      if (result === true) {
         this.supprimer(value);
         window.location.reload();
         this.openSnackBar('Problemes a été Supprimer !', '');

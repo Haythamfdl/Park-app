@@ -18,12 +18,14 @@ import {Utilisateur} from '../../_model/utilisateur';
 })
 export class ListmComponent implements OnInit {
 
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
   displayedColumns: string[] = ['user', 'sujet', 'dateenvoie', 'lu', 'Action'];
   dataSource;
   message: Message;
   user: Utilisateur;
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+
 
   constructor(private fb: FormBuilder,
               private router: Router,
@@ -66,7 +68,7 @@ export class ListmComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
-      if (result == true) {
+      if (result === true) {
         this.supprimer(value);
         window.location.reload();
         this.openSnackBar('Message a été Supprimer !', '');

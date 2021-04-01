@@ -11,33 +11,33 @@ export class MessageService {
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
   };
-  private readonly Url: string;
+  private readonly url: string;
 
   constructor(private http: HttpClient) {
-    this.Url = 'http://localhost:8080/messages';
+    this.url = 'http://localhost:8080/messages';
   }
 
   public getMessage(id): Observable<Message> {
-    return this.http.get<Message>(this.Url + '/' + id);
+    return this.http.get<Message>(this.url + '/' + id);
   }
 
   public getAllMessage(id): Observable<Message[]> {
-    return this.http.get<Message[]>(this.Url + '/user/' + id);
+    return this.http.get<Message[]>(this.url + '/user/' + id);
   }
 
   public getAllMessagesOuvert(id: string, ouver): Observable<Message[]> {
-    return this.http.get<Message[]>(this.Url + '/user/' + id + '/' + ouver);
+    return this.http.get<Message[]>(this.url + '/user/' + id + '/' + ouver);
   }
 
   public getAllMessagesOuvertCount(id: string, ouver): Observable<string> {
-    return this.http.get<string>(this.Url + '/count/' + id + '/' + ouver);
+    return this.http.get<string>(this.url + '/count/' + id + '/' + ouver);
   }
 
-  public save(message: Message): Observable<Object> {
-    return this.http.post(this.Url, message, this.httpOptions);
+  public save(message: Message): Observable<any> {
+    return this.http.post(this.url, message, this.httpOptions);
   }
 
-  public update(message: Message): Observable<Object> {
-    return this.http.put(this.Url, message, this.httpOptions);
+  public update(message: Message): Observable<any> {
+    return this.http.put(this.url, message, this.httpOptions);
   }
 }

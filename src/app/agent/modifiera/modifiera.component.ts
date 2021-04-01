@@ -44,7 +44,7 @@ export class ModifieraComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
-      if (result == true) {
+      if (result === true) {
         this.agentService.update(this.agent).subscribe();
         this.openSnackBar('L\'agent a été modifier', '');
         this.router.navigate(['/app/agents']).then();

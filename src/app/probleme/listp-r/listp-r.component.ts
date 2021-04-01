@@ -17,11 +17,12 @@ import {ComfirmDialogComponent} from '../../comfirm-dialog/comfirm-dialog.compon
 })
 export class ListpRComponent implements OnInit {
 
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
   displayedColumns: string[] = ['titre', 'type', 'agent', 'datesoumission', 'Action'];
   dataSource;
   probleme: Probleme;
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private fb: FormBuilder,
               private router: Router,
@@ -63,7 +64,7 @@ export class ListpRComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
-      if (result == true) {
+      if (result === true) {
         this.supprimer(value);
         window.location.reload();
         this.openSnackBar('Problemes a été Supprimer !', '');

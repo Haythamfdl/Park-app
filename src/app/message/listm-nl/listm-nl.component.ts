@@ -18,12 +18,12 @@ import {ComfirmDialogComponent} from '../../comfirm-dialog/comfirm-dialog.compon
 })
 export class ListmNlComponent implements OnInit {
 
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   displayedColumns: string[] = ['user', 'sujet', 'dateenvoie', 'Action'];
   dataSource;
   message: Message;
   user: Utilisateur;
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private fb: FormBuilder,
               private router: Router,
@@ -66,7 +66,7 @@ export class ListmNlComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
-      if (result == true) {
+      if (result === true) {
         this.supprimer(value);
         window.location.reload();
         this.openSnackBar('Message a été Supprimer !', '');

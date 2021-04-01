@@ -12,33 +12,33 @@ export class ProblemeService {
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
   };
-  private readonly Url: string;
+  private readonly url: string;
 
   constructor(private http: HttpClient) {
-    this.Url = 'http://localhost:8080/problemes';
+    this.url = 'http://localhost:8080/problemes';
   }
 
   public getAllProblemes(): Observable<Probleme[]> {
-    return this.http.get<Probleme[]>(this.Url);
+    return this.http.get<Probleme[]>(this.url);
   }
 
   public getProblemesAgent(agent: Agent): Observable<Probleme[]> {
-    return this.http.get<Probleme[]>(this.Url + '/agent/' + agent.idagent);
+    return this.http.get<Probleme[]>(this.url + '/agent/' + agent.idagent);
   }
 
   public getProblemesResolu(resolu): Observable<Probleme[]> {
-    return this.http.get<Probleme[]>(this.Url + '/resolu/' + resolu);
+    return this.http.get<Probleme[]>(this.url + '/resolu/' + resolu);
   }
 
   public getProbleme(id: string): Observable<Probleme> {
-    return this.http.get<Probleme>(this.Url + '/' + id);
+    return this.http.get<Probleme>(this.url + '/' + id);
   }
 
-  public save(probleme: Probleme): Observable<Object> {
-    return this.http.post(this.Url, probleme, this.httpOptions);
+  public save(probleme: Probleme): Observable<any> {
+    return this.http.post(this.url, probleme, this.httpOptions);
   }
 
-  public update(probleme: Probleme): Observable<Object> {
-    return this.http.put(this.Url, probleme, this.httpOptions);
+  public update(probleme: Probleme): Observable<any> {
+    return this.http.put(this.url, probleme, this.httpOptions);
   }
 }

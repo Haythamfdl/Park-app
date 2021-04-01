@@ -44,7 +44,7 @@ export class ModifierComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
-      if (result == true) {
+      if (result === true) {
         this.equipementService.update(this.equipement).subscribe();
         this.router.navigate(['/app/equipements']).then();
         this.openSnackBar('L\'équipement a été modifier', '');

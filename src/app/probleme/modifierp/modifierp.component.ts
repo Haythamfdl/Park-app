@@ -17,6 +17,9 @@ import {MatDialog} from '@angular/material/dialog';
   styleUrls: ['./modifierp.component.css']
 })
 export class ModifierpComponent implements OnInit {
+  @ViewChild('numa') el1: ElementRef;
+  @ViewChild('nume') el2: ElementRef;
+
   myForm: FormGroup;
   form: FormControl;
   agent: Agent;
@@ -31,9 +34,6 @@ export class ModifierpComponent implements OnInit {
     {value: 'Hardware', viewValue: 'Hardware'},
     {value: 'Service', viewValue: 'Service'}
   ];
-
-  @ViewChild('numa') el1: ElementRef;
-  @ViewChild('nume') el2: ElementRef;
 
   constructor(private fb: FormBuilder,
               private router: Router,
@@ -57,7 +57,7 @@ export class ModifierpComponent implements OnInit {
     this.probleme = JSON.parse(localStorage.getItem('Probleme'));
     this.problemsave = this.probleme;
     this.chercherAgent(this.probleme.agent.numero);
-    if (this.probleme.type == 'Hardware') {
+    if (this.probleme.type === 'Hardware') {
       this.showre = true;
       this.chercherEquipement(this.probleme.equipement.numero);
     }
@@ -80,7 +80,7 @@ export class ModifierpComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
-      if (result == true) {
+      if (result === true) {
         this.problemeService.update(this.probleme).subscribe();
         this.openSnackBar('Le Problème a été modifier', '');
         this.router.navigate(['/app/problemes']).then();
@@ -106,8 +106,8 @@ export class ModifierpComponent implements OnInit {
 
   onChange() {
     this.showe = false;
-    this.myForm.controls['equipement'].setValue(null);
-    if (this.myForm.value['type'] == 'Hardware') {
+    this.myForm.controls.equipement.setValue(null);
+    if (this.myForm.value.type === 'Hardware') {
       this.showre = true;
     } else {
       this.showre = false;
@@ -116,34 +116,34 @@ export class ModifierpComponent implements OnInit {
   }
 
   chercherAgent(num) {
-    if (num == '') {
+    if (num === '') {
       num = null;
     }
     this.agentService.getAgentbyNum(num).subscribe(data => {
       if (data !== null) {
         this.agent = data;
-        this.myForm.controls['agent'].setValue(this.agent);
+        this.myForm.controls.agent.setValue(this.agent);
         this.showa = true;
       } else {
         this.showa = false;
-        this.myForm.controls['agent'].setValue(null);
+        this.myForm.controls.agent.setValue(null);
         this.openSnackBar('Numéro l\'agent invalide', '');
       }
     });
   }
 
   chercherEquipement(num) {
-    if (num == '') {
+    if (num === '') {
       num = null;
     }
     this.equipementService.getEquipementbyNum(num).subscribe(data => {
       if (data !== null) {
         this.equipement = data;
-        this.myForm.controls['equipement'].setValue(this.equipement);
+        this.myForm.controls.equipement.setValue(this.equipement);
         this.showe = true;
       } else {
         this.showe = false;
-        this.myForm.controls['equipement'].setValue(null);
+        this.myForm.controls.equipement.setValue(null);
         this.openSnackBar('Numéro de l\'équipement invalide', '');
       }
     });

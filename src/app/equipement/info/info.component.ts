@@ -23,7 +23,7 @@ export class InfoComponent implements OnInit {
               private snackBar: MatSnackBar,
               private equipementService: EquipementService) {
     this.activatedRoute.params.subscribe(params => {
-      this.num = params['num'];
+      this.num = params.num;
     });
     this.equipement = new Equipement();
   }

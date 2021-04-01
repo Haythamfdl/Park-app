@@ -10,25 +10,25 @@ export class UtilisateurService {
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
   };
-  private readonly Url: string;
+  private readonly url: string;
 
   constructor(private http: HttpClient) {
-    this.Url = 'http://localhost:8080/utilisateurs';
+    this.url = 'http://localhost:8080/utilisateurs';
   }
 
   public getById(id): Observable<Utilisateur> {
-    return this.http.get<Utilisateur>(this.Url + '/id/' + id);
+    return this.http.get<Utilisateur>(this.url + '/id/' + id);
   }
 
   public login(email: string, pass: string): Observable<Utilisateur> {
-    return this.http.get<Utilisateur>(this.Url + '/' + email + '/' + pass);
+    return this.http.get<Utilisateur>(this.url + '/' + email + '/' + pass);
   }
 
   public getByEmail(email: string): Observable<Utilisateur> {
-    return this.http.get<Utilisateur>(this.Url + '/' + email);
+    return this.http.get<Utilisateur>(this.url + '/' + email);
   }
 
-  public update(utilisateur: Utilisateur): Observable<Object> {
-    return this.http.put(this.Url, utilisateur, this.httpOptions);
+  public update(utilisateur: Utilisateur): Observable<any> {
+    return this.http.put(this.url, utilisateur, this.httpOptions);
   }
 }

@@ -24,7 +24,7 @@ export class InfopComponent implements OnInit {
               private snackBar: MatSnackBar,
               private problemeService: ProblemeService) {
     this.activatedRoute.params.subscribe(params => {
-      this.id = params['id'];
+      this.id = params.id;
     });
     this.probleme = new Probleme();
   }

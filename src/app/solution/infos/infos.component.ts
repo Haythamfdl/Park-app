@@ -25,7 +25,7 @@ export class InfosComponent implements OnInit {
               private solutionService: SolutionService) {
     this.solution = new Solution();
     this.activatedRoute.params.subscribe(params => {
-      this.idsol = params['id'];
+      this.idsol = params.id;
     });
   }
 

@@ -23,7 +23,7 @@ export class InfoaComponent implements OnInit {
               public dialog: MatDialog,
               private agentService: AgentService) {
     this.activatedRoute.params.subscribe(params => {
-      this.num = params['num'];
+      this.num = params.num;
     });
     this.agent = new Agent();
   }

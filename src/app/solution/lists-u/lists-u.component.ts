@@ -18,14 +18,15 @@ import {Utilisateur} from '../../_model/utilisateur';
   styleUrls: ['./lists-u.component.css']
 })
 export class ListsUComponent implements OnInit {
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   displayedColumns: string[] = ['titre', 'probleme', 'datesoumission', 'Action'];
   dataSource;
   solution: Solution;
   idprob;
   utilisateur: Utilisateur;
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+
 
   constructor(private fb: FormBuilder,
               private router: Router,
@@ -35,7 +36,7 @@ export class ListsUComponent implements OnInit {
               private solutionService: SolutionService,
               private utilisateurService: UtilisateurService) {
     this.activatedRoute.params.subscribe(params => {
-      this.idprob = params['id'];
+      this.idprob = params.id;
     });
   }
 
@@ -49,8 +50,8 @@ export class ListsUComponent implements OnInit {
       this.dataSource = new MatTableDataSource<Solution>(data);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
-      this.utilisateurService.getById(this.idprob).subscribe(data => {
-        this.utilisateur = data;
+      this.utilisateurService.getById(this.idprob).subscribe(data2 => {
+        this.utilisateur = data2;
       });
     });
   }
@@ -74,7 +75,7 @@ export class ListsUComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result == true) {
+      if (result === true) {
         this.supprimer(value);
         window.location.reload();
         this.openSnackBar('Solution a été Supprimer !', '');

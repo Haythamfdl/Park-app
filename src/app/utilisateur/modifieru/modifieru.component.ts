@@ -14,10 +14,11 @@ import {ComfirmDialogComponent} from '../../comfirm-dialog/comfirm-dialog.compon
   styleUrls: ['./modifieru.component.css']
 })
 export class ModifieruComponent implements OnInit {
+  @ViewChild('npass') el1: ElementRef;
+
   myForm: FormGroup;
   user: Utilisateur;
   usersave: Utilisateur;
-  @ViewChild('npass') el1: ElementRef;
 
   constructor(private fb: FormBuilder,
               private router: Router,
@@ -69,7 +70,7 @@ export class ModifieruComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
-      if (result == true) {
+      if (result === true) {
         this.utilisateurService.update(this.user).subscribe();
         this.user.pass = null;
         this.openSnackBar('Vos Données on été modifier', '');

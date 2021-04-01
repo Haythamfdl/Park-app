@@ -18,11 +18,12 @@ import {Probleme} from '../../_model/probleme';
 })
 export class ListpComponent implements OnInit {
 
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
   displayedColumns: string[] = ['titre', 'type', 'agent', 'datesoumission', 'resolu', 'Action'];
   dataSource;
   probleme: Probleme;
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private fb: FormBuilder,
               private router: Router,
@@ -64,7 +65,7 @@ export class ListpComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
-      if (result == true) {
+      if (result === true) {
         this.supprimer(value);
         window.location.reload();
         this.openSnackBar('Problemes a été Supprimer !', '');

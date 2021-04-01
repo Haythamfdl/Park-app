@@ -16,6 +16,10 @@ import {DatePipe} from '@angular/common';
   styleUrls: ['./ajoutp.component.css']
 })
 export class AjoutpComponent implements OnInit {
+
+  @ViewChild('numa') el1: ElementRef;
+  @ViewChild('nume') el2: ElementRef;
+
   myForm: FormGroup;
   agent: Agent;
   equipement: Equipement;
@@ -29,8 +33,6 @@ export class AjoutpComponent implements OnInit {
     {value: 'Service', viewValue: 'Service'}
   ];
 
-  @ViewChild('numa') el1: ElementRef;
-  @ViewChild('nume') el2: ElementRef;
 
   constructor(private fb: FormBuilder,
               private router: Router,
@@ -79,8 +81,8 @@ export class AjoutpComponent implements OnInit {
 
   onChange() {
     this.showe = false;
-    this.myForm.controls['equipement'].setValue(null);
-    if (this.myForm.value['type'] == 'Hardware') {
+    this.myForm.controls.equipement.setValue(null);
+    if (this.myForm.value.type === 'Hardware') {
       this.showre = true;
     } else {
       this.showre = false;
@@ -89,34 +91,34 @@ export class AjoutpComponent implements OnInit {
   }
 
   chercherAgent(num) {
-    if (num == '') {
+    if (num === '') {
       num = null;
     }
     this.agentService.getAgentbyNum(num).subscribe(data => {
       if (data !== null) {
         this.agent = data;
-        this.myForm.controls['agent'].setValue(this.agent);
+        this.myForm.controls.agent.setValue(this.agent);
         this.showa = true;
       } else {
         this.showa = false;
-        this.myForm.controls['agent'].setValue(null);
+        this.myForm.controls.agent.setValue(null);
         this.openSnackBar('Numéro l\'agent invalide', '');
       }
     });
   }
 
   chercherEquipement(num) {
-    if (num == '') {
+    if (num === '') {
       num = null;
     }
     this.equipementService.getEquipementbyNum(num).subscribe(data => {
       if (data !== null) {
         this.equipement = data;
-        this.myForm.controls['equipement'].setValue(this.equipement);
+        this.myForm.controls.equipement.setValue(this.equipement);
         this.showe = true;
       } else {
         this.showe = false;
-        this.myForm.controls['equipement'].setValue(null);
+        this.myForm.controls.equipement.setValue(null);
         this.openSnackBar('Numéro de l\'équipement invalide', '');
       }
     });
