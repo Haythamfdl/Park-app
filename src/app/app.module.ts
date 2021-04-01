@@ -53,7 +53,6 @@ import {ModifiersComponent} from './solution/modifiers/modifiers.component';
 import {InfosComponent} from './solution/infos/infos.component';
 import {ListsUComponent} from './solution/lists-u/lists-u.component';
 import {InfouComponent} from './utilisateur/infou/infou.component';
-import {MatFabMenuModule} from '@angular-material-extensions/fab-menu';
 import {ModifieruComponent} from './utilisateur/modifieru/modifieru.component';
 import {ListmMenuComponent} from './message/listm-menu/listm-menu.component';
 import {ListmComponent} from './message/listm/listm.component';
@@ -122,7 +121,6 @@ import {InfomComponent} from './message/infom/infom.component';
     MatDialogModule,
     MatNativeDateModule,
     MatDatepickerModule,
-    MatFabMenuModule,
     MatButtonToggleModule,
     MDBBootstrapModule.forRoot(),
     FlexModule,
