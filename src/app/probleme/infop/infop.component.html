@@ -2,8 +2,8 @@
   <mat-card class="flex-item mat-elevation-z8">
     <mat-card-title>
       <h2>Information sur le Problème</h2>
-      <h3 *ngIf="!probleme.resolu" class="non-resolu"><b>Problème non Résolu</b></h3>
-      <h3 *ngIf="probleme.resolu"><b>Problème Résolu</b></h3>
+      <h3 *ngIf="!probleme.resolu" class="non-resolu"><strong>Problème non Résolu</strong></h3>
+      <h3 *ngIf="probleme.resolu"><strong>Problème Résolu</strong></h3>
     </mat-card-title>
     <form [formGroup]="myForm">
       <mat-card-content>

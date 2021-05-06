@@ -15,19 +15,19 @@
 
         <!-- Titre Column -->
         <ng-container matColumnDef="titre">
-          <th *matHeaderCellDef mat-header-cell mat-sort-header>Titre</th>
+          <th scope="col" *matHeaderCellDef mat-header-cell mat-sort-header>Titre</th>
           <td *matCellDef="let data" mat-cell> {{data.titre}} </td>
         </ng-container>
 
         <!-- Type Column -->
         <ng-container matColumnDef="type">
-          <th *matHeaderCellDef mat-header-cell mat-sort-header>Type</th>
+          <th scope="col" *matHeaderCellDef mat-header-cell mat-sort-header>Type</th>
           <td *matCellDef="let data" mat-cell> {{data.type}} </td>
         </ng-container>
 
         <!-- Agent Column -->
         <ng-container matColumnDef="agent">
-          <th *matHeaderCellDef mat-header-cell mat-sort-header>Agent</th>
+          <th scope="col" *matHeaderCellDef mat-header-cell mat-sort-header>Agent</th>
           <td *matCellDef="let data" mat-cell><a *ngIf="data.agent != null"
                                                  href="/app/agents/info/{{data.agent.numero}}">{{data.agent.nom}}</a><span
             *ngIf="data.agent == null">Aucun</span></td>
@@ -35,13 +35,13 @@
 
         <!-- Date de Soumission Column -->
         <ng-container matColumnDef="datesoumission">
-          <th *matHeaderCellDef mat-header-cell mat-sort-header>Date de Soumission</th>
+          <th scope="col" *matHeaderCellDef mat-header-cell mat-sort-header>Date de Soumission</th>
           <td *matCellDef="let data" mat-cell> {{data.datesoumission | date:'dd/MM/y'}} </td>
         </ng-container>
 
         <!-- Action Column -->
         <ng-container matColumnDef="Action">
-          <th *matHeaderCellDef mat-header-cell>Action</th>
+          <th scope="col" *matHeaderCellDef mat-header-cell>Action</th>
           <td *matCellDef="let data" mat-cell>
             <button (click)="info(data.idprob)" color="primary" mat-raised-button>Info</button>
             <button (click)="modifier(data)" class="action" color="primary" mat-raised-button>Modifier</button>

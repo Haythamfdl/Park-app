@@ -1,6 +1,6 @@
 <div *ngIf="utilisateur" class="flex-container">
   <mat-card class="flex-item mat-elevation-z2">
-    <mat-card-title><h2>Liste de toutes les Solutions de l'Utilisateur <b>{{utilisateur.nom}}</b></h2></mat-card-title>
+    <mat-card-title><h2>Liste de toutes les Solutions de l'Utilisateur <strong>{{utilisateur.nom}}</strong></h2></mat-card-title>
     <mat-card-content>
 
       <mat-form-field style="float: right">
@@ -12,26 +12,26 @@
 
         <!-- Titre Column -->
         <ng-container matColumnDef="titre">
-          <th *matHeaderCellDef mat-header-cell mat-sort-header>Titre</th>
+          <th scope="col" *matHeaderCellDef mat-header-cell mat-sort-header>Titre</th>
           <td *matCellDef="let data" mat-cell> {{data.titre}} </td>
         </ng-container>
 
         <!-- Titre Problème Column -->
         <ng-container matColumnDef="probleme">
-          <th *matHeaderCellDef mat-header-cell mat-sort-header>Titre Problème</th>
+          <th scope="col" *matHeaderCellDef mat-header-cell mat-sort-header>Titre Problème</th>
           <td *matCellDef="let data" mat-cell><a
             href="/app/problemes/info/ + {{data.probleme.idprob}}">{{data.probleme.titre}}</a></td>
         </ng-container>
 
         <!-- Date de Soumission Column -->
         <ng-container matColumnDef="datesoumission">
-          <th *matHeaderCellDef mat-header-cell mat-sort-header>Date de Soumission</th>
+          <th scope="col" *matHeaderCellDef mat-header-cell mat-sort-header>Date de Soumission</th>
           <td *matCellDef="let data" mat-cell> {{data.datesoumission | date:'dd/MM/y'}} </td>
         </ng-container>
 
         <!-- Action Column -->
         <ng-container matColumnDef="Action">
-          <th *matHeaderCellDef mat-header-cell>Action</th>
+          <th scope="col" *matHeaderCellDef mat-header-cell>Action</th>
           <td *matCellDef="let data" mat-cell>
             <button (click)="info(data.idsol)" color="primary" mat-raised-button>Info</button>
             <button (click)="modifier(data)" class="action" color="primary" mat-raised-button>Modifier</button>

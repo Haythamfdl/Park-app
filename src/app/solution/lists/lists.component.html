@@ -13,27 +13,27 @@
 
         <!-- Titre Column -->
         <ng-container matColumnDef="titre">
-          <th *matHeaderCellDef mat-header-cell mat-sort-header>Titre</th>
+          <th scope="col" *matHeaderCellDef mat-header-cell mat-sort-header>Titre</th>
           <td *matCellDef="let data" mat-cell> {{data.titre}} </td>
         </ng-container>
 
 
         <!-- Utilisateur Column -->
         <ng-container matColumnDef="utilisateur">
-          <th *matHeaderCellDef mat-header-cell mat-sort-header>Utilisateur</th>
+          <th scope="col" *matHeaderCellDef mat-header-cell mat-sort-header>Utilisateur</th>
           <td *matCellDef="let data" mat-cell><a href="/app/user/info/{{data.user.iduser}}">{{data.user.nom}}</a></td>
         </ng-container>
 
         <!-- Date de Soumission Column -->
         <ng-container matColumnDef="datesoumission">
-          <th *matHeaderCellDef mat-header-cell mat-sort-header>Date de Soumission</th>
+          <th scope="col" *matHeaderCellDef mat-header-cell mat-sort-header>Date de Soumission</th>
           <td *matCellDef="let data" mat-cell> {{data.datesoumission | date:'dd/MM/y'}} </td>
         </ng-container>
 
 
         <!-- Action Column -->
         <ng-container matColumnDef="Action">
-          <th *matHeaderCellDef mat-header-cell>Action</th>
+          <th scope="col" *matHeaderCellDef mat-header-cell>Action</th>
           <td *matCellDef="let data" mat-cell>
             <button (click)="info(data.idsol)" color="primary" mat-raised-button>Info</button>
             <button (click)="modifier(data)" class="action" color="primary" mat-raised-button>Modifier</button>

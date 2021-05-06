@@ -12,19 +12,19 @@
 
         <!-- Numéro Equipement Column -->
         <ng-container matColumnDef="numero">
-          <th *matHeaderCellDef mat-header-cell mat-sort-header>Numéro Equipement</th>
+          <th scope="col" *matHeaderCellDef mat-header-cell mat-sort-header>Numéro Equipement</th>
           <td *matCellDef="let data" mat-cell> {{data.numero}} </td>
         </ng-container>
 
         <!-- Désignation Column -->
         <ng-container matColumnDef="designation">
-          <th *matHeaderCellDef mat-header-cell mat-sort-header>Désignation</th>
+          <th scope="col" *matHeaderCellDef mat-header-cell mat-sort-header>Désignation</th>
           <td *matCellDef="let data" mat-cell> {{data.designation}} </td>
         </ng-container>
 
         <!-- Agent affecter Column -->
         <ng-container matColumnDef="agent">
-          <th *matHeaderCellDef mat-header-cell mat-sort-header>Agent affecter</th>
+          <th scope="col" *matHeaderCellDef mat-header-cell mat-sort-header>Agent affecter</th>
           <td *matCellDef="let data" mat-cell><a *ngIf="data.agent != null"
                                                  href="/app/agents/info/{{data.agent.numero}}">{{data.agent.nom}}</a><span
             *ngIf="data.agent == null">Aucun</span></td>
@@ -32,7 +32,7 @@
 
         <!-- Action Column -->
         <ng-container matColumnDef="Action">
-          <th *matHeaderCellDef mat-header-cell>Action</th>
+          <th scope="col" *matHeaderCellDef mat-header-cell>Action</th>
           <td *matCellDef="let data" mat-cell>
             <button (click)="info(data.numero)" color="primary" mat-raised-button>Info</button>
             <button (click)="modifier(data)" class="action" color="primary" mat-raised-button>Modifier</button>

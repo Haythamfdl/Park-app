@@ -1,5 +1,4 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {FormBuilder} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatDialog} from '@angular/material/dialog';
@@ -29,8 +28,7 @@ export class ListaProblemeComponent implements OnInit {
   agent: Agent;
   num;
 
-  constructor(private fb: FormBuilder,
-              private router: Router,
+  constructor(private router: Router,
               private snackBar: MatSnackBar,
               private activatedRoute: ActivatedRoute,
               public dialog: MatDialog,
