@@ -34,7 +34,7 @@ export class AjoutersComponent implements OnInit {
     } else {
       this.probleme = JSON.parse(localStorage.getItem('Probleme'));
     }
-
+    console.log(this.probleme);
     if (JSON.parse(localStorage.getItem('Utilisateur')) == null) {
       this.router.navigate(['/']).then();
     } else {

@@ -112,7 +112,6 @@ export class ModifierpComponent implements OnInit {
     } else {
       this.showre = false;
     }
-    console.log(this.myForm.value);
   }
 
   chercherAgent(num) {
@@ -140,6 +139,7 @@ export class ModifierpComponent implements OnInit {
       if (data !== null) {
         this.equipement = data;
         this.myForm.controls.equipement.setValue(this.equipement);
+        this.probleme.equipement = this.equipement;
         this.showe = true;
       } else {
         this.showe = false;

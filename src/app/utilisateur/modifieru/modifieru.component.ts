@@ -51,7 +51,7 @@ export class ModifieruComponent implements OnInit {
       if (data !== null) {
         this.user.iduser = this.usersave.iduser;
         this.user.isdeleted = false;
-        if (this.el1.nativeElement.value !== null) {
+        if (this.el1.nativeElement.value.trim() !== '') {
           this.user.pass = this.el1.nativeElement.value;
           this.user.datemodifpass = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
         }

@@ -89,6 +89,7 @@ export class ListpNrComponent implements OnInit {
 
   solution(value: any) {
     this.probleme = value;
+    localStorage.setItem('Probleme', JSON.stringify(this.probleme));
     this.router.navigate(['/app/solutions/probleme/' + this.probleme.idprob]).then();
   }
 
