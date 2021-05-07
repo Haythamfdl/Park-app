@@ -14,7 +14,7 @@
         <!-- Titre Column -->
         <ng-container matColumnDef="titre">
           <th scope="col" *matHeaderCellDef mat-header-cell mat-sort-header>Titre</th>
-          <td *matCellDef="let data" mat-cell> {{data.titre}} </td>
+          <td *matCellDef="let data" mat-cell> {{(data.titre.length>10)? (data.titre | slice:0:10)+'..':(data.titre)}}</td>
         </ng-container>
 
         <!-- Type Column -->

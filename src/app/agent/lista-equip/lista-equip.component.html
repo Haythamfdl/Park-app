@@ -20,7 +20,7 @@
         <!-- Désignation Column -->
         <ng-container matColumnDef="designation">
           <th scope="col" *matHeaderCellDef mat-header-cell mat-sort-header>Désignation</th>
-          <td *matCellDef="let data" mat-cell> {{data.designation}} </td>
+          <td *matCellDef="let data" mat-cell> {{(data.designation.length>15)? (data.designation | slice:0:15)+'..':(data.designation)}}</td>
         </ng-container>
 
         <!-- Action Column -->
