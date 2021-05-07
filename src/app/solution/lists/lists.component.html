@@ -20,7 +20,7 @@
 
         <!-- Utilisateur Column -->
         <ng-container matColumnDef="utilisateur">
-          <th scope="col" *matHeaderCellDef mat-header-cell mat-sort-header>Utilisateur</th>
+          <th scope="col" *matHeaderCellDef mat-header-cell>Utilisateur</th>
           <td *matCellDef="let data" mat-cell><a href="/app/user/info/{{data.user.iduser}}">{{data.user.nom}}</a></td>
         </ng-container>
 

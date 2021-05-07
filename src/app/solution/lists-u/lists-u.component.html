@@ -19,8 +19,7 @@
         <!-- Titre Problème Column -->
         <ng-container matColumnDef="probleme">
           <th scope="col" *matHeaderCellDef mat-header-cell mat-sort-header>Titre Problème</th>
-          <td *matCellDef="let data" mat-cell><a
-            href="/app/problemes/info/ + {{data.probleme.idprob}}">{{data.probleme.titre}}</a></td>
+          <td *matCellDef="let data" mat-cell><a href="/app/problemes/info/ + {{data.probleme.idprob}}">{{data.probleme.titre}}</a></td>
         </ng-container>
 
         <!-- Date de Soumission Column -->

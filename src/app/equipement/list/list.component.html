@@ -24,7 +24,7 @@
 
         <!-- Agent affecter Column -->
         <ng-container matColumnDef="agent">
-          <th scope="col" *matHeaderCellDef mat-header-cell mat-sort-header>Agent affecter</th>
+          <th scope="col" *matHeaderCellDef mat-header-cell>Agent affecter</th>
           <td *matCellDef="let data" mat-cell><a *ngIf="data.agent != null"
                                                  href="/app/agents/info/{{data.agent.numero}}">{{data.agent.nom}}</a><span
             *ngIf="data.agent == null">Aucun</span></td>
