@@ -15,7 +15,7 @@ export class NavbarComponent implements OnInit {
   user: Utilisateur;
   subscription: Subscription;
   nb = '0';
-  // délais entre chaque appelle 1000 = 1 seconde
+  // délais entre chaque appelle (1000 = 1 seconde)
   timer = 5000;
 
   constructor(private router: Router,
