@@ -15,7 +15,8 @@ export class NavbarComponent implements OnInit {
   user: Utilisateur;
   subscription: Subscription;
   nb = '0';
-  timer = 1000;
+  // délais entre chaque appelle 1000 = 1 seconde
+  timer = 5000;
 
   constructor(private router: Router,
               private snackBar: MatSnackBar,
