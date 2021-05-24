@@ -26,7 +26,9 @@ export class ListsUComponent implements OnInit {
   solution: Solution;
   idprob;
   utilisateur: Utilisateur;
-
+  user: Utilisateur;
+  permissionmodif = false;
+  permissionsup = false;
 
   constructor(private fb: FormBuilder,
               private router: Router,
@@ -41,7 +43,8 @@ export class ListsUComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (JSON.parse(localStorage.getItem('Utilisateur')) == null) {
+    this.user = JSON.parse(localStorage.getItem('Utilisateur'));
+    if (this.user == null) {
       this.router.navigate(['/']).then();
     }
     localStorage.removeItem('Equipement');
@@ -53,6 +56,18 @@ export class ListsUComponent implements OnInit {
       this.utilisateurService.getById(this.idprob).subscribe(data2 => {
         this.utilisateur = data2;
       });
+    });
+    this.permissionmodif = this.user.permissions.some(i => {
+      if (i.idpermission.toString() === '13') {
+        return true;
+      }
+      return false;
+    });
+    this.permissionsup = this.user.permissions.some(i => {
+      if (i.idpermission.toString() === '14') {
+        return true;
+      }
+      return false;
     });
   }
 

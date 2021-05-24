@@ -4,7 +4,7 @@
       <h2>Liste de tous les Problèmes Non Résolu soumis</h2>
     </mat-card-title>
     <mat-card-content>
-      <button (click)="ajouter()" class="mt-3" color="primary" mat-raised-button>Soumettre un Problème</button>
+      <button (click)="ajouter()" class="mt-3" color="primary" mat-raised-button [disabled]="!permissionajout">Soumettre un Problème</button>
 
       <mat-form-field style="float: right">
         <mat-label>Recherche</mat-label>
@@ -42,12 +42,12 @@
           <th scope="col" *matHeaderCellDef mat-header-cell>Action</th>
           <td *matCellDef="let data" mat-cell>
             <button (click)="info(data.idprob)" color="primary" mat-raised-button>Info</button>
-            <button (click)="modifier(data)" class="action" color="primary" mat-raised-button>Modifier</button>
+            <button (click)="modifier(data)" class="action" color="primary" mat-raised-button [disabled]="!permissionmodif">Modifier</button>
             <button (click)="solution(data)" class="action" color="primary" mat-raised-button>Voir Solution</button>
-            <button (click)="resolu(data)" *ngIf="!data.resolu" class="action" color="primary" mat-raised-button>
+            <button (click)="resolu(data)" *ngIf="!data.resolu" class="action" color="primary" mat-raised-button [disabled]="!permissionresou">
               Résolu
             </button>
-            <button (click)="openDialog(data)" class="action" color="warn" mat-raised-button>Supprimer</button>
+            <button (click)="openDialog(data)" class="action" color="warn" mat-raised-button [disabled]="!permissionsup">Supprimer</button>
           </td>
         </ng-container>
 

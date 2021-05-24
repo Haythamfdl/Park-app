@@ -9,6 +9,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {ComfirmDialogComponent} from '../../comfirm-dialog/comfirm-dialog.component';
 import {AgentService} from '../../_services/agent.service';
 import {Agent} from '../../_model/agent';
+import {Utilisateur} from '../../_model/utilisateur';
 
 @Component({
   selector: 'app-lista',
@@ -23,7 +24,10 @@ export class ListaComponent implements OnInit {
   displayedColumns: string[] = ['numero', 'nom', 'departement', 'Action'];
   dataSource;
   agent: Agent;
-
+  user: Utilisateur;
+  permissionajout = false;
+  permissionmodif = false;
+  permissionsup = false;
 
   constructor(private fb: FormBuilder,
               private router: Router,
@@ -33,7 +37,8 @@ export class ListaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (JSON.parse(localStorage.getItem('Utilisateur')) == null) {
+    this.user = JSON.parse(localStorage.getItem('Utilisateur'));
+    if (this.user == null) {
       this.router.navigate(['/']).then();
     }
     localStorage.removeItem('Equipement');
@@ -43,6 +48,27 @@ export class ListaComponent implements OnInit {
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
     });
+    this.permissionajout = this.user.permissions.some(i => {
+      if (i.idpermission.toString() === '5') {
+        return true;
+      }
+      return false;
+    });
+    this.permissionmodif = this.user.permissions.some(i => {
+      if (i.idpermission.toString() === '6') {
+        return true;
+      }
+      return false;
+    });
+    this.permissionsup = this.user.permissions.some(i => {
+      if (i.idpermission.toString() === '7') {
+        return true;
+      }
+      return false;
+    });
+    console.log(this.permissionajout);
+    console.log(this.permissionmodif);
+    console.log(this.permissionsup);
   }
 
   openSnackBar(message: string, action: string) {

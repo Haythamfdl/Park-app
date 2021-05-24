@@ -9,6 +9,7 @@ import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import {ComfirmDialogComponent} from '../../comfirm-dialog/comfirm-dialog.component';
+import {Utilisateur} from '../../_model/utilisateur';
 
 @Component({
   selector: 'app-listp-nr',
@@ -23,7 +24,11 @@ export class ListpNrComponent implements OnInit {
   displayedColumns: string[] = ['titre', 'type', 'agent', 'datesoumission', 'Action'];
   dataSource;
   probleme: Probleme;
-
+  user: Utilisateur;
+  permissionajout = false;
+  permissionmodif = false;
+  permissionsup = false;
+  permissionresou = false;
 
   constructor(private fb: FormBuilder,
               private router: Router,
@@ -33,7 +38,8 @@ export class ListpNrComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (JSON.parse(localStorage.getItem('Utilisateur')) == null) {
+    this.user = JSON.parse(localStorage.getItem('Utilisateur'));
+    if (this.user == null) {
       this.router.navigate(['/']).then();
     }
     localStorage.removeItem('Equipement');
@@ -42,6 +48,30 @@ export class ListpNrComponent implements OnInit {
       this.dataSource = new MatTableDataSource<Probleme>(data);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
+    });
+    this.permissionajout = this.user.permissions.some(i => {
+      if (i.idpermission.toString() === '8') {
+        return true;
+      }
+      return false;
+    });
+    this.permissionmodif = this.user.permissions.some(i => {
+      if (i.idpermission.toString() === '9') {
+        return true;
+      }
+      return false;
+    });
+    this.permissionsup = this.user.permissions.some(i => {
+      if (i.idpermission.toString() === '10') {
+        return true;
+      }
+      return false;
+    });
+    this.permissionresou = this.user.permissions.some(i => {
+      if (i.idpermission.toString() === '11') {
+        return true;
+      }
+      return false;
     });
   }
 

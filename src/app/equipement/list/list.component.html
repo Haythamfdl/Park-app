@@ -2,7 +2,7 @@
   <mat-card class="flex-item mat-elevation-z8">
     <mat-card-title><h2>Liste des équipements</h2></mat-card-title>
     <mat-card-content>
-      <button (click)="ajouter()" class="mt-3" color="primary" mat-raised-button>Ajouter un Equipement</button>
+      <button (click)="ajouter()" class="mt-3" color="primary" mat-raised-button [disabled]="!permissionajout">Ajouter un Equipement</button>
       <mat-form-field style="float: right">
         <mat-label>Recherche</mat-label>
         <input (keyup)="applyFilter($event)" matInput placeholder="Recherche">
@@ -35,14 +35,14 @@
           <th scope="col" *matHeaderCellDef mat-header-cell>Action</th>
           <td *matCellDef="let data" mat-cell>
             <button (click)="info(data.numero)" color="primary" mat-raised-button>Info</button>
-            <button (click)="modifier(data)" class="action" color="primary" mat-raised-button>Modifier</button>
+            <button (click)="modifier(data)" class="action" color="primary" mat-raised-button [disabled]="!permissionmodif">Modifier</button>
             <button (click)="affecter(data)" *ngIf="data.agent == null" class="action" color="primary"
-                    mat-raised-button>Affecter a un Agent
+                    mat-raised-button [disabled]="!permissionaffect">Affecter a un Agent
             </button>
             <button (click)="desaffecter(data)" *ngIf="data.agent !== null" class="action" color="primary"
-                    mat-raised-button>Enlever Affectation
+                    mat-raised-button [disabled]="!permissionaffect">Enlever Affectation
             </button>
-            <button (click)="openDialog(data)" class="action" color="warn" mat-raised-button>Supprimer</button>
+            <button (click)="openDialog(data)" class="action" color="warn" mat-raised-button [disabled]="!permissionsup">Supprimer</button>
           </td>
         </ng-container>
 

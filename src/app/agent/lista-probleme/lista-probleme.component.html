@@ -45,9 +45,9 @@
           <th scope="col" *matHeaderCellDef mat-header-cell>Action</th>
           <td *matCellDef="let data" mat-cell>
             <button (click)="info(data.idprob)" color="primary" mat-raised-button>Info</button>
-            <button (click)="modifier(data)" class="action" color="primary" mat-raised-button>Modifier</button>
+            <button (click)="modifier(data)" class="action" color="primary" mat-raised-button [disabled]="!permissionmodif">Modifier</button>
             <button (click)="solution(data)" class="action" color="primary" mat-raised-button>Voir Solution</button>
-            <button (click)="openDialog(data)" class="action" color="warn" mat-raised-button>Supprimer</button>
+            <button (click)="openDialog(data)" class="action" color="warn" mat-raised-button [disabled]="!permissionsup">Supprimer</button>
           </td>
         </ng-container>
 

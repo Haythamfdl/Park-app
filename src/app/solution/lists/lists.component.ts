@@ -9,6 +9,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {ComfirmDialogComponent} from '../../comfirm-dialog/comfirm-dialog.component';
 import {SolutionService} from '../../_services/solution.service';
 import {Solution} from '../../_model/solution';
+import {Utilisateur} from '../../_model/utilisateur';
 
 @Component({
   selector: 'app-lists',
@@ -23,6 +24,10 @@ export class ListsComponent implements OnInit {
   dataSource;
   solution: Solution;
   idprob;
+  user: Utilisateur;
+  permissionajout = false;
+  permissionmodif = false;
+  permissionsup = false;
 
   constructor(private fb: FormBuilder,
               private router: Router,
@@ -36,7 +41,8 @@ export class ListsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (JSON.parse(localStorage.getItem('Utilisateur')) == null) {
+    this.user = JSON.parse(localStorage.getItem('Utilisateur'));
+    if (this.user == null) {
       this.router.navigate(['/']).then();
     }
     localStorage.removeItem('Equipement');
@@ -45,6 +51,24 @@ export class ListsComponent implements OnInit {
       this.dataSource = new MatTableDataSource<Solution>(data);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
+    });
+    this.permissionajout = this.user.permissions.some(i => {
+      if (i.idpermission.toString() === '12') {
+        return true;
+      }
+      return false;
+    });
+    this.permissionmodif = this.user.permissions.some(i => {
+      if (i.idpermission.toString() === '13') {
+        return true;
+      }
+      return false;
+    });
+    this.permissionsup = this.user.permissions.some(i => {
+      if (i.idpermission.toString() === '14') {
+        return true;
+      }
+      return false;
     });
   }
 

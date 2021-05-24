@@ -4,6 +4,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {Utilisateur} from '../_model/utilisateur';
 import {interval, Subscription} from 'rxjs';
 import {MessageService} from '../_services/message.service';
+import {UtilisateurService} from '../_services/utilisateur.service';
 
 @Component({
   selector: 'app-navbar',
@@ -20,10 +21,16 @@ export class NavbarComponent implements OnInit {
 
   constructor(private router: Router,
               private snackBar: MatSnackBar,
+              private utilisateurService: UtilisateurService,
               private messageService: MessageService) {
     this.subscription = interval(this.timer).subscribe((func => {
       this.messageService.getAllMessagesOuvertCount(this.user.iduser, false).subscribe(data => {
         this.nb = data;
+        this.utilisateurService.getById(this.user.iduser).subscribe(datau => {
+          this.user = datau;
+          localStorage.setItem('Utilisateur', JSON.stringify(this.user));
+          console.log(this.user);
+        });
       });
     }));
   }

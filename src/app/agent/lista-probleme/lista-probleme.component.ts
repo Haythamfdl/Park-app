@@ -11,6 +11,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {ComfirmDialogComponent} from '../../comfirm-dialog/comfirm-dialog.component';
 import {Agent} from '../../_model/agent';
 import {AgentService} from '../../_services/agent.service';
+import {Utilisateur} from '../../_model/utilisateur';
 
 @Component({
   selector: 'app-lista-probleme',
@@ -27,6 +28,9 @@ export class ListaProblemeComponent implements OnInit {
   probleme: Probleme;
   agent: Agent;
   num;
+  user: Utilisateur;
+  permissionmodif = false;
+  permissionsup = false;
 
   constructor(private router: Router,
               private snackBar: MatSnackBar,
@@ -42,7 +46,8 @@ export class ListaProblemeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (JSON.parse(localStorage.getItem('Utilisateur')) == null) {
+    this.user = JSON.parse(localStorage.getItem('Utilisateur'));
+    if (this.user == null) {
       this.router.navigate(['/']).then();
     }
     localStorage.removeItem('Equipement');
@@ -59,6 +64,18 @@ export class ListaProblemeComponent implements OnInit {
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
       });
+    });
+    this.permissionmodif = this.user.permissions.some(i => {
+      if (i.idpermission.toString() === '9') {
+        return true;
+      }
+      return false;
+    });
+    this.permissionsup = this.user.permissions.some(i => {
+      if (i.idpermission.toString() === '10') {
+        return true;
+      }
+      return false;
     });
   }
 

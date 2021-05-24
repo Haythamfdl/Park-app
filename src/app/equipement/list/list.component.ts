@@ -9,6 +9,8 @@ import {MatTableDataSource} from '@angular/material/table';
 import {Equipement} from '../../_model/equipement';
 import {ComfirmDialogComponent} from '../../comfirm-dialog/comfirm-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
+import {Utilisateur} from '../../_model/utilisateur';
+import {Permission} from '../../_model/permission';
 
 
 @Component({
@@ -24,7 +26,11 @@ export class ListComponent implements OnInit {
   displayedColumns: string[] = ['numero', 'designation', 'agent', 'Action'];
   dataSource;
   equipement: Equipement;
-
+  user: Utilisateur;
+  permissionajout = false;
+  permissionmodif = false;
+  permissionsup = false;
+  permissionaffect = false;
 
   constructor(private fb: FormBuilder,
               private router: Router,
@@ -34,7 +40,8 @@ export class ListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (JSON.parse(localStorage.getItem('Utilisateur')) == null) {
+    this.user = JSON.parse(localStorage.getItem('Utilisateur'));
+    if (this.user == null) {
       this.router.navigate(['/']).then();
     }
     localStorage.removeItem('Equipement');
@@ -42,6 +49,30 @@ export class ListComponent implements OnInit {
       this.dataSource = new MatTableDataSource<Equipement>(data);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
+    });
+    this.permissionajout = this.user.permissions.some(i => {
+      if (i.idpermission.toString() === '1') {
+        return true;
+      }
+      return false;
+    });
+    this.permissionmodif = this.user.permissions.some(i => {
+      if (i.idpermission.toString() === '2') {
+        return true;
+      }
+      return false;
+      });
+    this.permissionsup = this.user.permissions.some(i => {
+      if (i.idpermission.toString() === '3') {
+        return true;
+      }
+      return false;
+    });
+    this.permissionaffect = this.user.permissions.some(i => {
+      if (i.idpermission.toString() === '4') {
+        return true;
+      }
+      return false;
     });
   }
 
