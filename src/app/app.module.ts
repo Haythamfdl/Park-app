@@ -60,6 +60,7 @@ import {ListmLComponent} from './message/listm-l/listm-l.component';
 import {ListmNlComponent} from './message/listm-nl/listm-nl.component';
 import {EnvoyermComponent} from './message/envoyerm/envoyerm.component';
 import {InfomComponent} from './message/infom/infom.component';
+import {AjouteruComponent} from './utilisateur/ajouteru/ajouteru.component';
 
 @NgModule({
   declarations: [
@@ -99,6 +100,7 @@ import {InfomComponent} from './message/infom/infom.component';
     ListmNlComponent,
     EnvoyermComponent,
     InfomComponent,
+    AjouteruComponent,
   ],
   imports: [
     BrowserModule,

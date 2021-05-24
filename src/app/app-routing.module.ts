@@ -35,6 +35,7 @@ import {ListmLComponent} from './message/listm-l/listm-l.component';
 import {ListmNlComponent} from './message/listm-nl/listm-nl.component';
 import {EnvoyermComponent} from './message/envoyerm/envoyerm.component';
 import {InfomComponent} from './message/infom/infom.component';
+import {AjouteruComponent} from './utilisateur/ajouteru/ajouteru.component';
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
@@ -69,6 +70,7 @@ const routes: Routes = [
       {path: 'solutions/info/:id', component: InfosComponent},
       {path: 'solutions/user/:id', component: ListsUComponent},
       {path: 'user/info/:id', component: InfouComponent},
+      {path: 'user/ajout', component: AjouteruComponent},
       {path: 'myprofile', component: ModifieruComponent},
       {
         path: 'messages', component: ListmMenuComponent, children: [

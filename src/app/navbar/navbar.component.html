@@ -26,6 +26,12 @@
           <a class="nav-link waves-light" href="/app/problemes" mdbWavesEffect>Gestion Problèmes</a>
         </li>
       </ul>
+
+      <ul class="navbar-nav" *ngIf="permissionajout">
+        <li class="nav-item">
+          <a class="nav-link waves-light" href="/app/user/ajout" mdbWavesEffect>Enregistrement d'Utilisateur</a>
+        </li>
+      </ul>
       <!-- Links -->
 
       <ul class="navbar-nav ml-auto nav-flex-icons">

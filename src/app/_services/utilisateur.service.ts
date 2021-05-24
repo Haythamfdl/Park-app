@@ -28,6 +28,10 @@ export class UtilisateurService {
     return this.http.get<Utilisateur>(this.url + '/' + email);
   }
 
+  public save(utilisateur: Utilisateur): Observable<any> {
+    return this.http.post(this.url, utilisateur, this.httpOptions);
+  }
+
   public update(utilisateur: Utilisateur): Observable<any> {
     return this.http.put(this.url, utilisateur, this.httpOptions);
   }

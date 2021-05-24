@@ -18,6 +18,7 @@ export class NavbarComponent implements OnInit {
   nb = '0';
   // délais entre chaque appelle (1000 = 1 seconde)
   timer = 5000;
+  permissionajout = false;
 
   constructor(private router: Router,
               private snackBar: MatSnackBar,
@@ -29,7 +30,6 @@ export class NavbarComponent implements OnInit {
         this.utilisateurService.getById(this.user.iduser).subscribe(datau => {
           this.user = datau;
           localStorage.setItem('Utilisateur', JSON.stringify(this.user));
-          console.log(this.user);
         });
       });
     }));
@@ -43,8 +43,13 @@ export class NavbarComponent implements OnInit {
     this.messageService.getAllMessagesOuvertCount(this.user.iduser, false).subscribe(data => {
       this.nb = data;
     });
+    this.permissionajout = this.user.permissions.some(i => {
+      if (i.idpermission.toString() === '15') {
+        return true;
+      }
+      return false;
+    });
   }
-
 
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
