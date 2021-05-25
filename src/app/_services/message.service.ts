@@ -34,7 +34,7 @@ export class MessageService {
   }
 
   public getMessageCount(id: string, ouver): Observable<string> {
-    this.utilisateurService.refreshToken(this.token.refreshtoken).subscribe(ntoken => {
+    this.utilisateurService.refreshToken().subscribe(ntoken => {
       this.token = ntoken;
       this.httpOptions = {
         headers: new HttpHeaders({'Content-Type': 'application/json', 'Authorization': `Bearer ` + this.token.accesstoken})

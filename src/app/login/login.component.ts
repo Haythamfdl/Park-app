@@ -50,8 +50,14 @@ export class LoginComponent implements OnInit {
     this.user = myForm.value;
     this.utilisateurService.authentification(this.user.email, this.user.pass).subscribe( token => {
       this.token = token;
+      localStorage.setItem('Token', JSON.stringify(this.token));
       this.alert();
-    });
+    },
+      error => {
+        this.user = new Utilisateur();
+        this.openSnackBar('Email ou mots de passe incorrecte', '');
+        localStorage.removeItem('Utilisateur');
+      });
   }
 
   openSnackBar(message: string, action: string) {
@@ -62,20 +68,13 @@ export class LoginComponent implements OnInit {
   }
 
   alert() {
-    if (this.token == null) {
-      this.user = new Utilisateur();
-      this.openSnackBar('Email ou mots de passe incorrecte', '');
-      localStorage.removeItem('Utilisateur');
-    } else {
-        this.utilisateurService.getByEmail(this.user.email).subscribe( data => {
-          this.user = data;
-          localStorage.setItem('Token', JSON.stringify(this.token));
-          localStorage.setItem('Utilisateur', JSON.stringify(this.user));
-          console.log(this.token);
-          this.openSnackBar('Vous êtes connecter', '');
-          this.router.navigate(['/app']).then();
-        });
-    }
+    this.utilisateurService.getByEmail(this.user.email).subscribe( data => {
+      this.user = data;
+      localStorage.setItem('Utilisateur', JSON.stringify(this.user));
+      console.log(this.token);
+      this.openSnackBar('Vous êtes connecter', '');
+      this.router.navigate(['/app']).then();
+    });
   }
 
 }

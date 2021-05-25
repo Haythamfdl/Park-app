@@ -30,9 +30,6 @@ export class NavbarComponent implements OnInit {
               private messageService: MessageService) {
     this.token = JSON.parse(localStorage.getItem('Token'));
     this.subscription = interval(this.timer).subscribe((func => {
-      this.utilisateurService.refreshToken(this.token.refreshtoken).subscribe(ntoken => {
-        console.log('refresh' + ntoken);
-      });
       /*this.messageService.getMessageCount(this.user.iduser, false).subscribe(data => {
         this.nb = data;
         this.utilisateurService.getById(this.user.iduser).subscribe(datau => {
@@ -57,6 +54,10 @@ export class NavbarComponent implements OnInit {
         return true;
       }
       return false;
+    });
+    this.utilisateurService.refreshToken().subscribe(ntoken => {
+      this.token = ntoken;
+      console.log(this.token);
     });
   }
 

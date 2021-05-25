@@ -9,10 +9,8 @@ import {map} from 'rxjs/operators';
   providedIn: 'root'
 })
 export class UtilisateurService {
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type':  'application/x-www-form-urlencoded'
-    })};
+  token: Tokens;
+  httpOptions;
   private readonly urlauth: string;
   private readonly url: string;
 
@@ -32,11 +30,12 @@ export class UtilisateurService {
     return this.http.post(this.urlauth, body);
   }
 
-  public refreshToken(refreshtoken: string): Observable<any> {
+  public refreshToken(): Observable<Tokens> {
+    this.token = JSON.parse(localStorage.getItem('Token'));
     const httpOptionsRefresh = {
-      headers: new HttpHeaders({'content-type': 'application/json', 'authorization': `Bearer ` + refreshtoken})
+      headers: new HttpHeaders({'content-type': 'application/json', authorization: `Bearer ` + this.token.refreshtoken})
     };
-    return this.http.get(this.url + '/refreshToken', httpOptionsRefresh);
+    return this.http.get<Tokens>(this.url + '/refreshToken', httpOptionsRefresh);
   }
 
   public login(email: string, pass: string): Observable<Utilisateur> {
@@ -44,14 +43,23 @@ export class UtilisateurService {
   }
 
   public getByEmail(email: string): Observable<Utilisateur> {
+
     return this.http.get<Utilisateur>(this.url + '/' + email);
   }
 
   public save(utilisateur: Utilisateur): Observable<any> {
+    this.token = JSON.parse(localStorage.getItem('Token'));
+    this.httpOptions = {
+      headers: new HttpHeaders({'content-type': 'application/json', authorization: `Bearer ` + this.token.accesstoken})
+    };
     return this.http.post(this.url, utilisateur, this.httpOptions);
   }
 
   public update(utilisateur: Utilisateur): Observable<any> {
+    this.token = JSON.parse(localStorage.getItem('Token'));
+    this.httpOptions = {
+      headers: new HttpHeaders({'content-type': 'application/json', authorization: `Bearer ` + this.token.accesstoken})
+    };
     return this.http.put(this.url, utilisateur, this.httpOptions);
   }
 }

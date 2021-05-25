@@ -49,10 +49,9 @@ export class ModifieruComponent implements OnInit {
 
   submit(myForm) {
     this.user = myForm.value;
-    this.utilisateurService.authentification(this.usersave.email, this.user.pass).subscribe(token => {
-      if (token !== null) {
-        this.token = token;
+    this.utilisateurService.authentification(this.usersave.email, this.user.pass).subscribe(data => {
         this.user.iduser = this.usersave.iduser;
+        this.user.permissions = this.usersave.permissions;
         this.user.isdeleted = false;
         if (this.el1.nativeElement.value.trim() !== '') {
           this.user.pass = this.el1.nativeElement.value;
@@ -60,10 +59,10 @@ export class ModifieruComponent implements OnInit {
         }
         console.log(this.user);
         this.openDialog();
-      } else {
+    },
+      error => {
         this.openSnackBar('Mot de passe est incorrect !', '');
-      }
-    });
+      });
   }
 
   openDialog() {
@@ -91,6 +90,7 @@ export class ModifieruComponent implements OnInit {
       tel: [this.user.tel, [Validators.required]],
       pass: [this.user.pass, [Validators.required]],
       datemodifpass: [this.user.datemodifpass],
+      permissions: [this.user.permissions],
       isdeleted: [this.user.isdeleted]
     });
   }
