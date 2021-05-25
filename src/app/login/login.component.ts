@@ -4,6 +4,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Utilisateur} from '../_model/utilisateur';
 import {UtilisateurService} from '../_services/utilisateur.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {Tokens} from '../_model/tokens';
 
 @Component({
   selector: 'app-login',
@@ -14,6 +15,7 @@ export class LoginComponent implements OnInit {
   myForm: FormGroup;
   hide = true;
   user: Utilisateur;
+  token: Tokens;
 
   constructor(private fb: FormBuilder,
               private router: Router,
@@ -46,8 +48,8 @@ export class LoginComponent implements OnInit {
 
   submit(myForm) {
     this.user = myForm.value;
-    this.utilisateurService.login(this.user.email, this.user.pass).subscribe(data => {
-      this.user = data;
+    this.utilisateurService.authentification(this.user.email, this.user.pass).subscribe( token => {
+      this.token = token;
       this.alert();
     });
   }
@@ -60,14 +62,19 @@ export class LoginComponent implements OnInit {
   }
 
   alert() {
-    if (this.user == null) {
+    if (this.token == null) {
       this.user = new Utilisateur();
       this.openSnackBar('Email ou mots de passe incorrecte', '');
       localStorage.removeItem('Utilisateur');
     } else {
-      localStorage.setItem('Utilisateur', JSON.stringify(this.user));
-      this.openSnackBar('Vous êtes connecter', '');
-      this.router.navigate(['/app']).then();
+        this.utilisateurService.getByEmail(this.user.email).subscribe( data => {
+          this.user = data;
+          localStorage.setItem('Token', JSON.stringify(this.token));
+          localStorage.setItem('Utilisateur', JSON.stringify(this.user));
+          console.log(this.token);
+          this.openSnackBar('Vous êtes connecter', '');
+          this.router.navigate(['/app']).then();
+        });
     }
   }
 

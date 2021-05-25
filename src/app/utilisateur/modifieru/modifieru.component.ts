@@ -7,6 +7,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {UtilisateurService} from '../../_services/utilisateur.service';
 import {DatePipe} from '@angular/common';
 import {ComfirmDialogComponent} from '../../comfirm-dialog/comfirm-dialog.component';
+import {Tokens} from '../../_model/tokens';
 
 @Component({
   selector: 'app-modifieru',
@@ -19,6 +20,7 @@ export class ModifieruComponent implements OnInit {
   myForm: FormGroup;
   user: Utilisateur;
   usersave: Utilisateur;
+  token: Tokens;
 
   constructor(private fb: FormBuilder,
               private router: Router,
@@ -47,8 +49,9 @@ export class ModifieruComponent implements OnInit {
 
   submit(myForm) {
     this.user = myForm.value;
-    this.utilisateurService.login(this.usersave.email, this.user.pass).subscribe(data => {
-      if (data !== null) {
+    this.utilisateurService.authentification(this.usersave.email, this.user.pass).subscribe(token => {
+      if (token !== null) {
+        this.token = token;
         this.user.iduser = this.usersave.iduser;
         this.user.isdeleted = false;
         if (this.el1.nativeElement.value.trim() !== '') {

@@ -3,14 +3,16 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Probleme} from '../_model/probleme';
 import {Agent} from '../_model/agent';
+import {Tokens} from '../_model/tokens';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProblemeService {
+  token: Tokens = JSON.parse(localStorage.getItem('Token'));
   httpOptions = {
-    headers: new HttpHeaders({'Content-Type': 'application/json'})
+    headers: new HttpHeaders({'Content-Type': 'application/json', 'Authorization': `Bearer ` + this.token.accesstoken})
   };
   private readonly url: string;
 
@@ -19,19 +21,19 @@ export class ProblemeService {
   }
 
   public getAllProblemes(): Observable<Probleme[]> {
-    return this.http.get<Probleme[]>(this.url);
+    return this.http.get<Probleme[]>(this.url, this.httpOptions);
   }
 
   public getProblemesAgent(agent: Agent): Observable<Probleme[]> {
-    return this.http.get<Probleme[]>(this.url + '/agent/' + agent.idagent);
+    return this.http.get<Probleme[]>(this.url + '/agent/' + agent.idagent, this.httpOptions);
   }
 
   public getProblemesResolu(resolu): Observable<Probleme[]> {
-    return this.http.get<Probleme[]>(this.url + '/resolu/' + resolu);
+    return this.http.get<Probleme[]>(this.url + '/resolu/' + resolu, this.httpOptions);
   }
 
   public getProbleme(id: string): Observable<Probleme> {
-    return this.http.get<Probleme>(this.url + '/' + id);
+    return this.http.get<Probleme>(this.url + '/' + id, this.httpOptions);
   }
 
   public save(probleme: Probleme): Observable<any> {

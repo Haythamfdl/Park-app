@@ -2,13 +2,15 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Permission} from '../_model/permission';
+import {Tokens} from '../_model/tokens';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PermissionService {
+  token: Tokens = JSON.parse(localStorage.getItem('Token'));
   httpOptions = {
-    headers: new HttpHeaders({'content-type': 'application/json'})
+    headers: new HttpHeaders({'Content-Type': 'application/json', 'Authorization': `Bearer ` + this.token.accesstoken})
   };
   private readonly url: string;
 
@@ -17,6 +19,6 @@ export class PermissionService {
   }
 
   public getAllPermissions(): Observable<Permission[]> {
-    return this.http.get<Permission[]>(this.url);
+    return this.http.get<Permission[]>(this.url, this.httpOptions);
   }
 }
