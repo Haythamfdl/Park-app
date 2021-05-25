@@ -19,22 +19,42 @@ export class SolutionService {
   }
 
   public getSolutionsProblem(id): Observable<Solution[]> {
-    return this.http.get<Solution[]>(this.url + '/problem/' + id, this.httpOptions);
+    this.token = JSON.parse(localStorage.getItem('Token'));
+    const httpOptions = {
+      headers: new HttpHeaders({authorization: `Bearer ` + this.token.accesstoken})
+    };
+    return this.http.get<Solution[]>(this.url + '/problem/' + id, httpOptions);
   }
 
   public getSolutionsUtilisateur(id): Observable<Solution[]> {
-    return this.http.get<Solution[]>(this.url + '/user/' + id, this.httpOptions);
+    this.token = JSON.parse(localStorage.getItem('Token'));
+    const httpOptions = {
+      headers: new HttpHeaders({authorization: `Bearer ` + this.token.accesstoken})
+    };
+    return this.http.get<Solution[]>(this.url + '/user/' + id, httpOptions);
   }
 
   public getSolution(id): Observable<Solution> {
-    return this.http.get<Solution>(this.url + '/' + id, this.httpOptions);
+    this.token = JSON.parse(localStorage.getItem('Token'));
+    const httpOptions = {
+      headers: new HttpHeaders({authorization: `Bearer ` + this.token.accesstoken})
+    };
+    return this.http.get<Solution>(this.url + '/' + id, httpOptions);
   }
 
   public save(solution: Solution): Observable<any> {
-    return this.http.post(this.url, solution, this.httpOptions);
+    this.token = JSON.parse(localStorage.getItem('Token'));
+    const httpOptions = {
+      headers: new HttpHeaders({authorization: `Bearer ` + this.token.accesstoken})
+    };
+    return this.http.post(this.url, solution, httpOptions);
   }
 
   public update(solution: Solution): Observable<any> {
-    return this.http.post(this.url, solution, this.httpOptions);
+    this.token = JSON.parse(localStorage.getItem('Token'));
+    const httpOptions = {
+      headers: new HttpHeaders({authorization: `Bearer ` + this.token.accesstoken})
+    };
+    return this.http.post(this.url, solution, httpOptions);
   }
 }

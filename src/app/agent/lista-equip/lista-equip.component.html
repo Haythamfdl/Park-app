@@ -2,7 +2,9 @@
   <mat-card *ngIf="agent" class="flex-item mat-elevation-z8">
     <mat-card-title><h2>Liste des équipements affecter à l'agent <strong>{{agent.nom}}</strong></h2></mat-card-title>
     <mat-card-content>
-      <button (click)="affecter()" class="mt-3" color="primary" mat-raised-button [disabled]="!permissionaffect">Affecter un Equipement</button>
+      <button (click)="affecter()" [disabled]="!permissionaffect" class="mt-3" color="primary" mat-raised-button>
+        Affecter un Equipement
+      </button>
 
       <mat-form-field style="float: right">
         <mat-label>Recherche</mat-label>
@@ -13,25 +15,31 @@
 
         <!-- Numéro Equipement Column -->
         <ng-container matColumnDef="numero">
-          <th scope="col" *matHeaderCellDef mat-header-cell mat-sort-header>Numéro Equipement</th>
+          <th *matHeaderCellDef mat-header-cell mat-sort-header scope="col">Numéro Equipement</th>
           <td *matCellDef="let data" mat-cell> {{data.numero}} </td>
         </ng-container>
 
         <!-- Désignation Column -->
         <ng-container matColumnDef="designation">
-          <th scope="col" *matHeaderCellDef mat-header-cell mat-sort-header>Désignation</th>
-          <td *matCellDef="let data" mat-cell> {{(data.designation.length>15)? (data.designation | slice:0:15)+'..':(data.designation)}}</td>
+          <th *matHeaderCellDef mat-header-cell mat-sort-header scope="col">Désignation</th>
+          <td *matCellDef="let data"
+              mat-cell> {{(data.designation.length > 15) ? (data.designation | slice:0:15) + '..' : (data.designation)}}</td>
         </ng-container>
 
         <!-- Action Column -->
         <ng-container matColumnDef="Action">
-          <th scope="col" *matHeaderCellDef mat-header-cell>Action</th>
+          <th *matHeaderCellDef mat-header-cell scope="col">Action</th>
           <td *matCellDef="let data" mat-cell>
             <button (click)="info(data.numero)" color="primary" mat-raised-button>Info</button>
-            <button (click)="modifier(data)" class="action" color="primary" mat-raised-button [disabled]="!permissionmodif">Modifier</button>
-            <button (click)="desaffecter(data)" class="action" color="primary" mat-raised-button [disabled]="!permissionaffect">Enlever Affectation
+            <button (click)="modifier(data)" [disabled]="!permissionmodif" class="action" color="primary"
+                    mat-raised-button>Modifier
             </button>
-            <button (click)="openDialog(data)" class="action" color="warn" mat-raised-button [disabled]="!permissionsup">Supprimer</button>
+            <button (click)="desaffecter(data)" [disabled]="!permissionaffect" class="action" color="primary"
+                    mat-raised-button>Enlever Affectation
+            </button>
+            <button (click)="openDialog(data)" [disabled]="!permissionsup" class="action" color="warn"
+                    mat-raised-button>Supprimer
+            </button>
           </td>
         </ng-container>
 

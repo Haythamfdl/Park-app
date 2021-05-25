@@ -8,10 +8,7 @@ import {Tokens} from '../_model/tokens';
   providedIn: 'root'
 })
 export class AgentService {
-  token: Tokens = JSON.parse(localStorage.getItem('Token'));
-  httpOptions = {
-    headers: new HttpHeaders({authorization: `Bearer ` + this.token.accesstoken})
-  };
+
   private readonly url: string;
 
   constructor(private http: HttpClient) {
@@ -19,18 +16,34 @@ export class AgentService {
   }
 
   public getAllAgent(): Observable<Agent[]> {
-    return this.http.get<Agent[]>(this.url, this.httpOptions);
+    const token: Tokens = JSON.parse(localStorage.getItem('Token'));
+    const httpOptions = {
+      headers: new HttpHeaders({authorization: `Bearer ` + token.accesstoken})
+    };
+    return this.http.get<Agent[]>(this.url, httpOptions);
   }
 
   public getAgentbyNum(num: string): Observable<Agent> {
-    return this.http.get<Agent>(this.url + '/' + num, this.httpOptions);
+    const token: Tokens = JSON.parse(localStorage.getItem('Token'));
+    const httpOptions = {
+      headers: new HttpHeaders({authorization: `Bearer ` + token.accesstoken})
+    };
+    return this.http.get<Agent>(this.url + '/' + num, httpOptions);
   }
 
   public save(agent: Agent): Observable<any> {
-    return this.http.post(this.url, agent, this.httpOptions);
+    const token: Tokens = JSON.parse(localStorage.getItem('Token'));
+    const httpOptions = {
+      headers: new HttpHeaders({authorization: `Bearer ` + token.accesstoken})
+    };
+    return this.http.post(this.url, agent, httpOptions);
   }
 
   public update(agent: Agent): Observable<any> {
-    return this.http.post(this.url, agent, this.httpOptions);
+    const token: Tokens = JSON.parse(localStorage.getItem('Token'));
+    const httpOptions = {
+      headers: new HttpHeaders({authorization: `Bearer ` + token.accesstoken})
+    };
+    return this.http.post(this.url, agent, httpOptions);
   }
 }

@@ -12,27 +12,28 @@
 
         <!-- Expéditeur Column -->
         <ng-container matColumnDef="user">
-          <th scope="col" *matHeaderCellDef mat-header-cell mat-sort-header>Expéditeur</th>
+          <th *matHeaderCellDef mat-header-cell mat-sort-header scope="col">Expéditeur</th>
           <td *matCellDef="let data" mat-cell><a
             href="/app/user/info/{{data.envoyeur.iduser}}">{{data.envoyeur.nom}}</a></td>
         </ng-container>
 
         <!-- Sujet Column -->
         <ng-container matColumnDef="sujet">
-          <th scope="col" *matHeaderCellDef mat-header-cell mat-sort-header>Sujet</th>
-          <td *matCellDef="let data" class="col" mat-cell> {{(data.sujet.length>10)? (data.sujet | slice:0:10)+'..':(data.sujet)}} </td>
+          <th *matHeaderCellDef mat-header-cell mat-sort-header scope="col">Sujet</th>
+          <td *matCellDef="let data" class="col"
+              mat-cell> {{(data.sujet.length > 10) ? (data.sujet | slice:0:10) + '..' : (data.sujet)}} </td>
         </ng-container>
 
 
         <!-- Date de Soumission Column -->
         <ng-container matColumnDef="dateenvoie">
-          <th scope="col" *matHeaderCellDef mat-header-cell mat-sort-header>Date de Réception</th>
+          <th *matHeaderCellDef mat-header-cell mat-sort-header scope="col">Date de Réception</th>
           <td *matCellDef="let data" mat-cell> {{data.dateenvoie | date:'dd/MM/y'}} </td>
         </ng-container>
 
         <!-- Action Column -->
         <ng-container matColumnDef="Action">
-          <th scope="col" *matHeaderCellDef mat-header-cell>Action</th>
+          <th *matHeaderCellDef mat-header-cell scope="col">Action</th>
           <td *matCellDef="let data" mat-cell>
             <button (click)="info(data)" color="primary" mat-raised-button>Ouvrir</button>
             <button (click)="openDialog(data)" class="action" color="warn" mat-raised-button>Supprimer</button>

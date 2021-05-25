@@ -60,7 +60,7 @@ export class ListComponent implements OnInit {
         return true;
       }
       return false;
-      });
+    });
     this.permissionsup = this.user.permissions.some(i => {
       if (i.idpermission.toString() === '3') {
         return true;

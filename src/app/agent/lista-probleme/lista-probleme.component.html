@@ -1,6 +1,7 @@
 <div class="flex-container">
   <mat-card *ngIf="agent" class="flex-item mat-elevation-z8">
-    <mat-card-title><h2>Liste de tous les Problèmes soumis par l'agent <strong>{{agent.nom}}</strong></h2></mat-card-title>
+    <mat-card-title><h2>Liste de tous les Problèmes soumis par l'agent <strong>{{agent.nom}}</strong></h2>
+    </mat-card-title>
     <mat-card-content>
 
       <mat-form-field style="float: right">
@@ -12,42 +13,48 @@
 
         <!-- Titre Column -->
         <ng-container matColumnDef="titre">
-          <th scope="col" *matHeaderCellDef mat-header-cell mat-sort-header>Titre</th>
+          <th *matHeaderCellDef mat-header-cell mat-sort-header scope="col">Titre</th>
           <td *matCellDef="let data" mat-cell> {{data.titre}} </td>
         </ng-container>
 
         <!-- Type Column -->
         <ng-container matColumnDef="type">
-          <th scope="col" *matHeaderCellDef mat-header-cell mat-sort-header>Type</th>
+          <th *matHeaderCellDef mat-header-cell mat-sort-header scope="col">Type</th>
           <td *matCellDef="let data" mat-cell> {{data.type}} </td>
         </ng-container>
 
         <!-- Agent Column -->
         <ng-container matColumnDef="agent">
-          <th scope="col" *matHeaderCellDef mat-header-cell>Agent</th>
-          <td *matCellDef="let data" mat-cell><a *ngIf="data.agent != null" href="/app/agents/info/{{data.agent.numero}}">{{data.agent.nom}}</a><span *ngIf="data.agent == null">Aucun</span></td>
+          <th *matHeaderCellDef mat-header-cell scope="col">Agent</th>
+          <td *matCellDef="let data" mat-cell><a *ngIf="data.agent != null"
+                                                 href="/app/agents/info/{{data.agent.numero}}">{{data.agent.nom}}</a><span
+            *ngIf="data.agent == null">Aucun</span></td>
         </ng-container>
 
         <!-- Date de Soumission Column -->
         <ng-container matColumnDef="datesoumission">
-          <th scope="col" *matHeaderCellDef mat-header-cell mat-sort-header>Date de Soumission</th>
+          <th *matHeaderCellDef mat-header-cell mat-sort-header scope="col">Date de Soumission</th>
           <td *matCellDef="let data" mat-cell> {{data.datesoumission | date:'dd/MM/y'}} </td>
         </ng-container>
 
         <!-- Résolu Column -->
         <ng-container matColumnDef="resolu">
-          <th scope="col" *matHeaderCellDef mat-header-cell mat-sort-header>Résolu</th>
+          <th *matHeaderCellDef mat-header-cell mat-sort-header scope="col">Résolu</th>
           <td *matCellDef="let data" mat-cell> {{data.resolu ? 'Oui' : 'Non'}} </td>
         </ng-container>
 
         <!-- Action Column -->
         <ng-container matColumnDef="Action">
-          <th scope="col" *matHeaderCellDef mat-header-cell>Action</th>
+          <th *matHeaderCellDef mat-header-cell scope="col">Action</th>
           <td *matCellDef="let data" mat-cell>
             <button (click)="info(data.idprob)" color="primary" mat-raised-button>Info</button>
-            <button (click)="modifier(data)" class="action" color="primary" mat-raised-button [disabled]="!permissionmodif">Modifier</button>
+            <button (click)="modifier(data)" [disabled]="!permissionmodif" class="action" color="primary"
+                    mat-raised-button>Modifier
+            </button>
             <button (click)="solution(data)" class="action" color="primary" mat-raised-button>Voir Solution</button>
-            <button (click)="openDialog(data)" class="action" color="warn" mat-raised-button [disabled]="!permissionsup">Supprimer</button>
+            <button (click)="openDialog(data)" [disabled]="!permissionsup" class="action" color="warn"
+                    mat-raised-button>Supprimer
+            </button>
           </td>
         </ng-container>
 

@@ -1,6 +1,7 @@
 <div *ngIf="utilisateur" class="flex-container">
   <mat-card class="flex-item mat-elevation-z2">
-    <mat-card-title><h2>Liste de toutes les Solutions de l'Utilisateur <strong>{{utilisateur.nom}}</strong></h2></mat-card-title>
+    <mat-card-title><h2>Liste de toutes les Solutions de l'Utilisateur <strong>{{utilisateur.nom}}</strong></h2>
+    </mat-card-title>
     <mat-card-content>
 
       <mat-form-field style="float: right">
@@ -12,29 +13,36 @@
 
         <!-- Titre Column -->
         <ng-container matColumnDef="titre">
-          <th scope="col" *matHeaderCellDef mat-header-cell mat-sort-header>Titre</th>
-          <td *matCellDef="let data" mat-cell> {{(data.titre.length>10)? (data.titre | slice:0:10)+'..':(data.titre)}}</td>
+          <th *matHeaderCellDef mat-header-cell mat-sort-header scope="col">Titre</th>
+          <td *matCellDef="let data"
+              mat-cell> {{(data.titre.length > 10) ? (data.titre | slice:0:10) + '..' : (data.titre)}}</td>
         </ng-container>
 
         <!-- Titre Problème Column -->
         <ng-container matColumnDef="probleme">
-          <th scope="col" *matHeaderCellDef mat-header-cell mat-sort-header>Titre Problème</th>
-          <td *matCellDef="let data" mat-cell><a href="/app/problemes/info/{{data.probleme.idprob}}">{{(data.probleme.titre.length>10)? (data.probleme.titre | slice:0:10)+'..':(data.probleme.titre)}}</a></td>
+          <th *matHeaderCellDef mat-header-cell mat-sort-header scope="col">Titre Problème</th>
+          <td *matCellDef="let data" mat-cell><a
+            href="/app/problemes/info/{{data.probleme.idprob}}">{{(data.probleme.titre.length > 10) ? (data.probleme.titre | slice:0:10) + '..' : (data.probleme.titre)}}</a>
+          </td>
         </ng-container>
 
         <!-- Date de Soumission Column -->
         <ng-container matColumnDef="datesoumission">
-          <th scope="col" *matHeaderCellDef mat-header-cell mat-sort-header>Date de Soumission</th>
+          <th *matHeaderCellDef mat-header-cell mat-sort-header scope="col">Date de Soumission</th>
           <td *matCellDef="let data" mat-cell> {{data.datesoumission | date:'dd/MM/y'}} </td>
         </ng-container>
 
         <!-- Action Column -->
         <ng-container matColumnDef="Action">
-          <th scope="col" *matHeaderCellDef mat-header-cell>Action</th>
+          <th *matHeaderCellDef mat-header-cell scope="col">Action</th>
           <td *matCellDef="let data" mat-cell>
             <button (click)="info(data.idsol)" color="primary" mat-raised-button>Info</button>
-            <button (click)="modifier(data)" class="action" color="primary" mat-raised-button [disabled]="!permissionmodif">Modifier</button>
-            <button (click)="openDialog(data)" class="action" color="warn" mat-raised-button [disabled]="!permissionsup">Supprimer</button>
+            <button (click)="modifier(data)" [disabled]="!permissionmodif" class="action" color="primary"
+                    mat-raised-button>Modifier
+            </button>
+            <button (click)="openDialog(data)" [disabled]="!permissionsup" class="action" color="warn"
+                    mat-raised-button>Supprimer
+            </button>
           </td>
         </ng-container>
 

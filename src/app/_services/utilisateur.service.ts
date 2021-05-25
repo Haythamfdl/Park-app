@@ -9,15 +9,15 @@ import {Tokens} from '../_model/tokens';
 })
 export class UtilisateurService {
   token: Tokens = JSON.parse(localStorage.getItem('Token'));
-  httpOptions = {
-    headers: new HttpHeaders({authorization: `Bearer ` + this.token.accesstoken.toString()})
-  };
-  private readonly urlauth: string;
+
   private readonly url: string;
+  private readonly urlauth: string;
+  private readonly urlrefresh: string;
 
   constructor(private http: HttpClient) {
     this.url = 'http://localhost:8080/utilisateurs';
     this.urlauth = 'http://localhost:8080/login';
+    this.urlrefresh = 'http://localhost:8080/refreshToken';
   }
 
   public getById(id): Observable<Utilisateur> {
@@ -31,29 +31,37 @@ export class UtilisateurService {
     return this.http.post(this.urlauth, body);
   }
 
-  public refreshToken(): Observable<any> {
+  public refreshToken(): Observable<Tokens> {
     this.token = JSON.parse(localStorage.getItem('Token'));
     const httpOptionsRefresh = {
       headers: new HttpHeaders({authorization: `Bearer ` + this.token.refreshtoken})
     };
-    console.log(httpOptionsRefresh);
-    return this.http.get<any>(this.url + '/refreshToken', httpOptionsRefresh);
+    return this.http.get<Tokens>(this.urlrefresh, httpOptionsRefresh);
   }
-
-  public login(email: string, pass: string): Observable<Utilisateur> {
+  /*public login(email: string, pass: string): Observable<Utilisateur> {
     return this.http.get<Utilisateur>(this.url + '/login/' + email + '/' + pass);
-  }
-
+  }*/
   public getByEmail(email: string): Observable<Utilisateur> {
-
-    return this.http.get<Utilisateur>(this.url + '/' + email);
+    this.token = JSON.parse(localStorage.getItem('Token'));
+    const httpOptions = {
+      headers: new HttpHeaders({authorization: `Bearer ` + this.token.accesstoken})
+    };
+    return this.http.get<Utilisateur>(this.url + '/' + email, httpOptions);
   }
 
   public save(utilisateur: Utilisateur): Observable<any> {
-    return this.http.post(this.url, utilisateur, this.httpOptions);
+    this.token = JSON.parse(localStorage.getItem('Token'));
+    const httpOptions = {
+      headers: new HttpHeaders({authorization: `Bearer ` + this.token.accesstoken})
+    };
+    return this.http.post(this.url, utilisateur, httpOptions);
   }
 
   public update(utilisateur: Utilisateur): Observable<any> {
-    return this.http.post(this.url, utilisateur, this.httpOptions);
+    this.token = JSON.parse(localStorage.getItem('Token'));
+    const httpOptions = {
+      headers: new HttpHeaders({authorization: `Bearer ` + this.token.accesstoken})
+    };
+    return this.http.post(this.url, utilisateur, httpOptions);
   }
 }

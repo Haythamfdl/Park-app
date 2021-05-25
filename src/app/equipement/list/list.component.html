@@ -2,7 +2,9 @@
   <mat-card class="flex-item mat-elevation-z8">
     <mat-card-title><h2>Liste des équipements</h2></mat-card-title>
     <mat-card-content>
-      <button (click)="ajouter()" class="mt-3" color="primary" mat-raised-button [disabled]="!permissionajout">Ajouter un Equipement</button>
+      <button (click)="ajouter()" [disabled]="!permissionajout" class="mt-3" color="primary" mat-raised-button>Ajouter
+        un Equipement
+      </button>
       <mat-form-field style="float: right">
         <mat-label>Recherche</mat-label>
         <input (keyup)="applyFilter($event)" matInput placeholder="Recherche">
@@ -12,19 +14,20 @@
 
         <!-- Numéro Equipement Column -->
         <ng-container matColumnDef="numero">
-          <th scope="col" *matHeaderCellDef mat-header-cell mat-sort-header>Numéro Equipement</th>
+          <th *matHeaderCellDef mat-header-cell mat-sort-header scope="col">Numéro Equipement</th>
           <td *matCellDef="let data" mat-cell> {{data.numero}} </td>
         </ng-container>
 
         <!-- Désignation Column -->
         <ng-container matColumnDef="designation">
-          <th scope="col" *matHeaderCellDef mat-header-cell mat-sort-header>Désignation</th>
-          <td *matCellDef="let data" mat-cell> {{(data.designation.length>15)? (data.designation | slice:0:15)+'..':(data.designation)}} </td>
+          <th *matHeaderCellDef mat-header-cell mat-sort-header scope="col">Désignation</th>
+          <td *matCellDef="let data"
+              mat-cell> {{(data.designation.length > 15) ? (data.designation | slice:0:15) + '..' : (data.designation)}} </td>
         </ng-container>
 
         <!-- Agent affecter Column -->
         <ng-container matColumnDef="agent">
-          <th scope="col" *matHeaderCellDef mat-header-cell>Agent affecter</th>
+          <th *matHeaderCellDef mat-header-cell scope="col">Agent affecter</th>
           <td *matCellDef="let data" mat-cell><a *ngIf="data.agent != null"
                                                  href="/app/agents/info/{{data.agent.numero}}">{{data.agent.nom}}</a><span
             *ngIf="data.agent == null">Aucun</span></td>
@@ -32,17 +35,21 @@
 
         <!-- Action Column -->
         <ng-container matColumnDef="Action">
-          <th scope="col" *matHeaderCellDef mat-header-cell>Action</th>
+          <th *matHeaderCellDef mat-header-cell scope="col">Action</th>
           <td *matCellDef="let data" mat-cell>
             <button (click)="info(data.numero)" color="primary" mat-raised-button>Info</button>
-            <button (click)="modifier(data)" class="action" color="primary" mat-raised-button [disabled]="!permissionmodif">Modifier</button>
-            <button (click)="affecter(data)" *ngIf="data.agent == null" class="action" color="primary"
-                    mat-raised-button [disabled]="!permissionaffect">Affecter a un Agent
+            <button (click)="modifier(data)" [disabled]="!permissionmodif" class="action" color="primary"
+                    mat-raised-button>Modifier
             </button>
-            <button (click)="desaffecter(data)" *ngIf="data.agent !== null" class="action" color="primary"
-                    mat-raised-button [disabled]="!permissionaffect">Enlever Affectation
+            <button (click)="affecter(data)" *ngIf="data.agent == null" [disabled]="!permissionaffect" class="action"
+                    color="primary" mat-raised-button>Affecter a un Agent
             </button>
-            <button (click)="openDialog(data)" class="action" color="warn" mat-raised-button [disabled]="!permissionsup">Supprimer</button>
+            <button (click)="desaffecter(data)" *ngIf="data.agent !== null" [disabled]="!permissionaffect" class="action"
+                    color="primary" mat-raised-button>Enlever Affectation
+            </button>
+            <button (click)="openDialog(data)" [disabled]="!permissionsup" class="action" color="warn"
+                    mat-raised-button>Supprimer
+            </button>
           </td>
         </ng-container>
 

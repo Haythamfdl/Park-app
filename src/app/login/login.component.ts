@@ -48,11 +48,11 @@ export class LoginComponent implements OnInit {
 
   submit(myForm) {
     this.user = myForm.value;
-    this.utilisateurService.authentification(this.user.email, this.user.pass).subscribe( token => {
-      this.token = token;
-      localStorage.setItem('Token', JSON.stringify(this.token));
-      this.alert();
-    },
+    this.utilisateurService.authentification(this.user.email, this.user.pass).subscribe(token => {
+        this.token = token;
+        localStorage.setItem('Token', JSON.stringify(this.token));
+        this.alert();
+      },
       error => {
         this.user = new Utilisateur();
         this.openSnackBar('Email ou mots de passe incorrecte', '');
@@ -68,7 +68,7 @@ export class LoginComponent implements OnInit {
   }
 
   alert() {
-    this.utilisateurService.getByEmail(this.user.email).subscribe( data => {
+    this.utilisateurService.getByEmail(this.user.email).subscribe(data => {
       this.user = data;
       localStorage.setItem('Utilisateur', JSON.stringify(this.user));
       console.log(this.token);

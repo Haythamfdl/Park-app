@@ -19,6 +19,6 @@ export class PermissionService {
   }
 
   public getAllPermissions(): Observable<Permission[]> {
-    return this.http.post<Permission[]>(this.url, this.httpOptions);
+    return this.http.get<Permission[]>(this.url, this.httpOptions);
   }
 }
