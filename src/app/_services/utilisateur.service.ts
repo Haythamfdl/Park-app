@@ -3,14 +3,15 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Utilisateur} from '../_model/utilisateur';
 import {Observable} from 'rxjs';
 import {Tokens} from '../_model/tokens';
-import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UtilisateurService {
-  token: Tokens;
-  httpOptions;
+  token: Tokens = JSON.parse(localStorage.getItem('Token'));
+  httpOptions = {
+    headers: new HttpHeaders({authorization: `Bearer ` + this.token.accesstoken.toString()})
+  };
   private readonly urlauth: string;
   private readonly url: string;
 
@@ -30,12 +31,13 @@ export class UtilisateurService {
     return this.http.post(this.urlauth, body);
   }
 
-  public refreshToken(): Observable<Tokens> {
+  public refreshToken(): Observable<any> {
     this.token = JSON.parse(localStorage.getItem('Token'));
     const httpOptionsRefresh = {
-      headers: new HttpHeaders({'content-type': 'application/json', authorization: `Bearer ` + this.token.refreshtoken})
+      headers: new HttpHeaders({authorization: `Bearer ` + this.token.refreshtoken})
     };
-    return this.http.get<Tokens>(this.url + '/refreshToken', httpOptionsRefresh);
+    console.log(httpOptionsRefresh);
+    return this.http.get<any>(this.url + '/refreshToken', httpOptionsRefresh);
   }
 
   public login(email: string, pass: string): Observable<Utilisateur> {
@@ -48,18 +50,10 @@ export class UtilisateurService {
   }
 
   public save(utilisateur: Utilisateur): Observable<any> {
-    this.token = JSON.parse(localStorage.getItem('Token'));
-    this.httpOptions = {
-      headers: new HttpHeaders({'content-type': 'application/json', authorization: `Bearer ` + this.token.accesstoken})
-    };
     return this.http.post(this.url, utilisateur, this.httpOptions);
   }
 
   public update(utilisateur: Utilisateur): Observable<any> {
-    this.token = JSON.parse(localStorage.getItem('Token'));
-    this.httpOptions = {
-      headers: new HttpHeaders({'content-type': 'application/json', authorization: `Bearer ` + this.token.accesstoken})
-    };
-    return this.http.put(this.url, utilisateur, this.httpOptions);
+    return this.http.post(this.url, utilisateur, this.httpOptions);
   }
 }

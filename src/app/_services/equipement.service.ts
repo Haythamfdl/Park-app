@@ -11,7 +11,7 @@ import {Tokens} from '../_model/tokens';
 export class EquipementService {
   token: Tokens = JSON.parse(localStorage.getItem('Token'));
   httpOptions = {
-    headers: new HttpHeaders({'Content-Type': 'application/json', 'Authorization': `Bearer ` + this.token.accesstoken})
+    headers: new HttpHeaders({authorization: `Bearer ` + this.token.accesstoken})
   };
   private readonly url: string;
 
@@ -36,6 +36,6 @@ export class EquipementService {
   }
 
   public update(equipement: Equipement): Observable<any> {
-    return this.http.put(this.url, equipement, this.httpOptions);
+    return this.http.post(this.url, equipement, this.httpOptions);
   }
 }

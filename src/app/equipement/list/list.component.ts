@@ -10,7 +10,6 @@ import {Equipement} from '../../_model/equipement';
 import {ComfirmDialogComponent} from '../../comfirm-dialog/comfirm-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 import {Utilisateur} from '../../_model/utilisateur';
-import {Permission} from '../../_model/permission';
 
 
 @Component({

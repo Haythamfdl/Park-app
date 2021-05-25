@@ -10,7 +10,7 @@ import {Tokens} from '../_model/tokens';
 export class SolutionService {
   token: Tokens = JSON.parse(localStorage.getItem('Token'));
   httpOptions = {
-    headers: new HttpHeaders({'Content-Type': 'application/json', 'Authorization': `Bearer ` + this.token.accesstoken})
+    headers: new HttpHeaders({authorization: `Bearer ` + this.token.accesstoken})
   };
   private readonly url: string;
 
@@ -35,6 +35,6 @@ export class SolutionService {
   }
 
   public update(solution: Solution): Observable<any> {
-    return this.http.put(this.url, solution, this.httpOptions);
+    return this.http.post(this.url, solution, this.httpOptions);
   }
 }
