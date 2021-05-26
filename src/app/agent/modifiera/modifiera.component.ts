@@ -6,6 +6,8 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {AgentService} from '../../_services/agent.service';
 import {ComfirmDialogComponent} from '../../comfirm-dialog/comfirm-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
+import {Utilisateur} from '../../_model/utilisateur';
+import {GlobalService} from '../../_services/global.service';
 
 @Component({
   selector: 'app-modifiera',
@@ -16,18 +18,25 @@ export class ModifieraComponent implements OnInit {
   myForm: FormGroup;
   agent: Agent;
   agentsave: Agent;
+  user: Utilisateur;
 
   constructor(private fb: FormBuilder,
               private router: Router,
               private snackBar: MatSnackBar,
               public dialog: MatDialog,
-              private agentService: AgentService) {
+              private agentService: AgentService,
+              private globalService: GlobalService) {
     this.agent = new Agent();
   }
 
   ngOnInit(): void {
-    if (JSON.parse(localStorage.getItem('Utilisateur')) == null) {
+    this.user = JSON.parse(localStorage.getItem('Utilisateur'));
+    if (this.user == null) {
       this.router.navigate(['/']).then();
+    }
+    const permission = this.globalService.checkPermission(this.user, '6');
+    if (!permission){
+      this.router.navigate(['/app/agents']).then();
     }
     if (JSON.parse(localStorage.getItem('Agent')) == null) {
       this.router.navigate(['/app/agents']).then();
@@ -43,7 +52,6 @@ export class ModifieraComponent implements OnInit {
       data: 'Voulez-vous vraiment faire cette modification ?'
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
       if (result === true) {
         this.agentService.update(this.agent).subscribe();
         this.openSnackBar('L\'agent a été modifier', '');

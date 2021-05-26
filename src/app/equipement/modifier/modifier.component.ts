@@ -6,6 +6,8 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {EquipementService} from '../../_services/equipement.service';
 import {MatDialog} from '@angular/material/dialog';
 import {ComfirmDialogComponent} from '../../comfirm-dialog/comfirm-dialog.component';
+import {Utilisateur} from '../../_model/utilisateur';
+import {GlobalService} from '../../_services/global.service';
 
 @Component({
   selector: 'app-modifier',
@@ -16,18 +18,26 @@ export class ModifierComponent implements OnInit {
   myForm: FormGroup;
   equipement: Equipement;
   equipsave: Equipement;
+  user: Utilisateur;
+
 
   constructor(private fb: FormBuilder,
               private router: Router,
               private snackBar: MatSnackBar,
               public dialog: MatDialog,
-              private equipementService: EquipementService) {
+              private equipementService: EquipementService,
+              private globalService: GlobalService) {
     this.equipement = new Equipement();
   }
 
   ngOnInit(): void {
-    if (JSON.parse(localStorage.getItem('Utilisateur')) == null) {
+    this.user = JSON.parse(localStorage.getItem('Utilisateur'));
+    if (this.user == null) {
       this.router.navigate(['/']).then();
+    }
+    const permission = this.globalService.checkPermission(this.user, '2');
+    if (!permission){
+      this.router.navigate(['/app/equipements']).then();
     }
     if (JSON.parse(localStorage.getItem('Equipement')) == null) {
       this.router.navigate(['/app/equipements']).then();
@@ -43,7 +53,6 @@ export class ModifierComponent implements OnInit {
       data: 'Voulez-vous vraiment faire cette modification ?'
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
       if (result === true) {
         this.equipementService.update(this.equipement).subscribe();
         this.router.navigate(['/app/equipements']).then();

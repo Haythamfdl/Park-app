@@ -40,10 +40,6 @@ export class AgentService {
   }
 
   public update(agent: Agent): Observable<any> {
-    const token: Tokens = JSON.parse(localStorage.getItem('Token'));
-    const httpOptions = {
-      headers: new HttpHeaders({authorization: `Bearer ` + token.accesstoken})
-    };
-    return this.http.post(this.url, agent, httpOptions);
+    return this.save(agent);
   }
 }

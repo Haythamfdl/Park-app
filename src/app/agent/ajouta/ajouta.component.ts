@@ -4,6 +4,8 @@ import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Agent} from '../../_model/agent';
 import {AgentService} from '../../_services/agent.service';
+import {Utilisateur} from '../../_model/utilisateur';
+import {GlobalService} from '../../_services/global.service';
 
 @Component({
   selector: 'app-ajouta',
@@ -13,19 +15,26 @@ import {AgentService} from '../../_services/agent.service';
 export class AjoutaComponent implements OnInit {
   myForm: FormGroup;
   agent: Agent;
+  user: Utilisateur;
 
   constructor(private fb: FormBuilder,
               private router: Router,
               private snackBar: MatSnackBar,
-              private agentService: AgentService) {
+              private agentService: AgentService,
+              private globalService: GlobalService) {
     this.agent = new Agent();
   }
 
   ngOnInit(): void {
-    this.createForm();
-    if (JSON.parse(localStorage.getItem('Utilisateur')) == null) {
+    this.user = JSON.parse(localStorage.getItem('Utilisateur'));
+    if (this.user == null) {
       this.router.navigate(['/']).then();
     }
+    const permission = this.globalService.checkPermission(this.user, '5');
+    if (!permission){
+      this.router.navigate(['/app/agents']).then();
+    }
+    this.createForm();
   }
 
   submit(myForm) {

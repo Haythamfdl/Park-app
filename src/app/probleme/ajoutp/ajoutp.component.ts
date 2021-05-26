@@ -9,6 +9,7 @@ import {Probleme} from '../../_model/probleme';
 import {EquipementService} from '../../_services/equipement.service';
 import {ProblemeService} from '../../_services/probleme.service';
 import {DatePipe} from '@angular/common';
+import {Utilisateur} from '../../_model/utilisateur';
 
 @Component({
   selector: 'app-ajoutp',
@@ -32,7 +33,7 @@ export class AjoutpComponent implements OnInit {
     {value: 'Hardware', viewValue: 'Hardware'},
     {value: 'Service', viewValue: 'Service'}
   ];
-
+  user: Utilisateur;
 
   constructor(private fb: FormBuilder,
               private router: Router,
@@ -47,8 +48,14 @@ export class AjoutpComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (JSON.parse(localStorage.getItem('Utilisateur')) == null) {
+    this.user = JSON.parse(localStorage.getItem('Utilisateur'));
+    if (this.user == null) {
       this.router.navigate(['/']).then();
+    }
+    const permission = this.checkPermission(this.user, '8');
+    if (!permission){
+      this.router.navigate(['/app/problemes']).then();
+      this.openSnackBar('Vous n\'avez pas les permission nécessaire pour accéder a cette page !', '');
     }
     this.createForm();
   }
@@ -135,6 +142,15 @@ export class AjoutpComponent implements OnInit {
       datesoumission: [this.probleme.datesoumission],
       resolu: [this.probleme.resolu],
       isdeleted: [this.probleme.isdeleted]
+    });
+  }
+
+  checkPermission(user: Utilisateur, idpermission: string): boolean{
+    return user.permissions.some(i => {
+      if (i.idpermission.toString() === idpermission) {
+        return true;
+      }
+      return false;
     });
   }
 }

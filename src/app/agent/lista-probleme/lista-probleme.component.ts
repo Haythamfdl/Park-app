@@ -98,7 +98,6 @@ export class ListaProblemeComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
       if (result === true) {
         this.supprimer(value);
         window.location.reload();

@@ -52,7 +52,6 @@ export class MessageService {
   public getMessageCount(id: string, ouver): Observable<string> {
     const ntoken: Tokens = this.utilisateurService.tokenValable();
     localStorage.setItem('Token', JSON.stringify(ntoken));
-    console.log(ntoken);
     return this.http.get<string>(this.url + '/count/' + id + '/' + ouver);
   }
 
@@ -65,10 +64,6 @@ export class MessageService {
   }
 
   public update(message: Message): Observable<any> {
-    this.token = JSON.parse(localStorage.getItem('Token'));
-    const httpOptions = {
-      headers: new HttpHeaders({authorization: `Bearer ` + this.token.accesstoken})
-    };
-    return this.http.post(this.url, message, httpOptions);
+    return this.save(message);
   }
 }

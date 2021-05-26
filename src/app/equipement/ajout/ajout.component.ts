@@ -4,6 +4,8 @@ import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Equipement} from '../../_model/equipement';
 import {EquipementService} from '../../_services/equipement.service';
+import {Utilisateur} from '../../_model/utilisateur';
+import {GlobalService} from '../../_services/global.service';
 
 @Component({
   selector: 'app-ajout',
@@ -13,17 +15,24 @@ import {EquipementService} from '../../_services/equipement.service';
 export class AjoutComponent implements OnInit {
   myForm: FormGroup;
   equipement: Equipement;
+  user: Utilisateur;
 
   constructor(private fb: FormBuilder,
               private router: Router,
               private snackBar: MatSnackBar,
-              private equipementService: EquipementService) {
+              private equipementService: EquipementService,
+              private globalService: GlobalService) {
     this.equipement = new Equipement();
   }
 
   ngOnInit(): void {
-    if (JSON.parse(localStorage.getItem('Utilisateur')) == null) {
+    this.user = JSON.parse(localStorage.getItem('Utilisateur'));
+    if (this.user == null) {
       this.router.navigate(['/']).then();
+    }
+    const permission = this.globalService.checkPermission(this.user, '1');
+    if (!permission){
+      this.router.navigate(['/app/equipements']).then();
     }
     this.createForm();
   }

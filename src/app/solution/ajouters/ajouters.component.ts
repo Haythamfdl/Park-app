@@ -7,6 +7,7 @@ import {Probleme} from '../../_model/probleme';
 import {Utilisateur} from '../../_model/utilisateur';
 import {SolutionService} from '../../_services/solution.service';
 import {DatePipe} from '@angular/common';
+import {GlobalService} from '../../_services/global.service';
 
 @Component({
   selector: 'app-ajouters',
@@ -23,7 +24,8 @@ export class AjoutersComponent implements OnInit {
               private router: Router,
               private snackBar: MatSnackBar,
               private datePipe: DatePipe,
-              private solutionService: SolutionService) {
+              private solutionService: SolutionService,
+              private globalService: GlobalService) {
     this.solution = new Solution();
   }
 
@@ -34,11 +36,14 @@ export class AjoutersComponent implements OnInit {
     } else {
       this.probleme = JSON.parse(localStorage.getItem('Probleme'));
     }
-    console.log(this.probleme);
     if (JSON.parse(localStorage.getItem('Utilisateur')) == null) {
       this.router.navigate(['/']).then();
     } else {
       this.utilisateur = JSON.parse(localStorage.getItem('Utilisateur'));
+    }
+    const permission = this.globalService.checkPermission(this.utilisateur, '12');
+    if (!permission){
+      this.router.navigate(['/app/solutions/probleme/' + this.probleme.idprob]).then();
     }
   }
 

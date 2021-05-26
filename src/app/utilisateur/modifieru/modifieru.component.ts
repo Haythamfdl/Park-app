@@ -59,7 +59,6 @@ export class ModifieruComponent implements OnInit {
         this.user.pass = this.el1.nativeElement.value;
         this.user.datemodifpass = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
       }
-      console.log(this.user);
       this.openDialog();
       },
         error => {
@@ -73,7 +72,6 @@ export class ModifieruComponent implements OnInit {
       data: 'Voulez-vous vraiment faire cette modification ?'
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
       if (result === true) {
         this.utilisateurService.update(this.user).subscribe();
         this.user.pass = null;

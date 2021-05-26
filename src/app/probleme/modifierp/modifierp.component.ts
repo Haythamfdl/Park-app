@@ -10,6 +10,7 @@ import {EquipementService} from '../../_services/equipement.service';
 import {ProblemeService} from '../../_services/probleme.service';
 import {ComfirmDialogComponent} from '../../comfirm-dialog/comfirm-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
+import {Utilisateur} from '../../_model/utilisateur';
 
 @Component({
   selector: 'app-modifierp',
@@ -34,6 +35,7 @@ export class ModifierpComponent implements OnInit {
     {value: 'Hardware', viewValue: 'Hardware'},
     {value: 'Service', viewValue: 'Service'}
   ];
+  user: Utilisateur;
 
   constructor(private fb: FormBuilder,
               private router: Router,
@@ -48,8 +50,14 @@ export class ModifierpComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (JSON.parse(localStorage.getItem('Utilisateur')) == null) {
+    this.user = JSON.parse(localStorage.getItem('Utilisateur'));
+    if (this.user == null) {
       this.router.navigate(['/']).then();
+    }
+    const permission = this.checkPermission(this.user, '9');
+    if (!permission){
+      this.router.navigate(['/app/problemes']).then();
+      this.openSnackBar('Vous n\'avez pas les permission nécessaire pour accéder a cette page !', '');
     }
     if (JSON.parse(localStorage.getItem('Probleme')) == null) {
       this.router.navigate(['/app/probleme']).then();
@@ -79,7 +87,6 @@ export class ModifierpComponent implements OnInit {
       data: 'Voulez-vous vraiment faire cette modification ?'
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
       if (result === true) {
         this.problemeService.update(this.probleme).subscribe();
         this.openSnackBar('Le Problème a été modifier', '');
@@ -160,6 +167,15 @@ export class ModifierpComponent implements OnInit {
       datesoumission: [this.probleme.datesoumission],
       resolu: [this.probleme.resolu],
       isdeleted: [this.probleme.isdeleted]
+    });
+  }
+
+  checkPermission(user: Utilisateur, idpermission: string): boolean{
+    return user.permissions.some(i => {
+      if (i.idpermission.toString() === idpermission) {
+        return true;
+      }
+      return false;
     });
   }
 }

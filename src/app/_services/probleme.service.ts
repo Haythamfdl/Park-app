@@ -61,10 +61,6 @@ export class ProblemeService {
   }
 
   public update(probleme: Probleme): Observable<any> {
-    this.token = JSON.parse(localStorage.getItem('Token'));
-    const httpOptions = {
-      headers: new HttpHeaders({authorization: `Bearer ` + this.token.accesstoken})
-    };
-    return this.http.post(this.url, probleme, httpOptions);
+    return this.save(probleme);
   }
 }

@@ -7,6 +7,8 @@ import {EquipementService} from '../../_services/equipement.service';
 import {Agent} from '../../_model/agent';
 import {AgentService} from '../../_services/agent.service';
 import {DatePipe} from '@angular/common';
+import {Utilisateur} from '../../_model/utilisateur';
+import {GlobalService} from '../../_services/global.service';
 
 @Component({
   selector: 'app-affecter',
@@ -19,13 +21,15 @@ export class AffecterComponent implements OnInit {
   agent: Agent;
   num;
   show = false;
+  user: Utilisateur;
 
   constructor(private fb: FormBuilder,
               private router: Router,
               private snackBar: MatSnackBar,
               private datePipe: DatePipe,
               private equipementService: EquipementService,
-              private agentService: AgentService) {
+              private agentService: AgentService,
+              private globalService: GlobalService) {
     this.equipement = new Equipement();
     this.agent = new Agent();
   }
@@ -35,8 +39,13 @@ export class AffecterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (JSON.parse(localStorage.getItem('Utilisateur')) == null) {
+    this.user = JSON.parse(localStorage.getItem('Utilisateur'));
+    if (this.user == null) {
       this.router.navigate(['/']).then();
+    }
+    const permission = this.globalService.checkPermission(this.user, '3');
+    if (!permission){
+      this.router.navigate(['/app/equipements']).then();
     }
     if (JSON.parse(localStorage.getItem('Equipement')) == null) {
       this.router.navigate(['/app/equipements']).then();

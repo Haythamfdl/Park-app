@@ -48,10 +48,6 @@ export class EquipementService {
   }
 
   public update(equipement: Equipement): Observable<any> {
-    const token: Tokens = JSON.parse(localStorage.getItem('Token'));
-    const httpOptions = {
-      headers: new HttpHeaders({authorization: `Bearer ` + token.accesstoken})
-    };
-    return this.http.post(this.url, equipement, httpOptions);
+    return this.save(equipement);
   }
 }

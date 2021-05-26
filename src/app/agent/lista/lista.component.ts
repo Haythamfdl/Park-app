@@ -66,9 +66,6 @@ export class ListaComponent implements OnInit {
       }
       return false;
     });
-    console.log(this.permissionajout);
-    console.log(this.permissionmodif);
-    console.log(this.permissionsup);
   }
 
   openSnackBar(message: string, action: string) {
@@ -85,7 +82,6 @@ export class ListaComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
       if (result === true) {
         this.supprimer(value);
         window.location.reload();
@@ -119,7 +115,6 @@ export class ListaComponent implements OnInit {
     this.agent = value;
     localStorage.setItem('Agent', JSON.stringify(this.agent));
     this.router.navigate(['/app/agents/modifier']).then();
-    console.log(this.agent);
   }
 
   supprimer(value: any) {

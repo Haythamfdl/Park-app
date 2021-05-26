@@ -39,7 +39,6 @@ export class UtilisateurService {
     this.getByEmail(user.email).subscribe(data => {
       user = data;
       localStorage.setItem('Utilisateur', JSON.stringify(user));
-      console.log('getEmail');
       return this.token;
     }, error => {
       this.refreshToken(this.token).subscribe(nToken => {
@@ -83,10 +82,6 @@ export class UtilisateurService {
   }
 
   public update(utilisateur: Utilisateur): Observable<any> {
-    this.token = JSON.parse(localStorage.getItem('Token'));
-    const httpOptions = {
-      headers: new HttpHeaders({authorization: `Bearer ` + this.token.accesstoken})
-    };
-    return this.http.post(this.url, utilisateur, httpOptions);
+    return this.save(utilisateur);
   }
 }

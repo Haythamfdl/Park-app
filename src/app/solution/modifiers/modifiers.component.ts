@@ -9,6 +9,7 @@ import {DatePipe} from '@angular/common';
 import {SolutionService} from '../../_services/solution.service';
 import {MatDialog} from '@angular/material/dialog';
 import {ComfirmDialogComponent} from '../../comfirm-dialog/comfirm-dialog.component';
+import {GlobalService} from '../../_services/global.service';
 
 @Component({
   selector: 'app-modifiers',
@@ -27,7 +28,8 @@ export class ModifiersComponent implements OnInit {
               private snackBar: MatSnackBar,
               public dialog: MatDialog,
               private datePipe: DatePipe,
-              private solutionService: SolutionService) {
+              private solutionService: SolutionService,
+              private globalService: GlobalService) {
     this.solution = new Solution();
   }
 
@@ -37,13 +39,15 @@ export class ModifiersComponent implements OnInit {
     } else {
       this.probleme = JSON.parse(localStorage.getItem('Probleme'));
     }
-
     if (JSON.parse(localStorage.getItem('Utilisateur')) == null) {
       this.router.navigate(['/']).then();
     } else {
       this.utilisateur = JSON.parse(localStorage.getItem('Utilisateur'));
     }
-
+    const permission = this.globalService.checkPermission(this.utilisateur, '13');
+    if (!permission){
+      this.router.navigate(['/app/solutions/probleme/' + this.probleme.idprob]).then();
+    }
     if (JSON.parse(localStorage.getItem('Solution')) == null) {
       this.router.navigate(['/app/solutions/probleme/' + this.probleme.idprob]).then();
     } else {
@@ -69,7 +73,6 @@ export class ModifiersComponent implements OnInit {
       data: 'Voulez-vous vraiment faire cette modification ?'
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
       if (result === true) {
         this.solutionService.update(this.solution).subscribe();
         this.openSnackBar('Le Solution a été modifier', '');

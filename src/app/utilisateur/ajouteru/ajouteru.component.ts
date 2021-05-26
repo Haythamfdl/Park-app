@@ -6,6 +6,7 @@ import {Utilisateur} from '../../_model/utilisateur';
 import {UtilisateurService} from '../../_services/utilisateur.service';
 import {PermissionService} from '../../_services/permission.service';
 import {Permission} from '../../_model/permission';
+import {GlobalService} from '../../_services/global.service';
 
 @Component({
   selector: 'app-ajouteru',
@@ -14,6 +15,7 @@ import {Permission} from '../../_model/permission';
 })
 export class AjouteruComponent implements OnInit {
   myForm: FormGroup;
+  utilisateur: Utilisateur;
   user: Utilisateur;
   permissions: Permission[];
 
@@ -21,27 +23,32 @@ export class AjouteruComponent implements OnInit {
               private router: Router,
               private snackBar: MatSnackBar,
               private utilisateurService: UtilisateurService,
-              private permissionService: PermissionService) {
-    this.user = new Utilisateur();
+              private permissionService: PermissionService,
+              private globalService: GlobalService) {
+    this.utilisateur = new Utilisateur();
   }
 
   ngOnInit(): void {
     this.createForm();
-    if (JSON.parse(localStorage.getItem('Utilisateur')) == null) {
+    this.user = JSON.parse(localStorage.getItem('Utilisateur'));
+    if (this.user == null) {
       this.router.navigate(['/']).then();
+    }
+    const permission = this.globalService.checkPermission(this.user, '15');
+    if (!permission){
+      this.router.navigate(['/app/agents']).then();
     }
     this.permissionService.getAllPermissions().subscribe(data => {
       this.permissions = data;
-      console.log(this.permissions);
     });
   }
 
   submit(myForm) {
-    this.user = myForm.value;
-    this.user.isdeleted = false;
-    this.utilisateurService.getByEmail(this.user.email).subscribe(data => {
+    this.utilisateur = myForm.value;
+    this.utilisateur.isdeleted = false;
+    this.utilisateurService.getByEmail(this.utilisateur.email).subscribe(data => {
       if (data == null) {
-        this.utilisateurService.save(this.user).subscribe();
+        this.utilisateurService.save(this.utilisateur).subscribe();
         this.openSnackBar('L\'utilisateur a été ajouter', '');
         this.router.navigate(['/app']).then();
       } else {
@@ -59,14 +66,14 @@ export class AjouteruComponent implements OnInit {
 
   createForm() {
     this.myForm = this.fb.group({
-      idequip: [this.user.iduser],
-      nom: [this.user.nom, [Validators.required]],
-      email: [this.user.email, [Validators.required, Validators.email]],
-      pass: [this.user.pass, [Validators.required]],
-      tel: [this.user.tel, [Validators.required]],
-      datemodifpass: [this.user.datemodifpass],
-      permissions: [this.user.permissions],
-      isdeleted: [this.user.isdeleted]
+      idequip: [this.utilisateur.iduser],
+      nom: [this.utilisateur.nom, [Validators.required]],
+      email: [this.utilisateur.email, [Validators.required, Validators.email]],
+      pass: [this.utilisateur.pass, [Validators.required]],
+      tel: [this.utilisateur.tel, [Validators.required]],
+      datemodifpass: [this.utilisateur.datemodifpass],
+      permissions: [this.utilisateur.permissions],
+      isdeleted: [this.utilisateur.isdeleted]
     });
   }
 }
