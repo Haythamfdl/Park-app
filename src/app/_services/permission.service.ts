@@ -8,10 +8,6 @@ import {Tokens} from '../_model/tokens';
   providedIn: 'root'
 })
 export class PermissionService {
-  token: Tokens = JSON.parse(localStorage.getItem('Token'));
-  httpOptions = {
-    headers: new HttpHeaders({authorization: `Bearer ` + this.token.accesstoken})
-  };
   private readonly url: string;
 
   constructor(private http: HttpClient) {
@@ -19,6 +15,10 @@ export class PermissionService {
   }
 
   public getAllPermissions(): Observable<Permission[]> {
-    return this.http.get<Permission[]>(this.url, this.httpOptions);
+    const token: Tokens = JSON.parse(localStorage.getItem('Token'));
+    const httpOptions = {
+      headers: new HttpHeaders({authorization: `Bearer ` + token.accesstoken})
+    };
+    return this.http.get<Permission[]>(this.url, httpOptions);
   }
 }

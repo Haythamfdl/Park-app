@@ -10,10 +10,6 @@ import {Tokens} from '../_model/tokens';
   providedIn: 'root'
 })
 export class ProblemeService {
-  token: Tokens = JSON.parse(localStorage.getItem('Token'));
-  httpOptions = {
-    headers: new HttpHeaders({authorization: `Bearer ` + this.token.accesstoken})
-  };
   private readonly url: string;
 
   constructor(private http: HttpClient) {
@@ -21,41 +17,41 @@ export class ProblemeService {
   }
 
   public getAllProblemes(): Observable<Probleme[]> {
-    this.token = JSON.parse(localStorage.getItem('Token'));
+    const token: Tokens = JSON.parse(localStorage.getItem('Token'));
     const httpOptions = {
-      headers: new HttpHeaders({authorization: `Bearer ` + this.token.accesstoken})
+      headers: new HttpHeaders({authorization: `Bearer ` + token.accesstoken})
     };
     return this.http.get<Probleme[]>(this.url, httpOptions);
   }
 
   public getProblemesAgent(agent: Agent): Observable<Probleme[]> {
-    this.token = JSON.parse(localStorage.getItem('Token'));
+    const token: Tokens = JSON.parse(localStorage.getItem('Token'));
     const httpOptions = {
-      headers: new HttpHeaders({authorization: `Bearer ` + this.token.accesstoken})
+      headers: new HttpHeaders({authorization: `Bearer ` + token.accesstoken})
     };
     return this.http.get<Probleme[]>(this.url + '/agent/' + agent.idagent, httpOptions);
   }
 
   public getProblemesResolu(resolu): Observable<Probleme[]> {
-    this.token = JSON.parse(localStorage.getItem('Token'));
+    const token: Tokens = JSON.parse(localStorage.getItem('Token'));
     const httpOptions = {
-      headers: new HttpHeaders({authorization: `Bearer ` + this.token.accesstoken})
+      headers: new HttpHeaders({authorization: `Bearer ` + token.accesstoken})
     };
     return this.http.get<Probleme[]>(this.url + '/resolu/' + resolu, httpOptions);
   }
 
   public getProbleme(id: string): Observable<Probleme> {
-    this.token = JSON.parse(localStorage.getItem('Token'));
+    const token: Tokens = JSON.parse(localStorage.getItem('Token'));
     const httpOptions = {
-      headers: new HttpHeaders({authorization: `Bearer ` + this.token.accesstoken})
+      headers: new HttpHeaders({authorization: `Bearer ` + token.accesstoken})
     };
     return this.http.get<Probleme>(this.url + '/' + id, httpOptions);
   }
 
   public save(probleme: Probleme): Observable<any> {
-    this.token = JSON.parse(localStorage.getItem('Token'));
+    const token: Tokens = JSON.parse(localStorage.getItem('Token'));
     const httpOptions = {
-      headers: new HttpHeaders({authorization: `Bearer ` + this.token.accesstoken})
+      headers: new HttpHeaders({authorization: `Bearer ` + token.accesstoken})
     };
     return this.http.post(this.url, probleme, httpOptions);
   }

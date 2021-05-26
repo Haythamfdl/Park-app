@@ -26,7 +26,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
               private snackBar: MatSnackBar,
               private utilisateurService: UtilisateurService,
               private messageService: MessageService) {
-    this.token = JSON.parse(localStorage.getItem('Token'));
     this.subscription = interval(this.timer).subscribe((func => {
       this.messageService.getMessageCount(this.user.iduser, false).subscribe(data => {
         this.nb = data;

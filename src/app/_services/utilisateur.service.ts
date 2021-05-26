@@ -9,21 +9,26 @@ import {Router} from '@angular/router';
   providedIn: 'root'
 })
 export class UtilisateurService {
-  token: Tokens = JSON.parse(localStorage.getItem('Token'));
 
   private readonly url: string;
   private readonly urlauth: string;
   private readonly urlrefresh: string;
+  private readonly urltest: string;
 
   constructor(private http: HttpClient,
               private router: Router) {
     this.url = 'http://localhost:8080/utilisateurs';
     this.urlauth = 'http://localhost:8080/login';
     this.urlrefresh = 'http://localhost:8080/refreshToken';
+    this.urltest = 'http://localhost:8080/testToken';
   }
 
   public getById(id): Observable<Utilisateur> {
-    return this.http.get<Utilisateur>(this.url + '/id/' + id);
+    const token: Tokens = this.getAccessToken();
+    const httpOptions = {
+      headers: new HttpHeaders({authorization: `Bearer ` + token.accesstoken})
+    };
+    return this.http.get<Utilisateur>(this.url + '/id/' + id, httpOptions);
   }
 
   public authentification(email: string, pass: string): Observable<any> {
@@ -33,27 +38,22 @@ export class UtilisateurService {
     return this.http.post(this.urlauth, body);
   }
 
-  public tokenValable(): Tokens {
-    this.token = JSON.parse(localStorage.getItem('Token'));
-    let user: Utilisateur = JSON.parse(localStorage.getItem('Utilisateur'));
-    this.getByEmail(user.email).subscribe(data => {
-      user = data;
-      localStorage.setItem('Utilisateur', JSON.stringify(user));
-      return this.token;
-    }, error => {
-      this.refreshToken(this.token).subscribe(nToken => {
-        this.token = nToken;
+  public getAccessToken(): Tokens {
+    let token: Tokens = JSON.parse(localStorage.getItem('Token'));
+    this.testToken(token).subscribe(data => token, error => {
+      this.refreshToken(token).subscribe(nToken => {
+        token = nToken;
         console.log('refreshToken');
-        localStorage.removeItem('Token');
-        localStorage.setItem('Token', JSON.stringify(this.token));
-        return this.token;
+        localStorage.setItem('Token', JSON.stringify(token));
+        return token;
       }, error2 => {
+        localStorage.removeItem('Token');
         localStorage.removeItem('Utilisateur');
         console.log('logout');
         this.router.navigate(['/']).then();
       });
     });
-    return this.token;
+    return token;
   }
 
   public refreshToken(rtoken: Tokens): Observable<Tokens> {
@@ -62,21 +62,30 @@ export class UtilisateurService {
     };
     return this.http.get<Tokens>(this.urlrefresh, httpOptionsRefresh);
   }
+
   /*public login(email: string, pass: string): Observable<Utilisateur> {
     return this.http.get<Utilisateur>(this.url + '/login/' + email + '/' + pass);
   }*/
+
   public getByEmail(email: string): Observable<Utilisateur> {
-    this.token = JSON.parse(localStorage.getItem('Token'));
+    const token: Tokens = JSON.parse(localStorage.getItem('Token'));
     const httpOptions = {
-      headers: new HttpHeaders({authorization: `Bearer ` + this.token.accesstoken})
+      headers: new HttpHeaders({authorization: `Bearer ` + token.accesstoken})
     };
     return this.http.get<Utilisateur>(this.url + '/' + email, httpOptions);
   }
 
-  public save(utilisateur: Utilisateur): Observable<any> {
-    this.token = JSON.parse(localStorage.getItem('Token'));
+  public testToken(token: Tokens): Observable<any> {
     const httpOptions = {
-      headers: new HttpHeaders({authorization: `Bearer ` + this.token.accesstoken})
+      headers: new HttpHeaders({authorization: `Bearer ` + token.accesstoken})
+    };
+    return this.http.get<Utilisateur>(this.urltest, httpOptions);
+  }
+
+  public save(utilisateur: Utilisateur): Observable<any> {
+    const token: Tokens = JSON.parse(localStorage.getItem('Token'));
+    const httpOptions = {
+      headers: new HttpHeaders({authorization: `Bearer ` + token.accesstoken})
     };
     return this.http.post(this.url, utilisateur, httpOptions);
   }

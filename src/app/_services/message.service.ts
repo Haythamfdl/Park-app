@@ -11,10 +11,6 @@ import {Router} from '@angular/router';
 })
 export class MessageService {
   nb = '0';
-  token = new Tokens();
-  httpOptions = {
-    headers: new HttpHeaders({authorization: `Bearer ` + this.token.accesstoken})
-  };
   private readonly url: string;
 
 
@@ -22,43 +18,43 @@ export class MessageService {
               private router: Router,
               private utilisateurService: UtilisateurService) {
     this.url = 'http://localhost:8080/messages';
-    this.token = JSON.parse(localStorage.getItem('Token'));
   }
 
   public getMessage(id): Observable<Message> {
-    this.token = JSON.parse(localStorage.getItem('Token'));
+    const token: Tokens = JSON.parse(localStorage.getItem('Token'));
     const httpOptions = {
-      headers: new HttpHeaders({authorization: `Bearer ` + this.token.accesstoken})
+      headers: new HttpHeaders({authorization: `Bearer ` + token.accesstoken})
     };
     return this.http.get<Message>(this.url + '/' + id, httpOptions);
   }
 
   public getAllMessage(id): Observable<Message[]> {
-    this.token = JSON.parse(localStorage.getItem('Token'));
+    const token: Tokens = JSON.parse(localStorage.getItem('Token'));
     const httpOptions = {
-      headers: new HttpHeaders({authorization: `Bearer ` + this.token.accesstoken})
+      headers: new HttpHeaders({authorization: `Bearer ` + token.accesstoken})
     };
     return this.http.get<Message[]>(this.url + '/user/' + id, httpOptions);
   }
 
   public getAllMessagesOuvert(id: string, ouver): Observable<any[]> {
-    this.token = JSON.parse(localStorage.getItem('Token'));
+    const token: Tokens = JSON.parse(localStorage.getItem('Token'));
     const httpOptions = {
-      headers: new HttpHeaders({authorization: `Bearer ` + this.token.accesstoken})
+      headers: new HttpHeaders({authorization: `Bearer ` + token.accesstoken})
     };
     return this.http.get<Message[]>(this.url + '/user/' + id + '/' + ouver, httpOptions);
   }
 
   public getMessageCount(id: string, ouver): Observable<string> {
-    const ntoken: Tokens = this.utilisateurService.tokenValable();
-    localStorage.setItem('Token', JSON.stringify(ntoken));
+    const token: Tokens = this.utilisateurService.getAccessToken();
+    console.log(token);
+    localStorage.setItem('Token', JSON.stringify(token));
     return this.http.get<string>(this.url + '/count/' + id + '/' + ouver);
   }
 
   public save(message: Message): Observable<any> {
-    this.token = JSON.parse(localStorage.getItem('Token'));
+    const token: Tokens = JSON.parse(localStorage.getItem('Token'));
     const httpOptions = {
-      headers: new HttpHeaders({authorization: `Bearer ` + this.token.accesstoken})
+      headers: new HttpHeaders({authorization: `Bearer ` + token.accesstoken})
     };
     return this.http.post(this.url, message, httpOptions);
   }
