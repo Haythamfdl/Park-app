@@ -64,6 +64,7 @@ export class NavbarComponent implements OnInit {
 
   deconexion() {
     localStorage.removeItem('Utilisateur');
+    localStorage.removeItem('Token');
     this.openSnackBar('Vous êtes déconnecter', '');
     this.router.navigate(['/']).then();
   }

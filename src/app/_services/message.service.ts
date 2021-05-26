@@ -50,14 +50,14 @@ export class MessageService {
   }
 
   public getMessageCount(id: string, ouver): Observable<string> {
-    //this.getAccessToken();
+    this.getAccessToken();
+    console.log(JSON.parse(localStorage.getItem('Token')));
     return this.http.get<string>(this.url + '/count/' + id + '/' + ouver);
   }
 
   public getAccessToken(): void {
     this.utilisateurService.refreshToken().subscribe(nToken => {
       this.token = nToken;
-      localStorage.setItem('Token', JSON.stringify(this.token));
     });
   }
 

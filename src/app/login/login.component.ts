@@ -37,6 +37,9 @@ export class LoginComponent implements OnInit {
     if (JSON.parse(localStorage.getItem('Utilisateur')) !== null) {
       this.router.navigate(['/app']).then();
     }
+    else {
+      localStorage.removeItem('Utilisateur');
+    }
   }
 
   createForm() {
@@ -71,7 +74,6 @@ export class LoginComponent implements OnInit {
     this.utilisateurService.getByEmail(this.user.email).subscribe(data => {
       this.user = data;
       localStorage.setItem('Utilisateur', JSON.stringify(this.user));
-      console.log(this.token);
       this.openSnackBar('Vous êtes connecter', '');
       this.router.navigate(['/app']).then();
     });
