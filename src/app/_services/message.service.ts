@@ -5,6 +5,7 @@ import {Message} from '../_model/message';
 import {Tokens} from '../_model/tokens';
 import {UtilisateurService} from './utilisateur.service';
 import {Router} from '@angular/router';
+import {TokenService} from './token.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,12 +17,12 @@ export class MessageService {
 
   constructor(private http: HttpClient,
               private router: Router,
-              private utilisateurService: UtilisateurService) {
+              private tokenService: TokenService) {
     this.url = 'http://localhost:8080/messages';
   }
 
   public getMessage(id): Observable<Message> {
-    const token: Tokens = JSON.parse(localStorage.getItem('Token'));
+    const token: Tokens = this.tokenService.getAccessToken();
     const httpOptions = {
       headers: new HttpHeaders({authorization: `Bearer ` + token.accesstoken})
     };
@@ -29,7 +30,7 @@ export class MessageService {
   }
 
   public getAllMessage(id): Observable<Message[]> {
-    const token: Tokens = JSON.parse(localStorage.getItem('Token'));
+    const token: Tokens = this.tokenService.getAccessToken();
     const httpOptions = {
       headers: new HttpHeaders({authorization: `Bearer ` + token.accesstoken})
     };
@@ -37,7 +38,7 @@ export class MessageService {
   }
 
   public getAllMessagesOuvert(id: string, ouver): Observable<any[]> {
-    const token: Tokens = JSON.parse(localStorage.getItem('Token'));
+    const token: Tokens = this.tokenService.getAccessToken();
     const httpOptions = {
       headers: new HttpHeaders({authorization: `Bearer ` + token.accesstoken})
     };
@@ -45,14 +46,13 @@ export class MessageService {
   }
 
   public getMessageCount(id: string, ouver): Observable<string> {
-    const token: Tokens = this.utilisateurService.getAccessToken();
-    console.log(token);
+    const token: Tokens = this.tokenService.getAccessToken();
     localStorage.setItem('Token', JSON.stringify(token));
     return this.http.get<string>(this.url + '/count/' + id + '/' + ouver);
   }
 
   public save(message: Message): Observable<any> {
-    const token: Tokens = JSON.parse(localStorage.getItem('Token'));
+    const token: Tokens = this.tokenService.getAccessToken();
     const httpOptions = {
       headers: new HttpHeaders({authorization: `Bearer ` + token.accesstoken})
     };

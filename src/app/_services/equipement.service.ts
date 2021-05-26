@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {Equipement} from '../_model/equipement';
 import {Agent} from '../_model/agent';
 import {Tokens} from '../_model/tokens';
+import {TokenService} from './token.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,12 +12,13 @@ import {Tokens} from '../_model/tokens';
 export class EquipementService {
   private readonly url: string;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private tokenService: TokenService) {
     this.url = 'http://localhost:8080/equipements';
   }
 
   public getAllEquipements(): Observable<Equipement[]> {
-    const token: Tokens = JSON.parse(localStorage.getItem('Token'));
+    const token: Tokens = this.tokenService.getAccessToken();
     const httpOptions = {
       headers: new HttpHeaders({authorization: `Bearer ` + token.accesstoken})
     };
@@ -24,7 +26,7 @@ export class EquipementService {
   }
 
   public getEquipementbyNum(num: string): Observable<Equipement> {
-    const token: Tokens = JSON.parse(localStorage.getItem('Token'));
+    const token: Tokens = this.tokenService.getAccessToken();
     const httpOptions = {
       headers: new HttpHeaders({authorization: `Bearer ` + token.accesstoken})
     };
@@ -32,7 +34,7 @@ export class EquipementService {
   }
 
   public getEquipmentsAgent(agent: Agent): Observable<Equipement[]> {
-    const token: Tokens = JSON.parse(localStorage.getItem('Token'));
+    const token: Tokens = this.tokenService.getAccessToken();
     const httpOptions = {
       headers: new HttpHeaders({authorization: `Bearer ` + token.accesstoken})
     };
@@ -40,7 +42,7 @@ export class EquipementService {
   }
 
   public save(equipement: Equipement): Observable<any> {
-    const token: Tokens = JSON.parse(localStorage.getItem('Token'));
+    const token: Tokens = this.tokenService.getAccessToken();
     const httpOptions = {
       headers: new HttpHeaders({authorization: `Bearer ` + token.accesstoken})
     };

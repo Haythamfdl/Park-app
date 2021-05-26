@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Solution} from '../_model/solution';
 import {Tokens} from '../_model/tokens';
+import {TokenService} from './token.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,8 @@ import {Tokens} from '../_model/tokens';
 export class SolutionService {
   private readonly url: string;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private tokenService: TokenService) {
     this.url = 'http://localhost:8080/solutions';
   }
 
