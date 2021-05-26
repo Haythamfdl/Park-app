@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Utilisateur} from '../_model/utilisateur';
@@ -12,7 +12,7 @@ import {Tokens} from '../_model/tokens';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit, OnDestroy {
 
   user: Utilisateur;
   subscription: Subscription;
@@ -36,6 +36,11 @@ export class NavbarComponent implements OnInit {
         });
       });
     }));
+  }
+
+  ngOnDestroy() {
+    localStorage.removeItem('Utilisateur');
+    this.subscription.unsubscribe();
   }
 
   ngOnInit(): void {

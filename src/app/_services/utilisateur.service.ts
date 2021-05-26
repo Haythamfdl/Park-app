@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Utilisateur} from '../_model/utilisateur';
 import {Observable} from 'rxjs';
 import {Tokens} from '../_model/tokens';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,8 @@ export class UtilisateurService {
   private readonly urlauth: string;
   private readonly urlrefresh: string;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private router: Router) {
     this.url = 'http://localhost:8080/utilisateurs';
     this.urlauth = 'http://localhost:8080/login';
     this.urlrefresh = 'http://localhost:8080/refreshToken';
@@ -31,10 +33,33 @@ export class UtilisateurService {
     return this.http.post(this.urlauth, body);
   }
 
-  public refreshToken(): Observable<Tokens> {
+  public tokenValable(): Tokens {
     this.token = JSON.parse(localStorage.getItem('Token'));
+    let user: Utilisateur = JSON.parse(localStorage.getItem('Utilisateur'));
+    this.getByEmail(user.email).subscribe(data => {
+      user = data;
+      localStorage.setItem('Utilisateur', JSON.stringify(user));
+      console.log('getEmail');
+      return this.token;
+    }, error => {
+      this.refreshToken(this.token).subscribe(nToken => {
+        this.token = nToken;
+        console.log('refreshToken');
+        localStorage.removeItem('Token');
+        localStorage.setItem('Token', JSON.stringify(this.token));
+        return this.token;
+      }, error2 => {
+        localStorage.removeItem('Utilisateur');
+        console.log('logout');
+        this.router.navigate(['/']).then();
+      });
+    });
+    return this.token;
+  }
+
+  public refreshToken(rtoken: Tokens): Observable<Tokens> {
     const httpOptionsRefresh = {
-      headers: new HttpHeaders({authorization: `Bearer ` + this.token.refreshtoken})
+      headers: new HttpHeaders({authorization: 'Bearer ' + rtoken.refreshtoken})
     };
     return this.http.get<Tokens>(this.urlrefresh, httpOptionsRefresh);
   }
