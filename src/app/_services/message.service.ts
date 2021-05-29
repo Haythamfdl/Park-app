@@ -47,7 +47,11 @@ export class MessageService {
 
   public getMessageCount(id: string, ouver): Observable<string> {
     const token: Tokens = this.tokenService.getAccessToken();
-    localStorage.setItem('Token', JSON.stringify(token));
+    this.tokenService.refreshToken(token).subscribe(ntoken => {
+      localStorage.setItem('Token', JSON.stringify(ntoken));
+      console.log('updated');
+      return this.http.get<string>(this.url + '/count/' + id + '/' + ouver);
+    });
     return this.http.get<string>(this.url + '/count/' + id + '/' + ouver);
   }
 
