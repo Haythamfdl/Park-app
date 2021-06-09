@@ -58,13 +58,13 @@ export class ListsUComponent implements OnInit {
       });
     });
     this.permissionmodif = this.user.permissions.some(i => {
-      if (i.idpermission.toString() === '13') {
+      if (i.code === 'MDS') {
         return true;
       }
       return false;
     });
     this.permissionsup = this.user.permissions.some(i => {
-      if (i.idpermission.toString() === '14') {
+      if (i.code === 'SPS') {
         return true;
       }
       return false;

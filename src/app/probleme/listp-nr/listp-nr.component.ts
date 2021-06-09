@@ -50,25 +50,25 @@ export class ListpNrComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
     });
     this.permissionajout = this.user.permissions.some(i => {
-      if (i.idpermission.toString() === '8') {
+      if (i.code === 'AJP') {
         return true;
       }
       return false;
     });
     this.permissionmodif = this.user.permissions.some(i => {
-      if (i.idpermission.toString() === '9') {
+      if (i.code === 'MDP') {
         return true;
       }
       return false;
     });
     this.permissionsup = this.user.permissions.some(i => {
-      if (i.idpermission.toString() === '10') {
+      if (i.code === 'SPP') {
         return true;
       }
       return false;
     });
     this.permissionresou = this.user.permissions.some(i => {
-      if (i.idpermission.toString() === '11') {
+      if (i.code === 'RSP') {
         return true;
       }
       return false;

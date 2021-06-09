@@ -50,9 +50,15 @@ export class MessageService {
     this.tokenService.refreshToken(token).subscribe(ntoken => {
       localStorage.setItem('Token', JSON.stringify(ntoken));
       console.log('updated');
-      return this.http.get<string>(this.url + '/count/' + id + '/' + ouver);
+      const httpOptions = {
+        headers: new HttpHeaders({authorization: `Bearer ` + ntoken.accesstoken})
+      };
+      return this.http.get<string>(this.url + '/count/' + id + '/' + ouver, httpOptions);
     });
-    return this.http.get<string>(this.url + '/count/' + id + '/' + ouver);
+    const httpOptions = {
+      headers: new HttpHeaders({authorization: `Bearer ` + token.accesstoken})
+    };
+    return this.http.get<string>(this.url + '/count/' + id + '/' + ouver, httpOptions);
   }
 
   public save(message: Message): Observable<any> {

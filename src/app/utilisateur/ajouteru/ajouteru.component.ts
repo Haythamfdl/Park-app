@@ -34,7 +34,7 @@ export class AjouteruComponent implements OnInit {
     if (this.user == null) {
       this.router.navigate(['/']).then();
     }
-    const permission = this.globalService.checkPermission(this.user, '15');
+    const permission = this.globalService.checkPermission(this.user, 'AJU');
     if (!permission){
       this.router.navigate(['/app/agents']).then();
     }

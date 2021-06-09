@@ -44,7 +44,7 @@ export class ModifiersComponent implements OnInit {
     } else {
       this.utilisateur = JSON.parse(localStorage.getItem('Utilisateur'));
     }
-    const permission = this.globalService.checkPermission(this.utilisateur, '13');
+    const permission = this.globalService.checkPermission(this.utilisateur, 'MDS');
     if (!permission){
       this.router.navigate(['/app/solutions/probleme/' + this.probleme.idprob]).then();
     }

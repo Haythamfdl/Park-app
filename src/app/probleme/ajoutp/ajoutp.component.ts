@@ -52,7 +52,7 @@ export class AjoutpComponent implements OnInit {
     if (this.user == null) {
       this.router.navigate(['/']).then();
     }
-    const permission = this.checkPermission(this.user, '8');
+    const permission = this.checkPermission(this.user, 'AJP');
     if (!permission){
       this.router.navigate(['/app/problemes']).then();
       this.openSnackBar('Vous n\'avez pas les permission nécessaire pour accéder a cette page !', '');
@@ -145,9 +145,9 @@ export class AjoutpComponent implements OnInit {
     });
   }
 
-  checkPermission(user: Utilisateur, idpermission: string): boolean{
+  checkPermission(user: Utilisateur, code: string): boolean{
     return user.permissions.some(i => {
-      if (i.idpermission.toString() === idpermission) {
+      if (i.code === code) {
         return true;
       }
       return false;

@@ -16,9 +16,9 @@ export class GlobalService {
     });
   }
 
-  checkPermission(user: Utilisateur, idpermission: string): boolean{
+  checkPermission(user: Utilisateur, codepermission: string): boolean{
     const per = user.permissions.some(i => {
-      if (i.idpermission.toString() === idpermission) {
+      if (i.code === codepermission) {
         return true;
       }
       return false;

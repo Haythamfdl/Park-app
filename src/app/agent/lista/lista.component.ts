@@ -49,19 +49,19 @@ export class ListaComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
     });
     this.permissionajout = this.user.permissions.some(i => {
-      if (i.idpermission.toString() === '5') {
+      if (i.code === 'AJA') {
         return true;
       }
       return false;
     });
     this.permissionmodif = this.user.permissions.some(i => {
-      if (i.idpermission.toString() === '6') {
+      if (i.code === 'MDA') {
         return true;
       }
       return false;
     });
     this.permissionsup = this.user.permissions.some(i => {
-      if (i.idpermission.toString() === '7') {
+      if (i.code === 'SPA') {
         return true;
       }
       return false;

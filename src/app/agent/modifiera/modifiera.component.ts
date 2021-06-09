@@ -34,7 +34,7 @@ export class ModifieraComponent implements OnInit {
     if (this.user == null) {
       this.router.navigate(['/']).then();
     }
-    const permission = this.globalService.checkPermission(this.user, '6');
+    const permission = this.globalService.checkPermission(this.user, 'MDA');
     if (!permission){
       this.router.navigate(['/app/agents']).then();
     }

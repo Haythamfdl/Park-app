@@ -43,7 +43,7 @@ export class AffecterComponent implements OnInit {
     if (this.user == null) {
       this.router.navigate(['/']).then();
     }
-    const permission = this.globalService.checkPermission(this.user, '3');
+    const permission = this.globalService.checkPermission(this.user, 'AFE');
     if (!permission){
       this.router.navigate(['/app/equipements']).then();
     }

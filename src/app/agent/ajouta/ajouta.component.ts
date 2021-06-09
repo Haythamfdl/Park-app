@@ -30,7 +30,7 @@ export class AjoutaComponent implements OnInit {
     if (this.user == null) {
       this.router.navigate(['/']).then();
     }
-    const permission = this.globalService.checkPermission(this.user, '5');
+    const permission = this.globalService.checkPermission(this.user, 'AJA');
     if (!permission){
       this.router.navigate(['/app/agents']).then();
     }

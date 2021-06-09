@@ -30,7 +30,7 @@ export class AjoutComponent implements OnInit {
     if (this.user == null) {
       this.router.navigate(['/']).then();
     }
-    const permission = this.globalService.checkPermission(this.user, '1');
+    const permission = this.globalService.checkPermission(this.user, 'AJE');
     if (!permission){
       this.router.navigate(['/app/equipements']).then();
     }

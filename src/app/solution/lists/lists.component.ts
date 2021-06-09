@@ -53,19 +53,19 @@ export class ListsComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
     });
     this.permissionajout = this.user.permissions.some(i => {
-      if (i.idpermission.toString() === '12') {
+      if (i.code === 'AJS') {
         return true;
       }
       return false;
     });
     this.permissionmodif = this.user.permissions.some(i => {
-      if (i.idpermission.toString() === '13') {
+      if (i.code === 'MDS') {
         return true;
       }
       return false;
     });
     this.permissionsup = this.user.permissions.some(i => {
-      if (i.idpermission.toString() === '14') {
+      if (i.code === 'SPS') {
         return true;
       }
       return false;

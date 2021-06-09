@@ -66,13 +66,13 @@ export class ListaProblemeComponent implements OnInit {
       });
     });
     this.permissionmodif = this.user.permissions.some(i => {
-      if (i.idpermission.toString() === '9') {
+      if (i.code === 'MDP') {
         return true;
       }
       return false;
     });
     this.permissionsup = this.user.permissions.some(i => {
-      if (i.idpermission.toString() === '10') {
+      if (i.code === 'SPP') {
         return true;
       }
       return false;
@@ -122,7 +122,7 @@ export class ListaProblemeComponent implements OnInit {
 
   solution(value: any) {
     this.probleme = value;
-    this.router.navigate(['/app/solutions/' + this.probleme.idprob]).then();
+    this.router.navigate(['/app/solutions/probleme/' + this.probleme.idprob]).then();
   }
 
   supprimer(value: any) {

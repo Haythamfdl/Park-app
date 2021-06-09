@@ -61,25 +61,25 @@ export class ListaEquipComponent implements OnInit {
       });
     });
     this.permissionajout = this.user.permissions.some(i => {
-      if (i.idpermission.toString() === '1') {
+      if (i.code === 'AJE') {
         return true;
       }
       return false;
     });
     this.permissionmodif = this.user.permissions.some(i => {
-      if (i.idpermission.toString() === '2') {
+      if (i.code === 'MDE') {
         return true;
       }
       return false;
     });
     this.permissionsup = this.user.permissions.some(i => {
-      if (i.idpermission.toString() === '3') {
+      if (i.code === 'SPE') {
         return true;
       }
       return false;
     });
     this.permissionaffect = this.user.permissions.some(i => {
-      if (i.idpermission.toString() === '4') {
+      if (i.code === 'AFE') {
         return true;
       }
       return false;
