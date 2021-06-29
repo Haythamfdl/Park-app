@@ -20,12 +20,12 @@ export class TokenService {
 
   public getAccessToken(): Tokens {
     let token: Tokens = JSON.parse(localStorage.getItem('Token'));
-    this.testToken(token).subscribe(data => token, error => {
+    this.testToken(token).subscribe(data => token, errorAccess => {
       this.refreshToken(token).subscribe(nToken => {
         token = nToken;
         localStorage.setItem('Token', JSON.stringify(token));
         return token;
-      }, error2 => {
+      }, errorRefresh => {
         localStorage.removeItem('Token');
         localStorage.removeItem('Utilisateur');
         console.log('logout');

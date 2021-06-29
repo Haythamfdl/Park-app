@@ -49,7 +49,6 @@ export class MessageService {
     const token: Tokens = this.tokenService.getAccessToken();
     this.tokenService.refreshToken(token).subscribe(ntoken => {
       localStorage.setItem('Token', JSON.stringify(ntoken));
-      console.log('updated');
       const httpOptions = {
         headers: new HttpHeaders({authorization: `Bearer ` + ntoken.accesstoken})
       };
