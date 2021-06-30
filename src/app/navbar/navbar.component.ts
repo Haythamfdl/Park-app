@@ -6,6 +6,9 @@ import {interval, Subscription} from 'rxjs';
 import {MessageService} from '../_services/message.service';
 import {UtilisateurService} from '../_services/utilisateur.service';
 import {Tokens} from '../_model/tokens';
+import {DEFAULT_INTERRUPTSOURCES, Idle} from '@ng-idle/core';
+import {Keepalive} from '@ng-idle/keepalive';
+import {TokenService} from '../_services/token.service';
 
 @Component({
   selector: 'app-navbar',
@@ -22,10 +25,18 @@ export class NavbarComponent implements OnInit, OnDestroy {
   permissionajout = false;
   token: Tokens;
 
+  idleState = 'Not started.';
+  timedOut = false;
+  lastPing?: Date = null;
+  title = 'angular-idle-timeout';
+
   constructor(private router: Router,
               private snackBar: MatSnackBar,
               private utilisateurService: UtilisateurService,
-              private messageService: MessageService) {
+              private messageService: MessageService,
+              private tokenService: TokenService,
+              private idle: Idle,
+              private keepalive: Keepalive) {
     this.subscription = interval(this.timer).subscribe((func => {
       this.messageService.getMessageCount(this.user.iduser, false).subscribe(data => {
         this.nb = data;
@@ -35,7 +46,53 @@ export class NavbarComponent implements OnInit, OnDestroy {
         });
       });
     }));
+
+    // sets an idle timeout
+    idle.setIdle(3);
+    // sets a timeout period
+    idle.setTimeout(10);
+    // sets the default interrupts
+    idle.setInterrupts(DEFAULT_INTERRUPTSOURCES);
+
+    idle.onIdleEnd.subscribe(() => {
+      this.idleState = 'No longer idle.';
+      console.log(this.idleState);
+      this.reset();
+      this.token = JSON.parse(localStorage.getItem('Token'));
+      this.tokenService.refreshToken(this.token).subscribe(ntoken => {
+        localStorage.setItem('Token', JSON.stringify(ntoken));
+        console.log('Token Updated');
+      });
+    });
+
+    idle.onTimeout.subscribe(() => {
+      this.idleState = 'Timed out!';
+      this.timedOut = true;
+      console.log(this.idleState);
+      this.deconexion();
+    });
+
+    idle.onIdleStart.subscribe(() => {
+      this.idleState = 'You\'ve gone idle!';
+      console.log(this.idleState);
+    });
+
+    idle.onTimeoutWarning.subscribe((countdown) => {
+      this.idleState = 'You will time out in ' + countdown + ' seconds!';
+      console.log(this.idleState);
+    });
+    // sets the ping interval to 15 seconds
+    keepalive.interval(9);
+    keepalive.onPing.subscribe(() => this.lastPing = new Date());
+    this.reset();
   }
+
+  reset() {
+    this.idle.watch();
+    this.idleState = 'Started.';
+    this.timedOut = false;
+  }
+
 
   ngOnDestroy() {
     localStorage.removeItem('Utilisateur');

@@ -61,6 +61,9 @@ import {ListmNlComponent} from './message/listm-nl/listm-nl.component';
 import {EnvoyermComponent} from './message/envoyerm/envoyerm.component';
 import {InfomComponent} from './message/infom/infom.component';
 import {AjouteruComponent} from './utilisateur/ajouteru/ajouteru.component';
+import {NgIdleKeepaliveModule} from '@ng-idle/keepalive';
+import {MomentModule} from 'angular2-moment';
+
 
 @NgModule({
   declarations: [
@@ -126,7 +129,9 @@ import {AjouteruComponent} from './utilisateur/ajouteru/ajouteru.component';
     MatButtonToggleModule,
     MDBBootstrapModule.forRoot(),
     FlexModule,
-    FormsModule
+    FormsModule,
+    NgIdleKeepaliveModule.forRoot(),
+    MomentModule,
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]
